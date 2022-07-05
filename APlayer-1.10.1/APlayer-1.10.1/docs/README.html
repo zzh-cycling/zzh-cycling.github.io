@@ -1,0 +1,612 @@
+<hr />
+<h2 id="search-english"><a class="markdownIt-Anchor" href="#search-english"></a> search: english</h2>
+<h1 id="aplayer"><a class="markdownIt-Anchor" href="#aplayer"></a> APlayer</h1>
+<p>🍭 Wow, such a beautiful HTML5 music player</p>
+<h2 id="special-sponsors"><a class="markdownIt-Anchor" href="#special-sponsors"></a> Special Sponsors</h2>
+<a href="https://pear.hk/" target="_blank">
+    <img width="222px" src="https://i.imgur.com/5qQYmfc.png">
+</a>
+<a href="https://www.upyun.com/" target="_blank">
+    <img width="222px" src="https://imgur.com/apG1uKf.png">
+</a>
+<h2 id="installation"><a class="markdownIt-Anchor" href="#installation"></a> Installation</h2>
+<p>Using npm:</p>
+<pre class="highlight"><code class="">npm install aplayer --save
+</code></pre>
+<p>Using Yarn:</p>
+<pre class="highlight"><code class="">yarn add aplayer
+</code></pre>
+<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
+<div class="aplayer-wrap">
+    <div id="aplayer2"><button class="docute-button load">Click to load player</div>
+</div>
+<pre class="highlight"><code class="html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"APlayer.min.css"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"aplayer"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"APlayer.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<pre class="highlight"><code class="js"><span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer({
+    <span class="hljs-attr">container</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'aplayer'</span>),
+    <span class="hljs-attr">audio</span>: [{
+        <span class="hljs-attr">name</span>: <span class="hljs-string">'name'</span>,
+        <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist'</span>,
+        <span class="hljs-attr">url</span>: <span class="hljs-string">'url.mp3'</span>,
+        <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover.jpg'</span>
+    }]
+});
+</code></pre>
+<p>Work with module bundler:</p>
+<pre class="highlight"><code class="js"><span class="hljs-keyword">import</span> <span class="hljs-string">'APlayer/dist/APlayer.min.css'</span>;
+<span class="hljs-keyword">import</span> APlayer <span class="hljs-keyword">from</span> <span class="hljs-string">'APlayer'</span>;
+
+<span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer(options);
+</code></pre>
+<h2 id="options"><a class="markdownIt-Anchor" href="#options"></a> Options</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>container</td>
+<td>document.querySelector(’.aplayer’)</td>
+<td>player container</td>
+</tr>
+<tr>
+<td>fixed</td>
+<td>false</td>
+<td>enable fixed mode, <a href="https://aplayer.js.org/#/home?id=fixed-mode">see more details</a></td>
+</tr>
+<tr>
+<td>mini</td>
+<td>false</td>
+<td>enable mini mode, <a href="https://aplayer.js.org/#/home?id=mini-mode">see more details</a></td>
+</tr>
+<tr>
+<td>autoplay</td>
+<td>false</td>
+<td>audio autoplay</td>
+</tr>
+<tr>
+<td>theme</td>
+<td>‘#b7daff’</td>
+<td>main color</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>‘all’</td>
+<td>player loop play, values: ‘all’, ‘one’, ‘none’</td>
+</tr>
+<tr>
+<td>order</td>
+<td>‘list’</td>
+<td>player play order, values: ‘list’, ‘random’</td>
+</tr>
+<tr>
+<td>preload</td>
+<td>‘auto’</td>
+<td>values: ‘none’, ‘metadata’, ‘auto’</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>0.7</td>
+<td>default volume, notice that player will remember user setting, default volume will not work after user set volume themselves</td>
+</tr>
+<tr>
+<td>audio</td>
+<td>-</td>
+<td>audio info, should be an object or object array</td>
+</tr>
+<tr>
+<td><a href="http://audio.name">audio.name</a></td>
+<td>-</td>
+<td>audio name</td>
+</tr>
+<tr>
+<td>audio.artist</td>
+<td>-</td>
+<td>audio artist</td>
+</tr>
+<tr>
+<td>audio.url</td>
+<td>-</td>
+<td>audio url</td>
+</tr>
+<tr>
+<td>audio.cover</td>
+<td>-</td>
+<td>audio cover</td>
+</tr>
+<tr>
+<td>audio.lrc</td>
+<td>-</td>
+<td><a href="https://aplayer.js.org/#/home?id=lrc">see more details</a></td>
+</tr>
+<tr>
+<td>audio.theme</td>
+<td>-</td>
+<td>main color when switching to this audio, it has priority over the above theme</td>
+</tr>
+<tr>
+<td>audio.type</td>
+<td>‘auto’</td>
+<td>values: ‘auto’, ‘hls’, ‘normal’ or other custom type, <a href="https://aplayer.js.org/#/home?id=mse-support">see more details</a></td>
+</tr>
+<tr>
+<td>customAudioType</td>
+<td>-</td>
+<td><a href="https://aplayer.js.org/#/home?id=mse-support">see more details</a></td>
+</tr>
+<tr>
+<td>mutex</td>
+<td>true</td>
+<td>prevent to play multiple player at the same time, pause other players when this player start play</td>
+</tr>
+<tr>
+<td>lrcType</td>
+<td>0</td>
+<td><a href="https://aplayer.js.org/#/home?id=lrc">see more details</a></td>
+</tr>
+<tr>
+<td>listFolded</td>
+<td>false</td>
+<td>indicate whether list should folded at first</td>
+</tr>
+<tr>
+<td>listMaxHeight</td>
+<td>-</td>
+<td>list max height</td>
+</tr>
+<tr>
+<td>storageName</td>
+<td>‘aplayer-setting’</td>
+<td>localStorage key that store player setting</td>
+</tr>
+</tbody>
+</table>
+<p>For example:</p>
+<div class="aplayer-wrap">
+    <div id="aplayer3"><button class="docute-button load">Click to load player</div>
+</div>
+<pre class="highlight"><code class="js"><span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer({
+    <span class="hljs-attr">container</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'player'</span>),
+    <span class="hljs-attr">mini</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">autoplay</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">theme</span>: <span class="hljs-string">'#FADFA3'</span>,
+    <span class="hljs-attr">loop</span>: <span class="hljs-string">'all'</span>,
+    <span class="hljs-attr">order</span>: <span class="hljs-string">'random'</span>,
+    <span class="hljs-attr">preload</span>: <span class="hljs-string">'auto'</span>,
+    <span class="hljs-attr">volume</span>: <span class="hljs-number">0.7</span>,
+    <span class="hljs-attr">mutex</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">listFolded</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">listMaxHeight</span>: <span class="hljs-string">'90px'</span>,
+    <span class="hljs-attr">lrcType</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">audio</span>: [
+        {
+            <span class="hljs-attr">name</span>: <span class="hljs-string">'name1'</span>,
+            <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist1'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'url1.mp3'</span>,
+            <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover1.jpg'</span>,
+            <span class="hljs-attr">lrc</span>: <span class="hljs-string">'lrc1.lrc'</span>,
+            <span class="hljs-attr">theme</span>: <span class="hljs-string">'#ebd0c2'</span>
+        },
+        {
+            <span class="hljs-attr">name</span>: <span class="hljs-string">'name2'</span>,
+            <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist2'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'url2.mp3'</span>,
+            <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover2.jpg'</span>,
+            <span class="hljs-attr">lrc</span>: <span class="hljs-string">'lrc2.lrc'</span>,
+            <span class="hljs-attr">theme</span>: <span class="hljs-string">'#46718b'</span>
+        }
+    ]
+});
+</code></pre>
+<h2 id="api"><a class="markdownIt-Anchor" href="#api"></a> API</h2>
+<ul>
+<li>
+<p><code>APlayer.version</code>: static property, return the version of APlayer</p>
+</li>
+<li>
+<p><code>ap.play()</code>: play audio</p>
+</li>
+<li>
+<p><code>ap.pause()</code>: pause audio</p>
+</li>
+<li>
+<p><code>ap.seek(time: number)</code>: seek to specified time, the unit of time is second</p>
+<pre class="highlight"><code class="js">ap.seek(<span class="hljs-number">100</span>);
+</code></pre>
+</li>
+<li>
+<p><code>ap.toggle()</code>: toggle between play and pause</p>
+</li>
+<li>
+<p><code>ap.on(event: string, handler: function)</code>: bind audio and player events, <a href="https://aplayer.js.org/#/home?id=event-binding">see more details</a></p>
+</li>
+<li>
+<p><code>ap.volume(percentage: number, nostorage: boolean)</code>: set audio volume</p>
+<pre class="highlight"><code class="js">ap.volume(<span class="hljs-number">0.1</span>, <span class="hljs-literal">true</span>);
+</code></pre>
+</li>
+<li>
+<p><code>ap.theme(color: string, index: number)</code>: set player theme, the default of index is current audio index</p>
+<pre class="highlight"><code class="js">ap.theme(<span class="hljs-string">'#000'</span>, <span class="hljs-number">0</span>);
+</code></pre>
+</li>
+<li>
+<p><code>ap.setMode(mode: string)</code>: set player mode, the value of mode should be ‘mini’ or ‘normal’</p>
+</li>
+<li>
+<p><code>ap.mode</code>: return current player mode, ‘mini’ or ‘normal’</p>
+</li>
+<li>
+<p><code>ap.notice(text: string, time: number, opacity: number)</code>: show message, the unit of time is millisecond, the default of time is 2000, the default of opacity is 0.8, setting time to 0 can disable notice autohide.</p>
+<pre class="highlight"><code class="js">ap.notice(<span class="hljs-string">'Amazing player'</span>, <span class="hljs-number">2000</span>, <span class="hljs-number">0.8</span>);
+</code></pre>
+</li>
+<li>
+<p><code>ap.skipBack()</code>: skip to previous audio</p>
+</li>
+<li>
+<p><code>ap.skipForward()</code>: skip to next audio</p>
+</li>
+<li>
+<p><code>ap.destroy()</code>: destroy player</p>
+</li>
+<li>
+<p><code>ap.lrc</code></p>
+<ul>
+<li>
+<p><code>ap.lrc.show()</code>: show lrc</p>
+</li>
+<li>
+<p><code>ap.lrc.hide()</code>: hide lrc</p>
+</li>
+<li>
+<p><code>ap.lrc.toggle()</code>: toggle lrc between show and hide</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>ap.list</code></p>
+<ul>
+<li>
+<p><code>ap.list.show()</code>: show list</p>
+</li>
+<li>
+<p><code>ap.list.hide()</code>: hide list</p>
+</li>
+<li>
+<p><code>ap.list.toggle()</code>: toggle list between show and hide</p>
+</li>
+<li>
+<p><code>ap.list.add(audios: array | object)</code>: add new audios to the list</p>
+</li>
+</ul>
+<pre class="highlight"><code class="js">ap.list.add([{
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'name'</span>,
+    <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist'</span>,
+    <span class="hljs-attr">url</span>: <span class="hljs-string">'url.mp3'</span>,
+    <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover.jpg'</span>,
+    <span class="hljs-attr">lrc</span>: <span class="hljs-string">'lrc.lrc'</span>,
+    <span class="hljs-attr">theme</span>: <span class="hljs-string">'#ebd0c2'</span>
+}]);
+</code></pre>
+<ul>
+<li><code>ap.list.remove(index: number)</code>: remove an audio from the list</li>
+</ul>
+<pre class="highlight"><code class="js">ap.list.remove(<span class="hljs-number">1</span>);
+</code></pre>
+<ul>
+<li><code>ap.list.switch()</code>: switch to an audio in the list</li>
+</ul>
+<pre class="highlight"><code class="js">ap.list.switch(<span class="hljs-number">1</span>);
+</code></pre>
+<ul>
+<li><code>ap.list.clear()</code>: remove all audios from the list</li>
+</ul>
+</li>
+<li>
+<p><code>ap.audio</code>: native audio</p>
+</li>
+<li>
+<p><code>ap.audio.currentTime</code>: returns the current playback position</p>
+</li>
+<li>
+<p><code>ap.audio.duration</code>: returns audio total time</p>
+</li>
+<li>
+<p><code>ap.audio.paused</code>: returns whether the audio paused</p>
+</li>
+<li>
+<p>most <a href="http://www.w3schools.com/tags/ref_av_dom.asp">native api</a> are supported</p>
+</li>
+</ul>
+<h2 id="event-binding"><a class="markdownIt-Anchor" href="#event-binding"></a> Event binding</h2>
+<p><code>ap.on(event, handler)</code></p>
+<pre class="highlight"><code class="js">ap.on(<span class="hljs-string">'ended'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'player ended'</span>);
+});
+</code></pre>
+<p>Audio events</p>
+<ul>
+<li>abort</li>
+<li>canplay</li>
+<li>canplaythrough</li>
+<li>durationchange</li>
+<li>emptied</li>
+<li>ended</li>
+<li>error</li>
+<li>loadeddata</li>
+<li>loadedmetadata</li>
+<li>loadstart</li>
+<li>mozaudioavailable</li>
+<li>pause</li>
+<li>play</li>
+<li>playing</li>
+<li>progress</li>
+<li>ratechange</li>
+<li>seeked</li>
+<li>seeking</li>
+<li>stalled</li>
+<li>suspend</li>
+<li>timeupdate</li>
+<li>volumechange</li>
+<li>waiting</li>
+</ul>
+<p>Player events</p>
+<ul>
+<li>listshow</li>
+<li>listhide</li>
+<li>listadd</li>
+<li>listremove</li>
+<li>listswitch</li>
+<li>listclear</li>
+<li>noticeshow</li>
+<li>noticehide</li>
+<li>destroy</li>
+<li>lrcshow</li>
+<li>lrchide</li>
+</ul>
+<h2 id="lrc"><a class="markdownIt-Anchor" href="#lrc"></a> LRC</h2>
+<p>We have three ways to pass LRC to APlayer, indicate the way to pass LRC by option <code>lrcType</code>, then put lrc to option <code>audio.lrc</code> or HTML.</p>
+<div class="aplayer-wrap">
+    <div id="aplayer4"><button class="docute-button load">Click to load player</div>
+</div>
+<h3 id="lrc-file"><a class="markdownIt-Anchor" href="#lrc-file"></a> LRC file</h3>
+<p>The first way, put LRC to a LRC file, LRC file will be loaded when this audio start to play.</p>
+<pre class="highlight"><code class="js"><span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer({
+    <span class="hljs-attr">container</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'aplayer'</span>),
+    <span class="hljs-attr">lrcType</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">audio</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">'name'</span>,
+        <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist'</span>,
+        <span class="hljs-attr">url</span>: <span class="hljs-string">'demo.mp3'</span>,
+        <span class="hljs-attr">cover</span>: <span class="hljs-string">'demo.jpg'</span>,
+        <span class="hljs-attr">lrc</span>: <span class="hljs-string">'lrc.lrc'</span>
+    }
+});
+</code></pre>
+<h3 id="lrc-string-in-js"><a class="markdownIt-Anchor" href="#lrc-string-in-js"></a> LRC string in JS</h3>
+<p>The second way, put LRC to a JS string.</p>
+<pre class="highlight"><code class="js"><span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer({
+    <span class="hljs-attr">container</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'aplayer'</span>),
+    <span class="hljs-attr">lrcType</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">audio</span>: {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">'name'</span>,
+        <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist'</span>,
+        <span class="hljs-attr">url</span>: <span class="hljs-string">'demo.mp3'</span>,
+        <span class="hljs-attr">cover</span>: <span class="hljs-string">'demo.jpg'</span>,
+        <span class="hljs-attr">lrc</span>: <span class="hljs-string">'[00:00.00]APlayer\n[00:04.01]is\n[00:08.02]amazing'</span>
+    }
+});
+</code></pre>
+<h3 id="lrc-in-html"><a class="markdownIt-Anchor" href="#lrc-in-html"></a> LRC in HTML</h3>
+<p>The third way, put LRC to HTML.</p>
+<pre class="highlight"><code class="html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"APlayer.min.css"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"player"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">pre</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"aplayer-lrc-content"</span>&gt;</span>
+        [00:00.00]APlayer audio1
+        [00:04.01]is
+        [00:08.02]amazing
+        <span class="hljs-comment">&lt;!-- ... --&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">pre</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"aplayer-lrc-content"</span>&gt;</span>
+        [00:00.00]APlayer audio2
+        [00:04.01]is
+        [00:08.02]amazing
+        <span class="hljs-comment">&lt;!-- ... --&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"APlayer.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<pre class="highlight"><code class="js"><span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer({
+    <span class="hljs-attr">container</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'aplayer'</span>),
+    <span class="hljs-attr">lrcType</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">audio</span>: [[
+        {
+            <span class="hljs-attr">name</span>: <span class="hljs-string">'name1'</span>,
+            <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist1'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'url1.mp3'</span>,
+            <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover1.jpg'</span>
+        },
+        {
+            <span class="hljs-attr">name</span>: <span class="hljs-string">'name2'</span>,
+            <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist2'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'url2.mp3'</span>,
+            <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover2.jpg'</span>
+        }
+    ]]
+});
+</code></pre>
+<h3 id="lrc-format"><a class="markdownIt-Anchor" href="#lrc-format"></a> LRC format</h3>
+<p>The following LRC format are supported:</p>
+<p><code>[mm:ss]APlayer</code></p>
+<p><code>[mm:ss.xx]is</code></p>
+<p><code>[mm:ss.xxx]amazing</code></p>
+<p><code>[mm:ss.xx][mm:ss.xx]APlayer</code></p>
+<p><code>[mm:ss.xx]&lt;mm:ss.xx&gt;is</code></p>
+<p><code>[mm:ss.xx]amazing[mm:ss.xx]APlayer</code></p>
+<h2 id="playlist"><a class="markdownIt-Anchor" href="#playlist"></a> Playlist</h2>
+<p>APlayer will show a playlist when it has more than one audio, option <code>listFolded</code> indicates whether list should folded at first, and option <code>listMaxHeight</code> indicates list max height.</p>
+<div class="aplayer-wrap">
+    <div id="aplayer5"><button class="docute-button load">Click to load player</div>
+</div>
+<pre class="highlight"><code class="js"><span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer({
+    <span class="hljs-attr">container</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'player'</span>),
+    <span class="hljs-attr">listFolded</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">listMaxHeight</span>: <span class="hljs-string">'90px'</span>,
+    <span class="hljs-attr">lrcType</span>: <span class="hljs-number">3</span>,
+    <span class="hljs-attr">audio</span>: [
+        {
+            <span class="hljs-attr">name</span>: <span class="hljs-string">'name1'</span>,
+            <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist1'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'url1.mp3'</span>,
+            <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover1.jpg'</span>,
+            <span class="hljs-attr">lrc</span>: <span class="hljs-string">'lrc1.lrc'</span>,
+            <span class="hljs-attr">theme</span>: <span class="hljs-string">'#ebd0c2'</span>
+        },
+        {
+            <span class="hljs-attr">name</span>: <span class="hljs-string">'name2'</span>,
+            <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist2'</span>,
+            <span class="hljs-attr">url</span>: <span class="hljs-string">'url2.mp3'</span>,
+            <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover2.jpg'</span>,
+            <span class="hljs-attr">lrc</span>: <span class="hljs-string">'lrc2.lrc'</span>,
+            <span class="hljs-attr">theme</span>: <span class="hljs-string">'#46718b'</span>
+        }
+    ]
+});
+</code></pre>
+<h2 id="fixed-mode"><a class="markdownIt-Anchor" href="#fixed-mode"></a> Fixed mode</h2>
+<p>APlayer can be fixed to page bottom via fixed mode, fixed mode is a very different mode, enjoy it!</p>
+<div class="aplayer-wrap">
+    <div id="aplayer9"><button class="docute-button load">Click to load player</div>
+</div>
+<pre class="highlight"><code class="js"><span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer({
+    <span class="hljs-attr">container</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'player'</span>),
+    <span class="hljs-attr">fixed</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">audio</span>: [{
+        <span class="hljs-attr">name</span>: <span class="hljs-string">'name'</span>,
+        <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist'</span>,
+        <span class="hljs-attr">url</span>: <span class="hljs-string">'url.mp3'</span>,
+        <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover.jpg'</span>,
+    }]
+});
+</code></pre>
+<h2 id="mini-mode"><a class="markdownIt-Anchor" href="#mini-mode"></a> Mini mode</h2>
+<p>If you don’t have enough space for normal player, mini mode might be your choice.</p>
+<p>Please note that mini mode is conflicted with fixed mode.</p>
+<div class="aplayer-wrap">
+    <div id="aplayer6"><button class="docute-button load">Click to load player</div>
+</div>
+<pre class="highlight"><code class="js"><span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer({
+    <span class="hljs-attr">container</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'player'</span>),
+    <span class="hljs-attr">mini</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">audio</span>: [{
+        <span class="hljs-attr">name</span>: <span class="hljs-string">'name'</span>,
+        <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist'</span>,
+        <span class="hljs-attr">url</span>: <span class="hljs-string">'url.mp3'</span>,
+        <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover.jpg'</span>,
+    }]
+});
+</code></pre>
+<h2 id="mse-support"><a class="markdownIt-Anchor" href="#mse-support"></a> MSE support</h2>
+<h3 id="hls"><a class="markdownIt-Anchor" href="#hls"></a> HLS</h3>
+<p>It requires the library <a href="https://github.com/video-dev/hls.js">hls.js</a> and it should be loaded before <code>APlayer.min.js</code>.</p>
+<div class="aplayer-wrap">
+    <div id="aplayer7"><button class="docute-button load">Click to load player</div>
+</div>
+<pre class="highlight"><code class="html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"APlayer.min.css"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"aplayer"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"hls.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"APlayer.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<pre class="highlight"><code class="js"><span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer({
+    <span class="hljs-attr">container</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'aplayer'</span>),
+    <span class="hljs-attr">audio</span>: [{
+        <span class="hljs-attr">name</span>: <span class="hljs-string">'HLS'</span>,
+        <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist'</span>,
+        <span class="hljs-attr">url</span>: <span class="hljs-string">'url.m3u8'</span>,
+        <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover.jpg'</span>,
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'hls'</span>
+    }]
+});
+</code></pre>
+<pre class="highlight"><code class="js"><span class="hljs-comment">// another way, use customType</span>
+<span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer({
+    <span class="hljs-attr">container</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'aplayer'</span>),
+    <span class="hljs-attr">audio</span>: [{
+        <span class="hljs-attr">name</span>: <span class="hljs-string">'HLS'</span>,
+        <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist'</span>,
+        <span class="hljs-attr">url</span>: <span class="hljs-string">'url.m3u8'</span>,
+        <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover.jpg'</span>,
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'customHls'</span>
+    }],
+    <span class="hljs-attr">customAudioType</span>: {
+        <span class="hljs-string">'customHls'</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">audioElement, audio, player</span>) </span>{
+            <span class="hljs-keyword">if</span> (Hls.isSupported()) {
+                <span class="hljs-keyword">const</span> hls = <span class="hljs-keyword">new</span> Hls();
+                hls.loadSource(audio.url);
+                hls.attachMedia(audioElement);
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (audioElement.canPlayType(<span class="hljs-string">'application/x-mpegURL'</span>) || audioElement.canPlayType(<span class="hljs-string">'application/vnd.apple.mpegURL'</span>)) {
+                audioElement.src = audio.url;
+            }
+            <span class="hljs-keyword">else</span> {
+                player.notice(<span class="hljs-string">'Error: HLS is not supported.'</span>);
+            }
+        }
+    }
+});
+</code></pre>
+<h2 id="self-adapting-theme-according-to-cover"><a class="markdownIt-Anchor" href="#self-adapting-theme-according-to-cover"></a> Self-adapting theme according to cover</h2>
+<p>It requires the library <a href="https://github.com/lokesh/color-thief/blob/master/src/color-thief.js">color-thief</a>.</p>
+<div class="aplayer-wrap">
+    <div id="aplayer8"><button class="docute-button load">Click to load player</div>
+</div>
+<pre class="highlight"><code class="html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"APlayer.min.css"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"aplayer"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"APlayer.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"color-thief.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<pre class="highlight"><code class="js"><span class="hljs-keyword">const</span> ap = <span class="hljs-keyword">new</span> APlayer({
+    <span class="hljs-attr">container</span>: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'aplayer'</span>),
+    <span class="hljs-attr">theme</span>: <span class="hljs-string">'#e9e9e9'</span>,
+    <span class="hljs-attr">audio</span>: [{
+        <span class="hljs-attr">name</span>: <span class="hljs-string">'name1'</span>,
+        <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist1'</span>,
+        <span class="hljs-attr">url</span>: <span class="hljs-string">'url1.mp3'</span>,
+        <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover1.jpg'</span>
+    }, {
+        <span class="hljs-attr">name</span>: <span class="hljs-string">'name2'</span>,
+        <span class="hljs-attr">artist</span>: <span class="hljs-string">'artist2'</span>,
+        <span class="hljs-attr">url</span>: <span class="hljs-string">'url2.mp3'</span>,
+        <span class="hljs-attr">cover</span>: <span class="hljs-string">'cover2.jpg'</span>
+    }]
+});
+
+<span class="hljs-keyword">const</span> colorThief = <span class="hljs-keyword">new</span> ColorThief();
+<span class="hljs-keyword">const</span> setTheme = <span class="hljs-function">(<span class="hljs-params">index</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (!ap.list.audios[index].theme) {
+        colorThief.getColorAsync(ap.list.audios[index].cover, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">color</span>) </span>{
+            ap.theme(<span class="hljs-string">`rgb(<span class="hljs-subst">${color[<span class="hljs-number">0</span>]}</span>, <span class="hljs-subst">${color[<span class="hljs-number">1</span>]}</span>, <span class="hljs-subst">${color[<span class="hljs-number">2</span>]}</span>)`</span>, index);
+        });
+    }
+};
+setTheme(ap.list.index);
+ap.on(<span class="hljs-string">'listswitch'</span>, (data) =&gt; {
+    setTheme(data.index);
+});
+</code></pre>
+<h2 id="cdn"><a class="markdownIt-Anchor" href="#cdn"></a> CDN</h2>
+<ul>
+<li><a href="https://www.jsdelivr.com/package/npm/aplayer">jsDelivr</a></li>
+<li><a href="https://cdnjs.com/libraries/aplayer">cdnjs</a></li>
+<li><a href="https://unpkg.com/aplayer/">unpkg</a></li>
+</ul>
+<h2 id="faq"><a class="markdownIt-Anchor" href="#faq"></a> FAQ</h2>
+<h3 id="why-cant-player-autoplay-in-some-mobile-browsers"><a class="markdownIt-Anchor" href="#why-cant-player-autoplay-in-some-mobile-browsers"></a> Why can’t player autoplay in some mobile browsers?</h3>
+<p>Most mobile browsers forbid audio autoplay, you wont be able to achieve it without hacks.</p>
