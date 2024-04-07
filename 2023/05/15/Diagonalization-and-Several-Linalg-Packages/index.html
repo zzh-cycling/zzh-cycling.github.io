@@ -1,0 +1,480 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Diagonalization and Several Linalg Packages | 诗遇上歌</title><meta name="keywords" content="physics,Fundamentals of computer and programming"><meta name="author" content="zzh"><meta name="copyright" content="zzh"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Exact Diagonalization This is a note for some problems encountered in doing Exact Diagonalization of quantum many body physics, also serving as a notebook for learning. Here we first don’t consider th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Diagonalization and Several Linalg Packages">
+<meta property="og:url" content="http://example.com/2023/05/15/Diagonalization-and-Several-Linalg-Packages/index.html">
+<meta property="og:site_name" content="诗遇上歌">
+<meta property="og:description" content="Exact Diagonalization This is a note for some problems encountered in doing Exact Diagonalization of quantum many body physics, also serving as a notebook for learning. Here we first don’t consider th">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/img/buaa-second-year/physics_cover.jpg">
+<meta property="article:published_time" content="2023-05-14T18:18:07.000Z">
+<meta property="article:modified_time" content="2023-12-09T17:39:11.431Z">
+<meta property="article:author" content="zzh">
+<meta property="article:tag" content="physics">
+<meta property="article:tag" content="Fundamentals of computer and programming">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/buaa-second-year/physics_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/05/15/Diagonalization-and-Several-Linalg-Packages/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Diagonalization and Several Linalg Packages',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-12-10 01:39:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.0.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/buaa-second-year/avatar2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">50</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">54</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-sitemap"></i><span> 关于</span></a></li><li><a class="site-page child" href="/myself/"><i class="fa-fw fa fa-id-card"></i><span> myself</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly/"><i class="fa-fw fa fa-heart"></i><span> butterfly主题</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/buaa-second-year/physics_cover.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">诗遇上歌</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-sitemap"></i><span> 关于</span></a></li><li><a class="site-page child" href="/myself/"><i class="fa-fw fa fa-id-card"></i><span> myself</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly/"><i class="fa-fw fa fa-heart"></i><span> butterfly主题</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Diagonalization and Several Linalg Packages</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2023-05-14T18:18:07.000Z" title="Created 2023-05-15 02:18:07">2023-05-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-12-09T17:39:11.431Z" title="Updated 2023-12-10 01:39:11">2023-12-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>19min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Diagonalization and Several Linalg Packages"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="exact-diagonalization">Exact Diagonalization</h1>
+<p>This is a note for some problems encountered in doing Exact Diagonalization of quantum many body physics, also serving as a notebook for learning. Here we first don’t consider the symmetry of Hamiltonian, just focus on coding. Thank to gxliu from Julia community, which is really helpful. <a target="_blank" rel="noopener" href="https://discourse.juliacn.com/t/topic/7202">Windows上Julia代码比Python慢了一倍并且在MacOS上正好反过来？</a></p>
+<h2 id="background">Background</h2>
+<p>I am writing a program for exact diagonalization in quantum many body physics, but due to Python being too slow, I turned to Julia, and thought it will behave much more bettr. Here are my two programs, where Julia was written in imitating Python.</p>
+<p>The Hamiltonian is:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>=</mo><munder><mo>∑</mo><mi>i</mi></munder><mo stretchy="false">[</mo><msub><mi>ω</mi><mi>i</mi></msub><msub><mi>n</mi><mi>i</mi></msub><mo>+</mo><mi>V</mi><mo stretchy="false">(</mo><msub><mi>n</mi><mi>i</mi></msub><mo>−</mo><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>n</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">)</mo><mo>+</mo><msubsup><mi>c</mi><mi>i</mi><mo lspace="0em" rspace="0em">†</mo></msubsup><msub><mi>c</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><msubsup><mi>c</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><mo lspace="0em" rspace="0em">†</mo></msubsup><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msubsup><mi>c</mi><mrow><mi>i</mi><mo>+</mo><mn>2</mn></mrow><mo lspace="0em" rspace="0em">†</mo></msubsup><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msubsup><mi>c</mi><mi>i</mi><mo lspace="0em" rspace="0em">†</mo></msubsup><msub><mi>c</mi><mrow><mi>i</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">H=\sum_i [\omega_i n_i+V(n_i-1/2)(n_{i+1}-1/2)+c^{\dagger}_ic_{i+1}+c^{\dagger}_{i+1}c_{i}+c^{\dagger}_{i+2}c_{i}+c^{\dagger}_ic_{i+2}]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.327674em;vertical-align:-1.277669em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0500050000000003em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mopen">[</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord">2</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.2438799999999999em;vertical-align:-0.276864em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9670159999999998em;"><span style="top:-2.4231360000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.180908em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">†</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.276864em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.3022109999999998em;vertical-align:-0.335195em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9670159999999999em;"><span style="top:-2.423136em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.1809080000000005em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">†</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.335195em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.3022109999999998em;vertical-align:-0.335195em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9670159999999999em;"><span style="top:-2.423136em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.1809080000000005em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">†</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.335195em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.2438799999999999em;vertical-align:-0.276864em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9670159999999998em;"><span style="top:-2.4231360000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.180908em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">†</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.276864em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span></span></p>
+<p>where on-site potentials <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ω</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\omega_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> are independent Gaussian random numbers with mean zero and variance <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>W</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">W^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
+<p>I first write a python code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> scipy.sparse <span class="keyword">as</span> sp</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">os.environ[<span class="string">&quot;OMP_NUM_THREADS&quot;</span>] = <span class="string">&quot;1&quot;</span> <span class="comment"># export OMP_NUM_THREADS=4</span></span><br><span class="line">os.environ[<span class="string">&quot;OPENBLAS_NUM_THREADS&quot;</span>] = <span class="string">&quot;1&quot;</span> <span class="comment"># export OPENBLAS_NUM_THREADS=4 </span></span><br><span class="line">os.environ[<span class="string">&quot;NUMEXPR_NUM_THREADS&quot;</span>] = <span class="string">&quot;1&quot;</span> <span class="comment"># export NUMEXPR_NUM_THREADS=6</span></span><br><span class="line"></span><br><span class="line">t0 = datetime.datetime.now()</span><br><span class="line"><span class="comment"># 这一步是生成所有占据数为N/2的态，比如N=4的话就是即0011，0101,0110,1001,1010,1100一系列的态。最终返回一个列表，里面都是二次量子化基矢，以列表的形式存储。</span></span><br><span class="line"><span class="comment"># This step is to generate all computational basis which occupation is N/2, for example, if N=4, it is a series of states, namely 0011, 0101, 0110, 1001, 1010, 1100, listed in decimal order. Finally, return a list containing second quantization basis, stored in the form of a list.</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">half_filling</span>(<span class="params">N</span>):</span><br><span class="line">    basis = []</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">2</span>**N):</span><br><span class="line">        xb = <span class="built_in">bin</span>(x)[<span class="number">2</span>:].zfill(N)</span><br><span class="line">        <span class="keyword">if</span> xb.count(<span class="string">&#x27;1&#x27;</span>) == N//<span class="number">2</span>:</span><br><span class="line">            basis.append(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, xb)))</span><br><span class="line">    <span class="keyword">return</span> basis</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这一部分是写哈密顿量，具体来说是用前文生成的半填充的基矢来展开哈密顿量</span></span><br><span class="line"><span class="comment"># This section is about writing the Hamiltonian, specifically using the half filled computational basis generated earlier to expand the Hamiltonian.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sparse_hamiltonian</span>(<span class="params">W,N,t=<span class="number">1</span>,tprime=<span class="number">1</span>,V=<span class="number">2</span></span>):</span><br><span class="line">    basis=half_filling(N) </span><br><span class="line">    basis=[<span class="built_in">list</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> basis]</span><br><span class="line">    L=<span class="built_in">len</span>(basis) </span><br><span class="line">    H=sp.dok_matrix((L,L))</span><br><span class="line">    omegalis=np.ones(N) <span class="comment"># Here should be np.normal(0,W**2)</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> <span class="built_in">range</span>(L): </span><br><span class="line">        rowstate=basis[row]</span><br><span class="line">        temp=<span class="number">0</span></span><br><span class="line"><span class="comment"># Write diagonal elements first</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                    <span class="keyword">if</span> rowstate[i]==<span class="number">1</span>:</span><br><span class="line">                        temp+=omegalis[i]</span><br><span class="line">                        <span class="keyword">if</span> rowstate[(i+<span class="number">1</span>)%N]==<span class="number">1</span>:</span><br><span class="line">                            temp+=V/<span class="number">4</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            temp-=V/<span class="number">4</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        <span class="keyword">if</span> rowstate[(i+<span class="number">1</span>)%N]==<span class="number">1</span>:</span><br><span class="line">                            temp-=V/<span class="number">4</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            temp+=V/<span class="number">4</span></span><br><span class="line">        H[row,row]=temp</span><br><span class="line"><span class="comment"># 再写非对角元素，因为c_i^&#123;\dagger&#125;c_&#123;i+1&#125;保持粒子数守恒所以作用后的基仍在我们已经写好的基矢空间内。遍历每一个基矢作为矩阵的横坐标，如果是比如0110态，就找对应的1010态作为纵坐标，以此类推。如果你不熟悉，可以参见Sandvik的精确对角化教程。</span></span><br><span class="line"><span class="comment"># Write non diagonal elements again, because c_i^&#123;\ dagger&#125;c_ &#123;i+1&#125; maintains the conservation of particle numbers, so the basis after the action remains within the subspace spanned by computational basis we have already written. Traverse each basis as the x-axis of the matrix. For example if it is the 0110 state, find the 1010 state as the corresponding  y-axis, and so on. If you are not familiar with it, you can refer to Sandvik&#x27;s tutorial on exact diagonalization.</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">            <span class="keyword">if</span> rowstate[j] == <span class="number">0</span> <span class="keyword">and</span> rowstate[(j+<span class="number">1</span>)%N] == <span class="number">1</span>:</span><br><span class="line">               newcolumnstate = rowstate.copy()</span><br><span class="line">               newcolumnstate[j] = <span class="number">1</span></span><br><span class="line">               newcolumnstate[(j+<span class="number">1</span>)%N] = <span class="number">0</span></span><br><span class="line">               column = basis.index(newcolumnstate)</span><br><span class="line">               H[row, column] += t</span><br><span class="line">            <span class="keyword">elif</span> rowstate[j] == <span class="number">0</span> <span class="keyword">and</span> rowstate[(j+<span class="number">2</span>)%N] == <span class="number">1</span>:</span><br><span class="line">                newcolumnstate = rowstate.copy()</span><br><span class="line">                newcolumnstate[j] = <span class="number">1</span></span><br><span class="line">                newcolumnstate[(j+<span class="number">2</span>)%N] = <span class="number">0</span></span><br><span class="line">                column = basis.index(newcolumnstate)</span><br><span class="line">                H[row, column] += tprime</span><br><span class="line">    H = H + H.T</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(L):</span><br><span class="line">        H[i, i] /= <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> H.toarray()</span><br><span class="line"></span><br><span class="line">energy=np.linalg.eigvalsh(sparse_hamiltonian(<span class="number">1</span>,<span class="number">16</span>))</span><br><span class="line"><span class="built_in">print</span>(datetime.datetime.now()-t0)</span><br></pre></td></tr></table></figure>
+<p>Imitating the above python code, I write its Julia version intended to accelerate computation.</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> SparseArrays</span><br><span class="line"><span class="keyword">using</span> LinearAlgebra</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> half_filling(N)</span><br><span class="line">    basis = []</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">2</span>^N-<span class="number">1</span>)</span><br><span class="line">        xb = string(x, base=<span class="number">2</span>, pad=N)</span><br><span class="line">        <span class="keyword">if</span> count(<span class="string">&#x27;1&#x27;</span>, xb) == N÷<span class="number">2</span></span><br><span class="line">            push!(basis, map(x -&gt; parse(<span class="built_in">Int64</span>, x), split(xb, <span class="string">&quot;&quot;</span>)))</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> basis</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> Hamiltonian(W,N,t=<span class="number">1</span>,tprime=<span class="number">1</span>,V=<span class="number">2</span>)</span><br><span class="line">    basis=half_filling(N)</span><br><span class="line">    L=length(basis)</span><br><span class="line">    H=spzeros(L,L)</span><br><span class="line">    omegalis=ones(N)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> <span class="number">1</span>:L</span><br><span class="line">        rowstate=basis[row]</span><br><span class="line">        temp=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:N</span><br><span class="line">            <span class="keyword">if</span> rowstate[i]==<span class="number">1</span></span><br><span class="line">                temp+=omegalis[i]</span><br><span class="line">                <span class="keyword">if</span> rowstate[mod1(i+<span class="number">1</span>,N)]==<span class="number">1</span></span><br><span class="line">                    temp+=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    temp-=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">if</span> rowstate[mod1(i+<span class="number">1</span>,N)]==<span class="number">1</span></span><br><span class="line">                    temp-=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    temp+=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        H[row,row]=temp</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="number">1</span>:N</span><br><span class="line">            <span class="keyword">if</span> rowstate[j]==<span class="number">0</span> &amp;&amp; rowstate[mod1(j+<span class="number">1</span>,N)]==<span class="number">1</span></span><br><span class="line">                newcolumnstate=copy(rowstate)</span><br><span class="line">                newcolumnstate[j]=<span class="number">1</span></span><br><span class="line">                newcolumnstate[mod1(j+<span class="number">1</span>,N)]=<span class="number">0</span></span><br><span class="line">                column = findfirst(x -&gt; isequal(x, newcolumnstate), basis)</span><br><span class="line">                H[row,column]+=t</span><br><span class="line"></span><br><span class="line">            <span class="keyword">elseif</span> rowstate[j] == <span class="number">0</span> &amp;&amp; rowstate[mod1(j+<span class="number">2</span>,N)] == <span class="number">1</span></span><br><span class="line">                newcolumnstate = copy(rowstate)</span><br><span class="line">                newcolumnstate[j] = <span class="number">1</span></span><br><span class="line">                newcolumnstate[mod1(j+<span class="number">2</span>,N)] = <span class="number">0</span></span><br><span class="line">                column = findfirst(x -&gt; isequal(x, newcolumnstate), basis)</span><br><span class="line">                H[row, column] += tprime</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    H=H+transpose(H)</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="number">1</span>:L</span><br><span class="line">        H[k,k]/=<span class="number">2</span> </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Matrix</span>(H)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@time</span> eigvals(Hamiltonian(<span class="number">1</span>,<span class="number">16</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="device-and-benchmark">Device and Benchmark</h2>
+<p>I have encountered the problem that my Python code runs twice as fast as Julia on my Windows platform, while in reverse on MacOS platform. So how come it can be true? We did a lot test on different platform.</p>
+<p>Here is Hardware device and package dependence environment.</p>
+<table>
+<thead>
+<tr>
+<th>Hardware</th>
+<th>OS</th>
+<th>CPU</th>
+<th>python version</th>
+<th>numpy version</th>
+<th>julia version</th>
+<th>BLAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AMD</td>
+<td>Windows10</td>
+<td>AMD Ryzen5 4600H</td>
+<td>3.7.12</td>
+<td>1.21.6</td>
+<td>1.8.5</td>
+<td>OpenBLAS</td>
+</tr>
+<tr>
+<td>Mac</td>
+<td>Ventura 13.2.1</td>
+<td>M1Max</td>
+<td>3.10.9</td>
+<td>1.24.2</td>
+<td>1.8.5</td>
+<td>OpenBLAS -&gt; MKL</td>
+</tr>
+<tr>
+<td>Intel</td>
+<td>Windows11</td>
+<td>i9-11900H</td>
+<td>/</td>
+<td>/</td>
+<td>1.8.5</td>
+<td>OpenBLAS -&gt; MKL</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>Centos7</td>
+<td>双路 至强金牌 6238R</td>
+<td>3.9.12</td>
+<td>1.21.5</td>
+<td>1.8.5</td>
+<td>numpy MKL, Julia OpenBLAS</td>
+</tr>
+</tbody>
+</table>
+<p>There are two main parts in my code spending time mostly: prepare the matrix, and<br>
+Here is my ED benchmark on parameter of Hamiltonian N=16:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>np.linalg.eigvalsh</th>
+<th>Linear.eigvals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenBLAS(AMD)</td>
+<td>70(scipy 75s)</td>
+<td>~160s</td>
+</tr>
+<tr>
+<td>OpenBLAS(AMD,1thread)</td>
+<td>120</td>
+<td>/</td>
+</tr>
+<tr>
+<td>OpenBLAS(mac)</td>
+<td>2min(scipy 1min)</td>
+<td>60s</td>
+</tr>
+<tr>
+<td>OpenBLAS(mac, 1thread)</td>
+<td>8min</td>
+<td>/</td>
+</tr>
+<tr>
+<td>veclib(mac)</td>
+<td>7min09s</td>
+<td>/</td>
+</tr>
+<tr>
+<td>OpenBLAS(Intel)</td>
+<td>5min</td>
+<td>140s</td>
+</tr>
+<tr>
+<td>MKL(Intel)</td>
+<td>33s</td>
+<td>37s</td>
+</tr>
+<tr>
+<td>MKL(Intel, 1 thread)</td>
+<td>66s</td>
+<td>231s</td>
+</tr>
+<tr>
+<td>MKL(Intel, Centos7)</td>
+<td>57s</td>
+<td>~85s</td>
+</tr>
+<tr>
+<td>MKL(Intel, Centos7,1 thread)</td>
+<td>64s</td>
+<td>95s</td>
+</tr>
+</tbody>
+</table>
+<p>my 1.21.6 run <code>np.show_config()</code> instruction return:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">blas_info:</span><br><span class="line">    libraries = [<span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>]</span><br><span class="line">    language = f77</span><br><span class="line">    define_macros = [(<span class="string">&#x27;HAVE_CBLAS&#x27;</span>, <span class="literal">None</span>)]</span><br><span class="line">blas_opt_info:</span><br><span class="line">    define_macros = [(<span class="string">&#x27;NO_ATLAS_INFO&#x27;</span>, <span class="number">1</span>), (<span class="string">&#x27;HAVE_CBLAS&#x27;</span>, <span class="literal">None</span>)]</span><br><span class="line">    libraries = [<span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>]</span><br><span class="line">    language = f77</span><br><span class="line">lapack_info:</span><br><span class="line">    libraries = [<span class="string">&#x27;lapack&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;lapack&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>]</span><br><span class="line">    language = f77</span><br><span class="line">lapack_opt_info:</span><br><span class="line">    libraries = [<span class="string">&#x27;lapack&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;lapack&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>]</span><br><span class="line">    language = f77</span><br><span class="line">    define_macros = [(<span class="string">&#x27;NO_ATLAS_INFO&#x27;</span>, <span class="number">1</span>), (<span class="string">&#x27;HAVE_CBLAS&#x27;</span>, <span class="literal">None</span>)]</span><br><span class="line">Supported SIMD extensions <span class="keyword">in</span> this NumPy install:</span><br><span class="line">    baseline = SSE,SSE2,SSE3</span><br><span class="line">    found = SSSE3,SSE41,POPCNT,SSE42,AVX,F16C,FMA3,AVX2</span><br><span class="line">    <span class="keyword">not</span> found = AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX,AVX512_CNL</span><br></pre></td></tr></table></figure>
+<p>my AMD machine run <code>versioninfo()</code> return:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Platform Info:</span><br><span class="line">  OS: Windows (x86_64-w64-mingw32) x86_64架构，也称为AMD64 or Intel <span class="number">64</span>，w64意思是windows64位，mingw32的开发工具链(Minimalist GNU <span class="keyword">for</span> Windows <span class="number">32</span>-bit)</span><br><span class="line">  CPU: <span class="number">12</span> × AMD Ryzen <span class="number">5</span> <span class="number">4600</span>H with Radeon Graphics</span><br><span class="line">  WORD_SIZE: <span class="number">64</span></span><br><span class="line">  LIBM: libopenlibm Julia解释器所链接的数学库</span><br><span class="line">  LLVM: libLLVM-<span class="number">13.0</span><span class="number">.1</span> (ORCJIT, znver2) LLVM编译器工具链的libLLVM-<span class="number">13.0</span><span class="number">.1</span>版本。ORCJIT是LLVM的即时编译器组件，znver2表示针对AMD Zen <span class="number">2</span>微架构进行了优化。与安装的Julia版本一起分发。</span><br><span class="line">  Threads: <span class="number">1</span> on <span class="number">12</span> virtual cores 计算机当前使用了<span class="number">1</span>个线程，并且您的处理器有<span class="number">12</span>个虚拟核心。</span><br></pre></td></tr></table></figure>
+<p><code>LinearAlgebra.BLAS.get_config()</code></p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LinearAlgebra.BLAS.LBTConfig</span><br><span class="line">Libraries:</span><br><span class="line">└ [ILP64] libopenblas64_.dll(支持ILP64（整数长为<span class="number">64</span>位）数据类型的OpenBLAS库。)</span><br></pre></td></tr></table></figure>
+<p>my pytorch run<code>torch.__config__.show()</code> return</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">PyTorch built <span class="keyword">with</span>:</span><br><span class="line">- C++ Version: <span class="number">199711</span></span><br><span class="line">- MSVC <span class="number">193431937</span></span><br><span class="line">- Intel(R) Math Kernel Library Version <span class="number">2020.0</span><span class="number">.2</span> ProductBuild <span class="number">20200624</span> <span class="keyword">for</span> Intel(R) <span class="number">64</span> architecture applications</span><br><span class="line">- Intel(R) MKL-DNN v2<span class="number">.7</span><span class="number">.3</span> (Git Hash6dbeffbae1f23cbbeae17adb7b5b13f1f37c080e)</span><br><span class="line">- OpenMP <span class="number">2019</span></span><br><span class="line">- LAPACK <span class="keyword">is</span> enabled (usually provided by MKL)</span><br><span class="line">- CPU capability usage: AVX2</span><br><span class="line">- CUDA Runtime <span class="number">11.7</span></span><br><span class="line">- NVCC architecture flags: -gencode;arch=compute_37code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencodearch=compute_60,code=sm_60;-gencode;arch=compute_61code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencodearch=compute_75,code=sm_75;-gencode;arch=compute_80code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencodearch=compute_37,code=compute_37</span><br><span class="line">- CuDNN <span class="number">8.5</span></span><br><span class="line">- Magma <span class="number">2.5</span><span class="number">.4</span></span><br><span class="line">- Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release,CUDA_VERSION=<span class="number">11.7</span>, CUDNN_VERSION=<span class="number">8.5</span><span class="number">.0</span>, CXX_COMPILER=C:/cbpytorch_1000000000000/work/tmp_bin/sccache-cl.exe,CXX_FLAGS=/DWIN32 /D_WINDOWS /GR /EHsc /w /bigobj /FS-DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI-DLIBKINETO_NOROCTRACER -DUSE_FBGEMM -DUSE_XNNPACK-DSYMBOLICATE_MOBILE_DEBUG_HANDLE, LAPACK_INFO=mkl,PERF_WITH_AVX=<span class="number">1</span>, PERF_WITH_AVX2=<span class="number">1</span>, PERF_WITH_AVX512=<span class="number">1</span>,TORCH_DISABLE_GPU_ASSERTS=OFF, TORCH_VERSION=<span class="number">2.0</span><span class="number">.0</span>,USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=<span class="number">1</span>,USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON,USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON,USE_ROCM=OFF,</span><br></pre></td></tr></table></figure>
+<h2 id="optimization">Optimization</h2>
+<p>Noticing that the list of basis have been sorted already, so we need not use the <code>list.index</code> and <code>findfirst</code> function but <code>bisect.bisect_left()</code> and <code>searchsortedfirst</code>, and the Type of function <code>half_filling</code> outcome has not been specified, so we could specify it to <code>String</code> Type explicitly. Then the codes become:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    newcolumnstate[(j+<span class="number">1</span>)%N] = <span class="number">0</span></span><br><span class="line">        column=bisect.bisect_left(basis,newcolumnstate)</span><br><span class="line">           H[row, column] += t</span><br><span class="line"><span class="keyword">elif</span> rowstate[j] == <span class="number">0</span> <span class="keyword">and</span> rowstate[(j+<span class="number">2</span>)%N] == <span class="number">1</span>:</span><br><span class="line">    newcolumnstate = rowstate.copy()</span><br><span class="line">    newcolumnstate[j] = <span class="number">1</span></span><br><span class="line">    newcolumnstate[(j+<span class="number">2</span>)%N] = <span class="number">0</span></span><br><span class="line">    <span class="comment"># column = basis.index(newcolumnstate)</span></span><br><span class="line">    column=bisect.bisect_left(basis,newcolumnstate)</span><br><span class="line">    <span class="comment">#换用这个查找函数后，构建矩阵的时间从之前24s到现在4.4s</span></span><br><span class="line">    H[row, column] += tprime</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> SparseArrays</span><br><span class="line"><span class="keyword">using</span> LinearAlgebra</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> half_filling_v2(N)</span><br><span class="line">    <span class="meta">@assert</span> mod(N,<span class="number">2</span>) == <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    N2 = N ÷ <span class="number">2</span></span><br><span class="line">    basis = <span class="built_in">String</span>[]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">2</span>^N-<span class="number">1</span>)</span><br><span class="line">        xb = string(x, base=<span class="number">2</span>, pad=N)</span><br><span class="line">        <span class="keyword">if</span> count(<span class="string">&#x27;1&#x27;</span>, xb) == N2 </span><br><span class="line">            push!(basis, xb)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> basis</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> Hamiltonian_v2(W,N,t=<span class="number">1</span>,tprime=<span class="number">1</span>,V=<span class="number">2</span>)</span><br><span class="line">    basis = half_filling_v2(N)</span><br><span class="line"></span><br><span class="line">    L = length(basis)</span><br><span class="line">    H = spzeros(L,L)</span><br><span class="line">    omegalis=ones(N)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> <span class="number">1</span>:L</span><br><span class="line">        rowstate=basis[row]</span><br><span class="line">        temp=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:N</span><br><span class="line">            <span class="keyword">if</span> rowstate[i]==<span class="string">&#x27;1&#x27;</span></span><br><span class="line">                temp+=omegalis[i]</span><br><span class="line">                <span class="keyword">if</span> rowstate[mod1(i+<span class="number">1</span>,N)]==<span class="string">&#x27;1&#x27;</span></span><br><span class="line">                    temp+=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    temp-=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">if</span> rowstate[mod1(i+<span class="number">1</span>,N)]==<span class="string">&#x27;1&#x27;</span></span><br><span class="line">                    temp-=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    temp+=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        H[row,row]=temp</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="number">1</span>:N</span><br><span class="line">            <span class="keyword">if</span> rowstate[j]==<span class="string">&#x27;0&#x27;</span> &amp;&amp; rowstate[mod1(j+<span class="number">1</span>,N)]==<span class="string">&#x27;1&#x27;</span></span><br><span class="line">                statearray = collect(rowstate)</span><br><span class="line">                statearray[j] = <span class="string">&#x27;1&#x27;</span></span><br><span class="line">                statearray[mod1(j+<span class="number">1</span>,N)] = <span class="string">&#x27;0&#x27;</span></span><br><span class="line">                newcolumnstate = join(statearray)</span><br><span class="line">                <span class="comment"># column = findfirst(x -&gt; isequal(x, newcolumnstate), basis)</span></span><br><span class="line">                column=searchsortedfirst(basis,newcolumnstate)</span><br><span class="line">                H[row,column]+=t</span><br><span class="line"></span><br><span class="line">            <span class="keyword">elseif</span> rowstate[j] == <span class="string">&#x27;0&#x27;</span> &amp;&amp; rowstate[mod1(j+<span class="number">2</span>,N)] == <span class="string">&#x27;1&#x27;</span></span><br><span class="line">                statearray = collect(rowstate)</span><br><span class="line">                statearray[j] = <span class="string">&#x27;1&#x27;</span></span><br><span class="line">                statearray[mod1(j+<span class="number">2</span>,N)] = <span class="string">&#x27;0&#x27;</span></span><br><span class="line">                newcolumnstate = join(statearray)</span><br><span class="line">                column=searchsortedfirst(basis,newcolumnstate)</span><br><span class="line">                H[row, column] += tprime</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    H=H+transpose(H)</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="number">1</span>:L</span><br><span class="line">        H[k,k]/=<span class="number">2</span> </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Matrix</span>(H)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">a=Hamiltonian_v2(<span class="number">1</span>,<span class="number">16</span>)</span><br><span class="line"><span class="comment"># energy=eigvals(Hamiltonian(1,16))</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Then the preparation parts optimization outcome becomes:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>python</th>
+<th>julia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>before</td>
+<td>24s</td>
+<td>26s</td>
+</tr>
+<tr>
+<td>after</td>
+<td>4s</td>
+<td>1s</td>
+</tr>
+</tbody>
+</table>
+<h2 id="conclusion">Conclusion</h2>
+<p>综合来看，上述最初版本的程序经过优化后，AMD上python从最开始的70s缩减到了50s，Julia程序从最开始的170s缩减到了144s，在Linux优化到了72s第一次，65s第二次。值得注意的是scipy和numpy的线代库不一样(<br>
+Another advantage of using scipy.linalg over numpy.linalg is that it is always compiled with BLAS/LAPACK support, while for numpy this is optional. Therefore, the scipy version might be faster depending on how numpy was installed. Therefore, unless you don’t want to add scipy as a dependency to your numpy program, use scipy.linalg instead of numpy.linalg). numpy的库和LinearAlgebra的线代库都是可以选择的，建议根据设备不同编译的时候选择链接到不同线代库上。Julia对OpenBLAS的支持属实不怎么好，建议在intel的芯片上还是用MKL，理论上AMD+OpenBLAS=Intel+MKL，在python表现出来了，Julia却没有，就很怪）。</p>
+<h1 id="math-package">Math Package</h1>
+<h2 id="basic-math-package">Basic Math Package</h2>
+<p>This basic linear algebra also have</p>
+<h3 id="blas">BLAS</h3>
+<p>Basic Linear Algebra Subprograms by Netliv in Fortran, not been optimized for operations too much. Various software and hardware manufacturers highly optimize the implementation of BLAS interfaces for their products.</p>
+<h3 id="lapack">LAPACK</h3>
+<p>Linear Algebra PACKage, whose bottom layer is BLAS, is more efficient than BLAS, by Netlib in Fortran.</p>
+<h3 id="scalapack">ScaLAPACK</h3>
+<p>short for Scalable LAPACK, suitable for MIMD(multiple instruction, multiple data)</p>
+<h2 id="advanced-math-package">Advanced Math Package</h2>
+<p>based on BLAS, LAPACK and ScaLAPACK which could be seen as interface standards, other packages are implemented. In which Atlas and OpenBLAS are open-accessed while others are commercial such as MKL cuBLAS.</p>
+<h3 id="atlas">Atlas</h3>
+<p>Automatically Tuned Linear Algebra Software, is possible to automatically adjust operating parameters during runtime based on hardware.</p>
+<h3 id="openblas">OpenBLAS</h3>
+<p>Just as its name, Open BLAS. (It is astonishing that its initial release is at 22 March 2011, and one of the developers is Chinese, Zhang Xianyi, Wang Qian)The optimization of OpenBLAS is done at compile time, so its running efficiency is generally higher than Atlas. But this also determines that Openblas has a high hardware dependency, and if the machine is changed, it may need to be recompiled.</p>
+<h3 id="mkl">MKL</h3>
+<p>based on Intel ® Built with C++ and Fortran compilers, and implemented threading using OpenMP *(Open Multi-Processing, a kind of parallel programming model). Support for Linux/Win (Intel chips such i9-11900H).</p>
+<p>Its bottom has:</p>
+<ol>
+<li>BLAS: All inter matrix operations (three levels) are threaded for dense and sparse BLAS. Many vector to vector operations (first level) and matrix to vector operations (second level) are aimed at Intel ® The dense matrix in 64 bit programs on the 64 architecture achieves threading. For sparse matrix, all secondary operations except triangle sparse matrix solver are threaded.</li>
+<li>LAPACK: Some computational routines have implemented threading for certain types of problems: linear equation solvers, orthogonal factorization, single valued factorization, and symmetric eigenvalue problems. LAPACK also calls BLAS, so even non threaded functions may run in parallel.</li>
+<li>ScaLAPACK: cluster oriented LAPACK Distributed memory parallel version.</li>
+<li>PARDISO: The three stages of the parallel direct sparse matrix solver are threaded: reordering (optional), factoring and solving (if multiple items on the right are used).</li>
+<li>DFTs: Discrete Fourier Transform</li>
+<li>VML: Vector Mathematics Library</li>
+<li>VSL: Vector Statistics Library</li>
+</ol>
+<h3 id="armadillo">Armadillo</h3>
+<p>Using template metaprogramming technology, the easy-to-use C++matrix library, similar to Matlab, provides efficient LAPACK, BLAS and ATLAS packages, including many high-performance versions such as Intel MKL, AMD ACM and OpenBLAS.</p>
+<p>bottom:</p>
+<p>BLAS/LAPACK: Supports OpenBLAS, ACML, and MKL</p>
+<h3 id="eigen-3">Eigen(3)</h3>
+<p>Its bottom:</p>
+<ol>
+<li>BLAS/LAPACK：支持所有基于F77的BLAS或LAPACK库作为底层（EIGEN_USE_BLAS、EIGEN_USE_LAPACKE）</li>
+<li>MKL：支持MKL作为底层（EIGEN_USE_MKL_ALL）</li>
+<li>CUDA：支持在CUDA kernels里使用CUDA</li>
+<li>OpenMP：多线程优化</li>
+</ol>
+<p>他们之间的关系</p>
+<ol>
+<li>狭义的BLAS/LAPACK可理解为用于线性代数运算库的API</li>
+<li>Netlib实现了Fortran/C版的BLAS/LAPACK、CBLAS/CLAPACK</li>
+<li>开源社区及商业公司针对API实现了BLAS（ATLAS、OpenBLAS）和LAPACK（MKL、ACML、CUBLAS）的针对性优化</li>
+<li>Eigen、Armadillo除自身实现线性代数运算库外还支持上述各种BLAS/LAPACK为基础的底层以加速运算</li>
+</ol>
+<p>他们之间的对比：</p>
+<ol>
+<li>备选：MKL、OpenBLAS、Eigen、Armadillo</li>
+<li>接口易用程度：Eigen &gt; Armadillo &gt; MKL/OpenBLAS</li>
+<li>速度：MKL≈OpenBLAS &gt; Eigen(with MKL) &gt; Eigen &gt; Armadillo<br>
+其中：</li>
+<li>OpenBLAS没有单核版本，强行指定OMP_NUM_THREADS=1性能损失大，不考虑</li>
+<li>MKL直接使用学习成本较高，但是性能最强</li>
+<li>Armadillo效率和接口易用性不如Eigen</li>
+<li>Eigen的原生BLAS/LAPACK实现速度不如MKL、OpenBLAS，但是使用MKL做后台性能和MKL原生几乎一样，所以可以视情况决定是否使用MKL</li>
+<li>AMD+openblas可以匹敌Intel+mkl，英特尔处理器无脑选择mkl，AMD 处理器下openblas的速度是mkl的两倍。</li>
+<li>2018 MATLAB用户反馈在 Zen CPU 上的运行效率奇低，还不如几年前的 Intel CPU。人们才发现MATLAB 用的MKL在非 Intel CPU 上不开启 AVX2 指令集，后来有人逆向 MKL，挖出了那个著名的环境变量MKL_DEBUG_CPU_TYPE=5，在 Zen CPU 上强制启用 AVX2。但是2020 年 Intel 在新版本 MKL 里删掉了这个环境变量，一批 AMD 用户又各种降级。不过好在这个时候已经有可用的开源替代品 OpenBLAS 了，虽然某些性能还赶不上 MKL，但是也比没有加速强多了。并且从这个时候开始，NumPy 等一票计算库也渐渐向开源的 OpenBLAS 靠拢。后续有人进一步逆向 MKL，还能用动态库劫持的方法强制开启对 Zen AVX/AVX2 指令集的完整支持。</li>
+</ol>
+<p>Above are focusing on CPU, nvidia invented cuBLAS in CUDA on GPU, others GPU accelerating packages have cuSOLVER, MAGMA, ROCm SMI Library.</p>
+<p>Others parallel computation platform have, OpenCL, ROCm, except CUDA.</p>
+<h2 id="compilation-instruction">Compilation instruction</h2>
+<p><code>-O4 -msse2 -msse3 -msse4 </code></p>
+<p>-O4 是编译器优化级别的选项，表示最高级别的优化。该选项会启用各种优化技术，以尽可能提高代码执行速度和性能。不同的编译器可能对优化级别有不同的定义和实现。</p>
+<p>-msse2、-msse3 和 -msse4 是指令集扩展选项，用于启用特定的SIMD（单指令多数据）指令集。这些指令集扩展允许并行处理多个数据元素，从而提高代码的执行效率。SSE（Streaming SIMD Extensions）指令集是一组在x86架构上用于向量化运算的指令集。</p>
+<p>常见的SIMD指令集有：</p>
+<ol>
+<li>
+<p>SSE（Streaming SIMD Extensions）：这是最早的SIMD指令集，包括SSE、SSE2、SSE3、SSSE3等版本。它们广泛支持x86和x86-64架构的处理器。</p>
+</li>
+<li>
+<p>AVX（Advanced Vector Extensions）：AVX是一组SIMD指令集扩展，包括AVX、AVX2和AVX-512等版本。它们提供更高的矢量化性能和更大的向量寄存器。</p>
+</li>
+<li>
+<p>NEON：NEON是ARM架构上的SIMD指令集，广泛用于移动设备和嵌入式系统。</p>
+</li>
+<li>
+<p>AltiVec：AltiVec是PowerPC架构上的SIMD指令集。</p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">zzh</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2023/05/15/Diagonalization-and-Several-Linalg-Packages/">http://example.com/2023/05/15/Diagonalization-and-Several-Linalg-Packages/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/physics/">physics</a><a class="post-meta__tags" href="/tags/Fundamentals-of-computer-and-programming/">Fundamentals of computer and programming</a></div><div class="post_share"><div class="social-share" data-image="/img/buaa-second-year/physics_cover.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/buaa-second-year/wechatpay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/buaa-second-year/wechatpay.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/buaa-second-year/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/buaa-second-year/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/11/12/%E5%BE%B7%E5%9B%BD%E8%A7%81%E9%97%BB%E4%B8%80%E4%BA%8C%E8%AE%B0/"><img class="prev-cover" src="/img/buaa-second-year/plum_blossom_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">德国见闻一二记</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/11/%E5%A4%A7%E4%B8%89%E4%B8%8B%E7%9A%84%E5%BE%80%E4%BA%8B/"><img class="next-cover" src="/img/buaa-second-year/plum_blossom_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">大三下的往事 and 2023年终总结</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2022/02/24/%E5%AF%86%E5%BA%A6%E7%9F%A9%E9%98%B5%E5%92%8C%E9%87%8F%E5%AD%90%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%EF%BC%881%EF%BC%89/" title="密度矩阵和量子随机过程（1）"><img class="cover" src="/img/buaa-second-year/physics_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-24</div><div class="title">密度矩阵和量子随机过程（1）</div></div></a></div><div><a href="/2022/05/03/%E5%AF%86%E5%BA%A6%E7%9F%A9%E9%98%B5%E5%92%8C%E9%87%8F%E5%AD%90%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%EF%BC%882%EF%BC%89/" title="密度矩阵和量子随机过程（2）"><img class="cover" src="/img/buaa-second-year/physics_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-03</div><div class="title">密度矩阵和量子随机过程（2）</div></div></a></div><div><a href="/2022/07/25/%E6%9A%91%E6%A0%A1/" title="北大暑校"><img class="cover" src="/img/buaa-second-year/plum_blossom_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-25</div><div class="title">北大暑校</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/buaa-second-year/avatar2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">zzh</div><div class="author-info__description">To write the life, To record the beauty</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">50</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">54</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zzh-cycling"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zzh-cycling" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2276780832@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.zhihu.com/people/zhi-zhao-hui-89" target="_blank" title="Zhihu"><i class="fa-brands fa-zhihu"></i></a><a class="social-icon" href="https://www.youtube.com/channel/UCdkrKOftTBoeyEXqpCSKlGA" target="_blank" title="Youtube"><i class="fa-brands fa-youtube"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome to zhaohui zhi's personal blog, and you're welcome to contribute.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#exact-diagonalization"><span class="toc-number">1.</span> <span class="toc-text">Exact Diagonalization</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#background"><span class="toc-number">1.1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#device-and-benchmark"><span class="toc-number">1.2.</span> <span class="toc-text">Device and Benchmark</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#optimization"><span class="toc-number">1.3.</span> <span class="toc-text">Optimization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion"><span class="toc-number">1.4.</span> <span class="toc-text">Conclusion</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#math-package"><span class="toc-number">2.</span> <span class="toc-text">Math Package</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#basic-math-package"><span class="toc-number">2.1.</span> <span class="toc-text">Basic Math Package</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#blas"><span class="toc-number">2.1.1.</span> <span class="toc-text">BLAS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lapack"><span class="toc-number">2.1.2.</span> <span class="toc-text">LAPACK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scalapack"><span class="toc-number">2.1.3.</span> <span class="toc-text">ScaLAPACK</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#advanced-math-package"><span class="toc-number">2.2.</span> <span class="toc-text">Advanced Math Package</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#atlas"><span class="toc-number">2.2.1.</span> <span class="toc-text">Atlas</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#openblas"><span class="toc-number">2.2.2.</span> <span class="toc-text">OpenBLAS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mkl"><span class="toc-number">2.2.3.</span> <span class="toc-text">MKL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#armadillo"><span class="toc-number">2.2.4.</span> <span class="toc-text">Armadillo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eigen-3"><span class="toc-number">2.2.5.</span> <span class="toc-text">Eigen(3)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#compilation-instruction"><span class="toc-number">2.3.</span> <span class="toc-text">Compilation instruction</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/27/%E5%BD%92/" title="归"><img src="/img/buaa-second-year/plum_blossom_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="归"/></a><div class="content"><a class="title" href="/2024/03/27/%E5%BD%92/" title="归">归</a><time datetime="2024-03-27T00:20:12.000Z" title="Created 2024-03-27 08:20:12">2024-03-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/12/%E5%BE%B7%E5%9B%BD%E8%A7%81%E9%97%BB%E4%B8%80%E4%BA%8C%E8%AE%B0/" title="德国见闻一二记"><img src="/img/buaa-second-year/plum_blossom_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="德国见闻一二记"/></a><div class="content"><a class="title" href="/2023/11/12/%E5%BE%B7%E5%9B%BD%E8%A7%81%E9%97%BB%E4%B8%80%E4%BA%8C%E8%AE%B0/" title="德国见闻一二记">德国见闻一二记</a><time datetime="2023-11-12T12:30:54.000Z" title="Created 2023-11-12 20:30:54">2023-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/15/Diagonalization-and-Several-Linalg-Packages/" title="Diagonalization and Several Linalg Packages"><img src="/img/buaa-second-year/physics_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Diagonalization and Several Linalg Packages"/></a><div class="content"><a class="title" href="/2023/05/15/Diagonalization-and-Several-Linalg-Packages/" title="Diagonalization and Several Linalg Packages">Diagonalization and Several Linalg Packages</a><time datetime="2023-05-14T18:18:07.000Z" title="Created 2023-05-15 02:18:07">2023-05-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/11/%E5%A4%A7%E4%B8%89%E4%B8%8B%E7%9A%84%E5%BE%80%E4%BA%8B/" title="大三下的往事 and 2023年终总结"><img src="/img/buaa-second-year/plum_blossom_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大三下的往事 and 2023年终总结"/></a><div class="content"><a class="title" href="/2023/03/11/%E5%A4%A7%E4%B8%89%E4%B8%8B%E7%9A%84%E5%BE%80%E4%BA%8B/" title="大三下的往事 and 2023年终总结">大三下的往事 and 2023年终总结</a><time datetime="2023-03-11T14:58:25.000Z" title="Created 2023-03-11 22:58:25">2023-03-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/12/31/%E5%86%AC%E5%AD%A3%E6%80%BB%E7%BB%93/" title="冬季总结"><img src="/img/buaa-second-year/plum_blossom_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="冬季总结"/></a><div class="content"><a class="title" href="/2022/12/31/%E5%86%AC%E5%AD%A3%E6%80%BB%E7%BB%93/" title="冬季总结">冬季总结</a><time datetime="2022-12-31T14:57:41.000Z" title="Created 2022-12-31 22:57:41">2022-12-31</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By zzh</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><div class="aplayer no-destroy" data-id="466692088" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true" data-lrcType="-1"> </div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
