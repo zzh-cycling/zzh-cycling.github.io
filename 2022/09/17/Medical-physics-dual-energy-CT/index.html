@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Medical_physics-dual_energy_CT | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="这篇文章是大二上学期跟着北航赵维老师做双能CT成像深度学习算法研究的一些笔记，加入了一些之前参与华为昇腾众智计划的私货，整理一下。现在不做了）。那时候是对图像处理感兴趣才做了一点，赵老师还说能发顶会），现在感觉深度学习没啥解释性，以后也可能不会碰医学物理）。 CT就是电子计算机断层扫描，它是利用精确准直的X线束、γ射线、超声波等，与灵敏度极高的探测器一同围绕人体的某一部位作一个接一个的断面扫描，通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Medical_physics-dual_energy_CT">
+<meta property="og:url" content="http://example.com/2022/09/17/Medical-physics-dual-energy-CT/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这篇文章是大二上学期跟着北航赵维老师做双能CT成像深度学习算法研究的一些笔记，加入了一些之前参与华为昇腾众智计划的私货，整理一下。现在不做了）。那时候是对图像处理感兴趣才做了一点，赵老师还说能发顶会），现在感觉深度学习没啥解释性，以后也可能不会碰医学物理）。 CT就是电子计算机断层扫描，它是利用精确准直的X线束、γ射线、超声波等，与灵敏度极高的探测器一同围绕人体的某一部位作一个接一个的断面扫描，通">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/third-year/x_ray_spectrum.jpg">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/ba67c879a381e186eb679975840b3353.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/e419acfdded7e88c6c1b38011d6aff3c.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/4347dd9e4c0cf4beef2c9267b7ad224d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/3f3567757402d273006cf9499baa7458.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/4f9c810821e96eb7988e84e99edd46de.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/5792310a69f11d008c49885a25b18b14.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/a10132f48a41712c7f6ff720946c26e1.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/f487843fffa5eab4ade5861ac86e48fc.png">
+<meta property="article:published_time" content="2022-09-16T16:11:41.000Z">
+<meta property="article:modified_time" content="2024-11-05T07:30:50.466Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Physics">
+<meta property="article:tag" content="Medical Imaging">
+<meta property="article:tag" content="模型部署">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/third-year/x_ray_spectrum.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">[object Object]</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Medical-physics-dual-energy-CT" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/09/17/Medical-physics-dual-energy-CT/" class="article-date">
+  <time class="dt-published" datetime="2022-09-16T16:11:41.000Z" itemprop="datePublished">2022-09-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Medical_physics-dual_energy_CT
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>这篇文章是大二上学期跟着北航赵维老师做双能CT成像深度学习算法研究的一些笔记，加入了一些之前参与华为昇腾众智计划的私货，整理一下。现在不做了）。那时候是对图像处理感兴趣才做了一点，赵老师还说能发顶会），现在感觉深度学习没啥解释性，以后也可能不会碰医学物理）。</p>
+<p>CT就是电子计算机断层扫描，它是利用精确准直的X线束、γ射线、超声波等，与灵敏度极高的探测器一同围绕人体的某一部位作一个接一个的断面扫描，通过衰减系数的换算，推测人体密度，最后利用成像算法将该断面恢复出来。CT发展的三个目标：减少采集时间，降低射线照射，降低成本。</p>
+<p>然后X射线与物质相互作用的唯像模型有光电效应，compton散射和电子对效应。通过高能电子轰击靶核可以得到X射线能谱图如下，也叫阳极靶面特征曲线，我们可以看到80kvp球管输出最大80kev，60kev巅峰。得到的图像分解模型基物质分解算法也有几类：material decomposition就是按照微观相互作用机制来分解；Alvarez的数学公式的实现经历了图像数据域物质分解、转化形式的基物质对投影数据域物质分解、直接基于康普顿及光电效应的投影数据域物质分解。</p>
+<p><img src="/img/third-year/x_ray_spectrum.jpg" alt=""></p>
+<p>CT发明者Hounsfield先生早在1973年就发现一个重要的现象：即化学成分和密度不同的物质在一种X线能量下可以表现为相同的CT值，也就是原子序数Z高但密度低的物质与原子序数Z低但密度高的物质可能通过单一的CT值是无法鉴别的。</p>
+<p>基于这一重要的发现，Hounsfield提出了通过两种不同能量的X线(E1、E2)分别成像，以进一步鉴别原子序数不同的等密度物质。Alvarez将其精确地通过数学表达了出来，也就是CT的能量选择性重建，如下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/ba67c879a381e186eb679975840b3353.png" alt="光电效应衰减+康普顿衰减具体公式"></p>
+<p>然后每一种物质对于一个特定的光电效应衰减系数(α1)和康普顿衰减系数(α2)，这样，每一种物质都可以通过(α1，α2)这样的系数组合进行表达，通过这种方式可以实现对CT值相同的不同物质的准确区分，这是首次通过数学公式精确表达了双能CT的物质分解算法。</p>
+<p>由于双能量物质分解算法的发明者Alvarez的公式对两种能量成像在时间、空间上的匹配具有严格的要求，也就是对设备的要求非常高，要求CT设备能够在相同的时间和方向上同时采集两种能量的衰减数据。所以早期的物质分解算法并没有按照Alvarez的公式直接对衰减系数进行分解，而是先重建出高、低两种kV的图像，然后利用以下公式计算出不同能级图像的CT值，如下图:</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/e419acfdded7e88c6c1b38011d6aff3c.png" alt="高、低两种kV的图像，然后利用以下公式计算出不同能级图像的CT值"></p>
+<p>并同样基于两种kV图像的CT值散点图(如下图)中的斜率来分解和区分不同的物质。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/4347dd9e4c0cf4beef2c9267b7ad224d.png" alt="基于两种kV图像的CT值散点图中的斜率来分解和区分不同的物质"></p>
+<p>由于上述分解算法是基于图像数据的，因此实际上基于两个假设：(1)CT值测量都是准确的，不会受到噪声干扰；(2)图像不会受到X线硬化伪影的影响。这两个假设都是与实际情况不符的，所以后来又诞生了新的不再使用图像数据进行分解的算法。</p>
+<p>该方法是通过对Alvarez公式的数学转化，将线性衰减系数的物理效应分解方式转化成了基物质对(A物质衰减+B物质衰减=总衰减)分解的方式，如下图:</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/3f3567757402d273006cf9499baa7458.png" alt="A物质衰减+B物质衰减=总衰减"></p>
+<p>通过高低kV切换的方式获得两种能量的原始数据，然后通过上述公式分解出水基图、碘基图，然后通过这两种基本图像再进一步处理出其他能谱图像，如下图</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/4f9c810821e96eb7988e84e99edd46de.png" alt="1"></p>
+<p>上诉方法是基于几乎同时、几乎同向采集的两种能量的数据实现了投影数据域的分解算法，物质分解的准确性得到了提升，但是实际上也是基于一个假设：假设所有的物质都是由水和碘这两种基本物质混合而成的，例如钙，也是由二者组成的，如下图:</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/5792310a69f11d008c49885a25b18b14.png" alt="Ca=H2O+I2"></p>
+<p>这种假设有时候与实际情况也是不符的，所以基于这两种基物质图获得的单能级图像，其CT值的测量对于碘物质和水物质是准确的，而对于其他物质可能是不准确的。所以后来又诞生了新的投影数据域分解算法，如下图:<br>
+<img src="https://img-blog.csdnimg.cn/img_convert/a10132f48a41712c7f6ff720946c26e1.png" alt="投影数据域分解算法"></p>
+<p>这种算法实际上正是1976年Alvarez提出的公式，也就是基于双层探测器在同一时间、同一方向对同一束X线中的高、低能量光子同时进行分离采集，然后基于获得的高、低两种能量的数据通过上述公式求解出康普顿数据和光电效应数据以进一步获得多种能谱图像，同时高低能量两组数据直接求和按照常规CT重建方式也可以获得常规CT图像，如下图:</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/f487843fffa5eab4ade5861ac86e48fc.png" alt="原理图"></p>
+<p>CT系统从最开始的CT发展到现在已经有了第四代CT系统：螺旋CT、锥束CT、双源CT（高低能）、单源（高低能）kdv快速转变CT。我当时跟着赵老师就是做通过深度学习模型将单能图像转化成双能图像。双能成像的方法就有上述说的双源、单源kdv快速转变、还可以用加Zn/Cu薄片的方法。双源误差大，单源对于器件要求高，成本也高，Zn/Cu薄片的缺点就是伪双能，需要用到双层探测器，两块探测器和滤波片。单源双源才是真双能。</p>
+<p>双能ct包括双能分解和图像重建两部分。有一种宝石双能，能够瞬时完成高低能转化，0.5ms内实现80kvp140kvp转化，生成40-140kev101组单能图像，做到同源同时同向。双能ct硬件改进降低不同能谱的重叠度，进行更好的双能分解，比如基于光子计数探测器的能谱CT。软件则是研究研究更好的物质分解方法，从而更好地进行图像重建，比如各种双能成像算法。</p>
+<p>能谱CT利用光子计数探测器，实现单光子成像，之前都是能流强度均值求<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">μ</span></span></span></span>，是平均值后，这个存在着beam-hardening现象，主要是在120kV，是因为低能量光子首先被消耗所以用单光子。能谱CT成为继骨密度测定、冠状动脉钙化积分后的第三种定量分析工具。其优势在于实现多参数成像，使组织内部CT值差异得到更充分展现，更加有利于组织成分分析和鉴别。能谱CT具有独特的单能量成像技术，可以对不同的组织采用不同的能量以获得最优化图像；能谱CT还可以绘制能谱曲线，依据特定物质特有的能谱曲线可以鉴别组织成分，判断组织来源；除此之外，还可以利用能谱CT进行物质分离，得到水基图、碘基图、虚拟平扫图像等。</p>
+<p>能谱成像技术已广泛应用于全身各个系统，可以提供人体解剖、生理、病理、血流动力学、组织灌注及活性、代谢等方面的信息。能谱CT具有很多极富亮点的应用，例如：(1)利用能谱CT物质分离技术中脂肪基物质图可以分辨胆囊阴性结石和胆汁，以检出胆囊阴性结石；(2)利用能谱CT最佳单能量图像，并结合碘基图可以较敏感地检出微小肿瘤；(3)利用能谱CT碘基图，可以对肿瘤组织中碘含量进行定量分析，以精确评估肿瘤血供情况，进行肿瘤疗效评估；(4)利用能谱CT尿酸基物质成像可以准确判断痛风真假结石，以诊断及指导临床治疗。</p>
+<p>昇腾算子库优化项目，这是北航数学学院和华为合作的一个科研项目，需要在linux系统上华为自主开发的开发平台上编写用于深度学习的算子。这个让我迅速入门了linux系统操作与使用，并且了解了深度学习的技术。</p>
+<p>pb文件的节点信息可以使用netron.app网站查看。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">atc --model=cspdarknet53.pb --output=cspdarknet53 --framework=3 --input_shape=&quot;Placeholder:1,256,256,3&quot; --out_nodes=&quot;stage6/Add:0&quot; --soc_version=Ascend310</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python train_dualenergy1.py --train-data-path=/home/zzh/test/testtrain.tfrecord --valid-data-path=/home/zzh/test/test.valid.tfrecord --save-path=/home/zzh/test</span><br></pre></td></tr></table></figure>
+<h1>Reference</h1>
+<p>[1] Zhao W ,  Lv T ,  Gao P , et al. Dual-energy CT imaging using a single-energy CT data is feasible via deep learning[J].  2019.</p>
+<p>[2] Mccollough C H ,  Leng S ,  Yu L , et al. reviews and commentary n review dual-and multi-energy ct: principles, technical approaches, and clinical applications 1.</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/bHdOSt2i_d3_pfQXN9J2sw">能谱纯化技术的基本原理与临床应用</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/09/17/Medical-physics-dual-energy-CT/" data-id="cm7r4k120000hxd82glhhfp4o" data-title="Medical_physics-dual_energy_CT" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Medical-Imaging/" rel="tag">Medical Imaging</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Physics/" rel="tag">Physics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" rel="tag">模型部署</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/03/%E4%B9%9D%E6%9C%88%E6%80%BB%E7%BB%93-%E5%AF%92%E7%A0%A7%E5%82%AC%E6%9C%A8%E5%8F%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          九月总结_寒砧催木叶
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/09/16/%E6%97%A0%E9%9D%9E%E4%B8%80%E5%BF%B5%E6%95%91%E8%8B%8D%E7%94%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">无非一念救苍生</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">个人总结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/">春天来了</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%8B%E5%A4%A9%E6%9D%A5%E4%BA%86/">秋天来了</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%84%E6%B5%8B/">评测</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B6%A6/" rel="tag"> 润</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fundamentals-of-computer-and-programming/" rel="tag">Fundamentals of computer and programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-and-macOS/" rel="tag">Linux and macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medical-Imaging/" rel="tag">Medical Imaging</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PekingUni-Summer-School/" rel="tag">PekingUni Summer School</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics/" rel="tag">Physics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/latex/" rel="tag">latex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/non-equilibrium/" rel="tag">non-equilibrium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/physics/" rel="tag">physics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qutip/" rel="tag">qutip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%9C%E5%8C%97/" rel="tag">东北</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" rel="tag">个人总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%84%E8%AF%AD/" rel="tag">俄语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E4%BA%AC%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90/" rel="tag">北京吃喝玩乐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E4%BA%AC%E6%B8%B8%E7%8E%A9/" rel="tag">北京游玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E8%88%AA/" rel="tag">北航</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E7%89%A9/" rel="tag">博物</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E5%AD%97%E5%A7%93%E6%B0%8F/" rel="tag">名字姓氏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%8A%E5%88%AB/" rel="tag">告别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E4%BA%8C%E7%9A%84%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">大二的生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E9%99%A2%E8%B7%AF%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">学院路生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%A1%E7%BE%8E%E7%90%86%E6%83%B3/" rel="tag">审美理想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B6%E4%B9%A1/" rel="tag">家乡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%88%B1%E5%A5%BD/" rel="tag">小爱好</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%80%E6%97%A7/" rel="tag">怀旧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%97%E7%BE%8E%E6%8F%B4%E6%9C%9D/" rel="tag">抗美援朝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E4%B9%A1/" rel="tag">故乡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%8F%B2%E5%93%B2/" rel="tag">文史哲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%A6/" rel="tag">文学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E5%B9%B4%E5%A5%BD/" rel="tag">新年好</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%85%E8%A1%8C/" rel="tag">旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E4%BB%A3/" rel="tag">时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/" rel="tag">春天来了</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" rel="tag">模型部署</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%99%E6%B2%B3%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">沙河生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E7%8E%A9/" rel="tag">游玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/" rel="tag">热爱生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%B1%E6%83%85/" rel="tag">爱情</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89/" rel="tag">物理直觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E4%B8%BB%E4%B9%89/" rel="tag">理想主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" rel="tag">理想的生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%BD%B1%E4%B8%8E%E6%AD%8C%E6%9B%B2/" rel="tag">电影与歌曲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%8B%E5%AE%9E%E5%AD%A6%E5%9B%AD/" rel="tag">秋实学园</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/" rel="tag">红楼梦</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E7%84%B6/" rel="tag">自然</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E6%95%AC%E8%8B%B1%E9%9B%84/" rel="tag">致敬英雄</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%88%AA%E5%A4%A9/" rel="tag">航天</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%84%E6%B5%8B/" rel="tag">评测</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%AE%E7%9B%98/" rel="tag">键盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AA%91%E8%BD%A6/" rel="tag">骑车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AD%8F%E6%99%8B/" rel="tag">魏晋</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B6%A6/" style="font-size: 10px;"> 润</a> <a href="/tags/Fundamentals-of-computer-and-programming/" style="font-size: 11.67px;">Fundamentals of computer and programming</a> <a href="/tags/Linux-and-macOS/" style="font-size: 10px;">Linux and macOS</a> <a href="/tags/Medical-Imaging/" style="font-size: 10px;">Medical Imaging</a> <a href="/tags/PekingUni-Summer-School/" style="font-size: 10px;">PekingUni Summer School</a> <a href="/tags/Physics/" style="font-size: 10px;">Physics</a> <a href="/tags/coding/" style="font-size: 11.67px;">coding</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/non-equilibrium/" style="font-size: 11.67px;">non-equilibrium</a> <a href="/tags/physics/" style="font-size: 15px;">physics</a> <a href="/tags/qutip/" style="font-size: 10px;">qutip</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E4%B8%9C%E5%8C%97/" style="font-size: 10px;">东北</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" style="font-size: 18.33px;">个人总结</a> <a href="/tags/%E4%BF%84%E8%AF%AD/" style="font-size: 10px;">俄语</a> <a href="/tags/%E5%8C%97%E4%BA%AC%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90/" style="font-size: 13.33px;">北京吃喝玩乐</a> <a href="/tags/%E5%8C%97%E4%BA%AC%E6%B8%B8%E7%8E%A9/" style="font-size: 16.67px;">北京游玩</a> <a href="/tags/%E5%8C%97%E8%88%AA/" style="font-size: 10px;">北航</a> <a href="/tags/%E5%8D%9A%E7%89%A9/" style="font-size: 10px;">博物</a> <a href="/tags/%E5%90%8D%E5%AD%97%E5%A7%93%E6%B0%8F/" style="font-size: 10px;">名字姓氏</a> <a href="/tags/%E5%91%8A%E5%88%AB/" style="font-size: 10px;">告别</a> <a href="/tags/%E5%A4%A7%E4%BA%8C%E7%9A%84%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 10px;">大二的生存指南</a> <a href="/tags/%E5%AD%A6%E9%99%A2%E8%B7%AF%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 11.67px;">学院路生存指南</a> <a href="/tags/%E5%AE%A1%E7%BE%8E%E7%90%86%E6%83%B3/" style="font-size: 10px;">审美理想</a> <a href="/tags/%E5%AE%B6%E4%B9%A1/" style="font-size: 10px;">家乡</a> <a href="/tags/%E5%B0%8F%E7%88%B1%E5%A5%BD/" style="font-size: 10px;">小爱好</a> <a href="/tags/%E6%80%80%E6%97%A7/" style="font-size: 11.67px;">怀旧</a> <a href="/tags/%E6%8A%97%E7%BE%8E%E6%8F%B4%E6%9C%9D/" style="font-size: 10px;">抗美援朝</a> <a href="/tags/%E6%95%85%E4%B9%A1/" style="font-size: 10px;">故乡</a> <a href="/tags/%E6%96%87%E5%8F%B2%E5%93%B2/" style="font-size: 11.67px;">文史哲</a> <a href="/tags/%E6%96%87%E5%AD%A6/" style="font-size: 10px;">文学</a> <a href="/tags/%E6%96%B0%E5%B9%B4%E5%A5%BD/" style="font-size: 10px;">新年好</a> <a href="/tags/%E6%97%85%E8%A1%8C/" style="font-size: 10px;">旅行</a> <a href="/tags/%E6%97%B6%E4%BB%A3/" style="font-size: 13.33px;">时代</a> <a href="/tags/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/" style="font-size: 16.67px;">春天来了</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">模型部署</a> <a href="/tags/%E6%B2%99%E6%B2%B3%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 11.67px;">沙河生存指南</a> <a href="/tags/%E6%B8%B8%E7%8E%A9/" style="font-size: 10px;">游玩</a> <a href="/tags/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">热爱生活</a> <a href="/tags/%E7%88%B1%E6%83%85/" style="font-size: 10px;">爱情</a> <a href="/tags/%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89/" style="font-size: 10px;">物理直觉</a> <a href="/tags/%E7%90%86%E6%83%B3%E4%B8%BB%E4%B9%89/" style="font-size: 10px;">理想主义</a> <a href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" style="font-size: 20px;">理想的生活</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E4%B8%8E%E6%AD%8C%E6%9B%B2/" style="font-size: 10px;">电影与歌曲</a> <a href="/tags/%E7%A7%8B%E5%AE%9E%E5%AD%A6%E5%9B%AD/" style="font-size: 10px;">秋实学园</a> <a href="/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/" style="font-size: 10px;">红楼梦</a> <a href="/tags/%E8%87%AA%E7%84%B6/" style="font-size: 10px;">自然</a> <a href="/tags/%E8%87%B4%E6%95%AC%E8%8B%B1%E9%9B%84/" style="font-size: 10px;">致敬英雄</a> <a href="/tags/%E8%88%AA%E5%A4%A9/" style="font-size: 10px;">航天</a> <a href="/tags/%E8%AF%84%E6%B5%8B/" style="font-size: 10px;">评测</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E9%94%AE%E7%9B%98/" style="font-size: 10px;">键盘</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a> <a href="/tags/%E9%AA%91%E8%BD%A6/" style="font-size: 11.67px;">骑车</a> <a href="/tags/%E9%AD%8F%E6%99%8B/" style="font-size: 10px;">魏晋</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/02/11/Download-without-sudo/">Download without sudo</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/09/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">2024年度总结</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/27/%E5%BD%92/">归</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/12/%E5%BE%B7%E5%9B%BD%E8%A7%81%E9%97%BB%E4%B8%80%E4%BA%8C%E8%AE%B0/">德国见闻一二记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/15/Diagonalization-and-Several-Linalg-Packages/">Diagonalization and Several Linalg Packages</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

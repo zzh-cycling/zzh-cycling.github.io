@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Download without sudo | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文是记录没有sudo权限，但需要在Linux系统上安装Git的过程，并且学习了相关的Makefile和环境变量的知识。这一过程是非常典型的.&#x2F;configure &amp;&amp; make &amp;&amp; make install 三部曲。如果你有sudo权限，那自然sudo apt-get install git(for Ubuntu&#x2F;Debian)就好，会自动帮你完成这一系列编译链">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Download without sudo">
+<meta property="og:url" content="http://example.com/2025/02/11/Download-without-sudo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本文是记录没有sudo权限，但需要在Linux系统上安装Git的过程，并且学习了相关的Makefile和环境变量的知识。这一过程是非常典型的.&#x2F;configure &amp;&amp; make &amp;&amp; make install 三部曲。如果你有sudo权限，那自然sudo apt-get install git(for Ubuntu&#x2F;Debian)就好，会自动帮你完成这一系列编译链">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-11T08:34:42.000Z">
+<meta property="article:modified_time" content="2025-03-01T04:54:22.487Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Fundamentals of computer and programming">
+<meta property="article:tag" content="Linux and macOS">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">[object Object]</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Download-without-sudo" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/02/11/Download-without-sudo/" class="article-date">
+  <time class="dt-published" datetime="2025-02-11T08:34:42.000Z" itemprop="datePublished">2025-02-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Download without sudo
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文是记录没有sudo权限，但需要在Linux系统上安装Git的过程，并且学习了相关的Makefile和环境变量的知识。这一过程是非常典型的./configure &amp;&amp; make &amp;&amp; make install 三部曲。如果你有sudo权限，那自然<code>sudo apt-get install git</code>(for Ubuntu/Debian)就好，会自动帮你完成这一系列编译链。</p>
+<p>当你在命令行运行 <code>./configure &amp;&amp; make &amp;&amp; make install</code> 时，实际上是三个过程</p>
+<ol>
+<li><strong>配置阶段（<code>./configure</code>）</strong>：检查系统环境并生成 Makefile 文件</li>
+<li><strong>编译阶段（<code>make</code>）</strong>：根据 Makefile 将源代码编译为二进制文件</li>
+<li><strong>安装阶段（<code>make install</code>）</strong>：将编译好的文件复制到系统目标目录</li>
+</ol>
+<h1>使用源码编译安装</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/git/git/archive/refs/tags/v2.42.0.tar.gz -O git.tar.gz</span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<p><strong>解压源码</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf git.tar.gz</span><br><span class="line"><span class="built_in">cd</span> git-*</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>安装依赖</strong></p>
+<ul>
+<li>编译Git需要一些依赖库，如<code>curl</code>、<code>zlib</code>等。你可以通过以下命令安装（无需sudo权限），这个大家一般都有，如果没有权限安装<code>libcurl4-openssl-dev</code>，接着configure make三件套就是： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get download libcurl4-openssl-dev zlib1g-dev</span><br><span class="line">dpkg -x libcurl4-openssl-dev*.deb ./</span><br><span class="line">dpkg -x zlib1g-dev*.deb ./</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>编译并安装</strong></p>
+<ul>
+<li>编译并安装到自定义目录（例如<code>$HOME/bin</code>）：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=<span class="variable">$HOME</span>/bin</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+</li>
+<li>将<code>$HOME/bin/bin</code>添加到你的<code>PATH</code>环境变量中：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=$HOME/bin/bin:$PATH&#x27;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>验证安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这上面的过程涉及到了环境变量和Make两个东西，怎么理解呢？我们在Windows系统也都在安装python等工具时设置过环境变量，但可能没有仔细想过。</p>
+<h2 id="环境变量">环境变量</h2>
+<p>环境变量在操作系统中用来指定操作系统运行环境的一些参数，具体一个环境变量包括名称和参数值。</p>
+<table>
+<thead>
+<tr>
+<th>变量名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOME</td>
+<td>用户的主目录（即家目录）</td>
+</tr>
+<tr>
+<td>SHELL</td>
+<td>用户在使用的Shell解释器名称</td>
+</tr>
+<tr>
+<td>HISTSIZE</td>
+<td>输出的历史命令记录条数</td>
+</tr>
+<tr>
+<td>HISTFILESIZE</td>
+<td>保存的历史命令记录条数</td>
+</tr>
+<tr>
+<td>MAIL</td>
+<td>邮件保存路径</td>
+</tr>
+<tr>
+<td>LANG</td>
+<td>系统语言、语系名称</td>
+</tr>
+<tr>
+<td>RANDOM</td>
+<td>生成一个随机数字</td>
+</tr>
+<tr>
+<td>PS1</td>
+<td>Bash解释器的提示符</td>
+</tr>
+<tr>
+<td>PATH</td>
+<td>定义解释器搜索用户执行命令的路径</td>
+</tr>
+<tr>
+<td>EDITOR</td>
+<td>用户默认的文本编辑器</td>
+</tr>
+</tbody>
+</table>
+<p><code>printenv</code>或者<code>env</code>,<code>ENV</code>可以把PC所有的环境变量打印出来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">printenv</span>  </span><br><span class="line">.....  </span><br><span class="line">TERM_PROGRAM=Apple_Terminal  </span><br><span class="line">SHELL=/bin/zsh  </span><br><span class="line">TERM=xterm-256color  </span><br><span class="line">TERM_PROGRAM_VERSION=433  </span><br><span class="line">SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.MTCZ3F7w1u/Listeners  </span><br><span class="line">PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin  </span><br><span class="line">......  </span><br></pre></td></tr></table></figure>
+<p>可以看到环境变量有这么多，按照key value这种排列出来。</p>
+<ul>
+<li>
+<p><code>SHELL</code>: 用户的默认 shell, 当用户登录时，系统会根据 SHELL 环境变量来确定使用哪个 shell。这个变量影响到用户在终端中运行的命令行环境。</p>
+</li>
+<li>
+<p><code>CONDA_EXE, CONDA_PYTHON_EXE, CONDA_PREFIX, CONDA_DEFAULT_ENV, CONDA_PROMPT_MODIFIER, CONDA_SHLVL</code>：这些变量与 Anaconda 或 Miniconda（Python 的包管理和环境管理工具）相关。它们提供有关当前 Conda 环境的信息。<br>
+CONDA_EXE: Conda 可执行文件的路径。CONDA_PYTHON_EXE: 当前 Conda 环境中 Python 可执行文件的路径。<br>
+CONDA_PREFIX: 当前 Conda 环境的路径。CONDA_DEFAULT_ENV: 当前活动的 Conda 环境名称。<br>
+CONDA_PROMPT_MODIFIER: 终端提示符中显示的当前 Conda 环境的名称。<br>
+CONDA_SHLVL: 当前 Conda 环境的层级。</p>
+</li>
+<li>
+<p><code>LC_CTYPE</code>：指定字符集和语言环境的类型。UTF-8 表示使用 UTF-8 编码，支持多种语言字符。</p>
+</li>
+<li>
+<p><code>_</code>：通常用于保存上一个命令的执行结果。在某些情况下，它会被用作传递给环境的最后命令的参数。</p>
+</li>
+<li>
+<p><code>?</code>：返回上一个命令的执行成功与否。成功返回0，未成功返回其他数，可以写<code>if [ $? -eq 0 ]; do functin();fi</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="variable">$LC_CTYPE</span></span><br><span class="line">&gt; UTF-8</span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$_</span></span><br><span class="line">&gt; UTF-8</span><br><span class="line">$ <span class="built_in">echo</span> $?</span><br><span class="line">&gt; 0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="path-环境变量">PATH 环境变量</h3>
+<h4 id="我们来看看当pwd的时候发生了什么事">我们来看看当<code>pwd</code>的时候发生了什么事</h4>
+<p>我们有两种pwd的方式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/bin/pwd  </span><br><span class="line">$ <span class="built_in">pwd</span>  </span><br></pre></td></tr></table></figure>
+<p>第一种方法每次都要从根路径自己手打，这样也太没效率了，总不能每次新建一个文件夹都要这样写？/usr/bin/mkdir new_dir。 于是就有了第二种这样，直接把命令打出来，不用自己从根路径一步步的打，那么系统是如何找到pwd这个命令的呢。这就涉及到了PATH这一环境变量。PATH 是一个特殊的环境变量，它包含一系列目录的路径，操作系统在这些目录中查找可执行文件。当你在终端中输入一个命令时，系统会依次在这些目录中搜索相应的可执行文件。</p>
+<p>输入下面的命令看一下环境变量下的PATH有哪些路径：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="variable">$PATH</span>  </span><br><span class="line">&gt; </span><br><span class="line">/Users/user1/.julia/bin:</span><br><span class="line">/opt/homebrew/Caskroom/miniconda/base/bin:</span><br><span class="line">/opt/homebrew/Caskroom/miniconda/base/condabin:</span><br><span class="line">/opt/homebrew/bin:</span><br><span class="line">/opt/homebrew/sbin:</span><br><span class="line">/usr/local/bin:</span><br><span class="line">/System/Cryptexes/App/usr/bin:</span><br><span class="line">/usr/bin:</span><br><span class="line">/bin:</span><br><span class="line">/usr/sbin:/sbin:</span><br><span class="line">/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:</span><br><span class="line">/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:</span><br><span class="line">/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:</span><br><span class="line">/Users/user1/.cargo/bin</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">where</span> <span class="built_in">pwd</span>  <span class="comment">#$ which pwd # which也可以  </span></span><br><span class="line">&gt; /bin/pwd </span><br></pre></td></tr></table></figure>
+<p>于是可以看出这两种方法的区别在于一个是程序自己从PATH里面找出来，一个是你自己输入路径来执行命令。</p>
+<h4 id="命令在-linux-中的执行分为-4-个步骤">命令在 Linux 中的执行分为 4 个步骤。</h4>
+<ol>
+<li>判断用户是否以绝对路径或相对路径的方式输入命令（如 /bin/ls ），如果是的话则直接执行。</li>
+<li>Linux 系统检查用户输入的命令是否为“别名命令”，即用一个自定义的命令名称来替换原本的命令名称。可以用 alias 命令来创建一个属于自己的命令别名，格式为“alias rm= rm -i”或者“alias 别名=命令”，若要取消一个命令别名，则是用 unalias 命令，格式为“unalias 别名”。我们之前在使用 rm 命令删除文件时，Linux 系统都会要求我们再确认是否执行删除操作，其实这就是 Linux 系统为了防止用户误删除文件而特意设置的 rm 别名命令。</li>
+<li>Bash 解释器判断用户输入的是内部命令还是外部命令。内部命令是解释器内部的指令，会被直接执行；而用户在绝大部分时间输入的是外部命令，这些命令交由步骤 4 继续处理。可以使用“type 命令名称”来判断用户输入的命令是内部命令还是外部命令。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(base) user@host ~ % <span class="built_in">type</span> <span class="built_in">ls</span></span><br><span class="line"><span class="built_in">ls</span> is /bin/ls</span><br><span class="line">(base) user@host ~ % <span class="built_in">type</span> <span class="built_in">pwd</span></span><br><span class="line"><span class="built_in">pwd</span> is a shell <span class="built_in">builtin</span></span><br><span class="line">(base) user@host ~ % % <span class="built_in">type</span> <span class="built_in">chmod</span></span><br><span class="line"><span class="built_in">chmod</span> is /bin/chmod</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>系统在多个路径中查找用户输入的命令文件，而定义这些路径的变量叫作 PATH，作用是告诉 Bash 解释器待执行的命令可能存放的位置，然后 Bash 解释器就会乖乖地在这些位置中逐个查找。 PATH 是由多个路径值组成的变量，每个路径值之间用冒号间隔，对这些路径的增加和删除操作将影响到 Bash 解释器对Linux 命令的查找。</li>
+</ol>
+<h4 id="如何设置path或者是其他环境变量">如何设置PATH或者是其他环境变量</h4>
+<p>系统变量就是一个大的容器，其中里面有一个环境变量是PATH，PATH主要用于储存各种命令的路径。那么我们如何设置呢？我们可以用<code>export PATH=/xxx/bin:$PATH</code>这行命令，作用是将 /xxx/bin 目录添加到 PATH 的开头。将新的目录添加到<code>$PATH</code>的开头，意味着优先查找该目录中的可执行文件。如果你希望后面的目录优先被查找，可以将<code>$PATH</code>放在前面，如<code>export PATH=$PATH:/xxx/bin</code>。</p>
+<p>这个设置只在当前终端会话中有效。如果你想要在每次打开终端时都自动设置，可以将这行命令添加到你的 shell 配置文件中,如 <code>~/.bashrc</code>、<code>~/.bash_profile</code> 或 <code>~/.zshrc</code>, 如果没有执行权限，可以<code>source ~/.bashrc</code>。</p>
+<h4 id="linux-文件系统目录结构">Linux 文件系统目录结构</h4>
+<p>上面导出了PATH路径，可以看看这些文件是用来干嘛的。</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/bin</code></td>
+<td>基本命令二进制文件</td>
+</tr>
+<tr>
+<td><code>/sbin</code></td>
+<td>基本的系统二进制文件，通常是 root 运行的</td>
+</tr>
+<tr>
+<td><code>/dev</code></td>
+<td>设备文件，通常是硬件设备接口文件</td>
+</tr>
+<tr>
+<td><code>/etc</code></td>
+<td>主机特定的系统配置文件</td>
+</tr>
+<tr>
+<td><code>/home</code></td>
+<td>系统用户的主目录</td>
+</tr>
+<tr>
+<td><code>/lib</code></td>
+<td>系统软件通用库</td>
+</tr>
+<tr>
+<td><code>/opt</code></td>
+<td>可选的应用软件</td>
+</tr>
+<tr>
+<td><code>/sys</code></td>
+<td>包含系统的信息和配置(第一堂课介绍的)</td>
+</tr>
+<tr>
+<td><code>/tmp</code></td>
+<td>临时文件(<code>/var/tmp</code>) 通常重启时删除</td>
+</tr>
+<tr>
+<td><code>/usr/</code></td>
+<td>只读的用户数据</td>
+</tr>
+<tr>
+<td><code>/usr/bin</code></td>
+<td>非必须的命令二进制文件</td>
+</tr>
+<tr>
+<td><code>/usr/sbin</code></td>
+<td>非必须的系统二进制文件，通常是由 root 运行的</td>
+</tr>
+<tr>
+<td><code>/usr/local/bin</code></td>
+<td>用户编译程序的二进制文件</td>
+</tr>
+<tr>
+<td><code>/var</code></td>
+<td>变量文件 像日志或缓存</td>
+</tr>
+</tbody>
+</table>
+<h2 id="make"><a target="_blank" rel="noopener" href="https://missing-semester-cn.github.io/2020/metaprogramming/">Make</a></h2>
+<p>大多数Unix系统都会包含一个 “构建过程”，需要执行一系列操作。通常这一过程包含了很多步骤，很多分支。执行一些命令来生成图表，然后执行另外的一些命令生成结果，然后再执行其他的命令来生成最终的论文，这一过程可以通过构建系统来完成，这些系统一般涉及到<em>dependencies</em>, <em>targets</em>, and <em>rules</em>。</p>
+<p><code>make</code>是最常用的构建系统之一，您会发现它通常被安装到了几乎所有基于<code>UNIX</code>的系统中。<code>make</code> 并不完美，但是对于中小型项目来说，它已经足够好了。当您执行 <code>make</code> 时，它会去参考当前目录下名为 <code>Makefile</code> 的文件。所有构建目标、相关依赖和规则都需要在该文件中定义。我们先来定义前置的文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">$ cat paper.tex</span><br><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\usepackage&#123;graphicx&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">\includegraphics[scale=0.65]&#123;plot-data.png&#125;</span><br><span class="line">\end&#123;document&#125;</span><br><span class="line">$ cat plot.py</span><br><span class="line">#!/usr/bin/env python</span><br><span class="line">import matplotlib</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import numpy as np</span><br><span class="line">import argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser()</span><br><span class="line">parser.add_argument(&#x27;-i&#x27;, type=argparse.FileType(&#x27;r&#x27;))</span><br><span class="line">parser.add_argument(&#x27;-o&#x27;)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line"></span><br><span class="line">data = np.loadtxt(args.i)</span><br><span class="line">plt.plot(data[:, 0], data[:, 1])</span><br><span class="line">plt.savefig(args.o)</span><br><span class="line">$ cat data.dat</span><br><span class="line">1 1</span><br><span class="line">2 2</span><br><span class="line">3 3</span><br><span class="line">4 4</span><br><span class="line">5 8</span><br></pre></td></tr></table></figure>
+<p>然后再定义<code>Makefile</code>文件：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">paper.pdf: paper.tex plot-data.png</span></span><br><span class="line">	pdflatex paper.tex</span><br><span class="line"></span><br><span class="line"><span class="section">plot-%.png: %.dat plot.py</span></span><br><span class="line">	./plot.py -i <span class="variable">$*</span>.dat -o <span class="variable">$@</span></span><br></pre></td></tr></table></figure>
+<p>接下来执行<code>make</code>，看会发生什么？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ make</span><br><span class="line">&gt; ./plot.py -i data.dat -o plot-data.png</span><br><span class="line">&gt; pdflatex paper.tex</span><br><span class="line">... lots of output ...</span><br></pre></td></tr></table></figure>
+<p>生成了PDF！如果再次执行 make 会怎样？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ make</span><br><span class="line">&gt; make: <span class="string">&#x27;paper.pdf&#x27;</span> is up to <span class="built_in">date</span>.</span><br></pre></td></tr></table></figure>
+<p>没做任何变动，因为它什么都不需要做。make 检查出所有之前构建的目标仍然与其列出的依赖项保持最新状态。我们再来看一下这句话：</p>
+<p>当你在命令行运行 <code>./configure &amp;&amp; make &amp;&amp; make install</code> 时，实际上是三个过程</p>
+<ol>
+<li><strong>配置阶段（<code>./configure</code>）</strong>：检查系统环境并生成 Makefile 文件</li>
+<li><strong>编译阶段（<code>make</code>）</strong>：根据 Makefile 将源代码编译为二进制文件</li>
+<li><strong>安装阶段（<code>make install</code>）</strong>：将编译好的文件复制到系统目标目录</li>
+</ol>
+<p>所以我们在下载源文件后配置时，是根据源码包中 <a target="_blank" rel="noopener" href="http://Makefile.in">Makefile.in</a> 文件的指示，configure脚本可以在编译软件之前检测系统的硬件架构、操作系统类型、所需的库文件以及其他相关的环境信息，根据所采集到的系统信息，自动在当前目录中生成一个用于编译和安装软件的Makefile文件(还有其它本文无需关心的文件)，其中包括了编译器选项、依赖库的路径、安装路径等，然后 <code>make</code> 程序就按照当前目录中的 Makefile 文件的指示将源代码编译为二进制文件，最后将这些二进制文件移动(即安装)到指定的地方(仍然按照 Makefile 文件的指示)。<br>
+configure脚本通常是通过autoconf工具生成的，autoconf工具会根据用户在configure.ac文件中提供的信息和规则，生成对应的configure脚本。 <code>autoconf -o configure configure.ac</code></p>
+<h1>接着安装</h1>
+<ol>
+<li>报错!系统中缺少<code>autoconf</code>工具。<code>autoconf</code>是一个用于生成<code>configure</code>脚本的工具，它是许多开源项目（包括Git）编译过程中必需的。所以我们接着三部曲安装<code>autoconf</code></li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.gz</span><br><span class="line">tar -zxvf autoconf-2.71.tar.gz</span><br><span class="line"><span class="built_in">cd</span> autoconf-2.71</span><br><span class="line">./configure --prefix=<span class="variable">$HOME</span>/bin</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>报错，<code>./configure</code>脚本提示缺少<code>GNU M4</code>工具。<code>GNU M4</code>是一个宏处理器，<code>autoconf</code>和许多其他项目在生成<code>configure</code>脚本时需要它。你需要手动安装<code>GNU M4</code>，因为系统中没有找到合适的版本。</li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.gz</span><br><span class="line">tar -zxvf m4-1.4.19.tar.gz</span><br><span class="line"><span class="built_in">cd</span> m4-1.4.19</span><br><span class="line">./configure --prefix=<span class="variable">$HOME</span>/bin</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<ul>
+<li>确保<code>GNU M4</code>已经正确安装并添加到<code>PATH</code>中后，重新运行<code>./configure</code>脚本： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=<span class="variable">$HOME</span>/bin</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果在后续步骤中遇到其他依赖问题（如<code>gawk</code>、<code>curl</code>、<code>openssl</code>等），可以按照类似的方法手动安装这些工具。事实上我又遇到了<code>zlib.h not found</code>, <code>msgfmt: not found</code>的错误(缺少<code>gettext</code>工具集中的<code>msgfmt</code>命令。<code>msgfmt</code>用于编译国际化消息文件，是Git编译过程中需要的工具之一。), <code>automake</code>, <code>aclocal </code>未安装的问题，一一解决，成功安装Git。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/02/11/Download-without-sudo/" data-id="cm7r4k120000fxd82d2u683oj" data-title="Download without sudo" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fundamentals-of-computer-and-programming/" rel="tag">Fundamentals of computer and programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux-and-macOS/" rel="tag">Linux and macOS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2025/02/09/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2024年度总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">个人总结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/">春天来了</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%8B%E5%A4%A9%E6%9D%A5%E4%BA%86/">秋天来了</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%84%E6%B5%8B/">评测</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B6%A6/" rel="tag"> 润</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fundamentals-of-computer-and-programming/" rel="tag">Fundamentals of computer and programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-and-macOS/" rel="tag">Linux and macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medical-Imaging/" rel="tag">Medical Imaging</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PekingUni-Summer-School/" rel="tag">PekingUni Summer School</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics/" rel="tag">Physics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/latex/" rel="tag">latex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/non-equilibrium/" rel="tag">non-equilibrium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/physics/" rel="tag">physics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qutip/" rel="tag">qutip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%9C%E5%8C%97/" rel="tag">东北</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" rel="tag">个人总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%84%E8%AF%AD/" rel="tag">俄语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E4%BA%AC%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90/" rel="tag">北京吃喝玩乐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E4%BA%AC%E6%B8%B8%E7%8E%A9/" rel="tag">北京游玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E8%88%AA/" rel="tag">北航</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E7%89%A9/" rel="tag">博物</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E5%AD%97%E5%A7%93%E6%B0%8F/" rel="tag">名字姓氏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%8A%E5%88%AB/" rel="tag">告别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E4%BA%8C%E7%9A%84%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">大二的生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E9%99%A2%E8%B7%AF%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">学院路生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%A1%E7%BE%8E%E7%90%86%E6%83%B3/" rel="tag">审美理想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B6%E4%B9%A1/" rel="tag">家乡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%88%B1%E5%A5%BD/" rel="tag">小爱好</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%80%E6%97%A7/" rel="tag">怀旧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%97%E7%BE%8E%E6%8F%B4%E6%9C%9D/" rel="tag">抗美援朝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E4%B9%A1/" rel="tag">故乡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%8F%B2%E5%93%B2/" rel="tag">文史哲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%A6/" rel="tag">文学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E5%B9%B4%E5%A5%BD/" rel="tag">新年好</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%85%E8%A1%8C/" rel="tag">旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E4%BB%A3/" rel="tag">时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/" rel="tag">春天来了</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" rel="tag">模型部署</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%99%E6%B2%B3%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">沙河生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E7%8E%A9/" rel="tag">游玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/" rel="tag">热爱生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%B1%E6%83%85/" rel="tag">爱情</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89/" rel="tag">物理直觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E4%B8%BB%E4%B9%89/" rel="tag">理想主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" rel="tag">理想的生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%BD%B1%E4%B8%8E%E6%AD%8C%E6%9B%B2/" rel="tag">电影与歌曲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%8B%E5%AE%9E%E5%AD%A6%E5%9B%AD/" rel="tag">秋实学园</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/" rel="tag">红楼梦</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E7%84%B6/" rel="tag">自然</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E6%95%AC%E8%8B%B1%E9%9B%84/" rel="tag">致敬英雄</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%88%AA%E5%A4%A9/" rel="tag">航天</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%84%E6%B5%8B/" rel="tag">评测</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%AE%E7%9B%98/" rel="tag">键盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AA%91%E8%BD%A6/" rel="tag">骑车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AD%8F%E6%99%8B/" rel="tag">魏晋</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B6%A6/" style="font-size: 10px;"> 润</a> <a href="/tags/Fundamentals-of-computer-and-programming/" style="font-size: 11.67px;">Fundamentals of computer and programming</a> <a href="/tags/Linux-and-macOS/" style="font-size: 10px;">Linux and macOS</a> <a href="/tags/Medical-Imaging/" style="font-size: 10px;">Medical Imaging</a> <a href="/tags/PekingUni-Summer-School/" style="font-size: 10px;">PekingUni Summer School</a> <a href="/tags/Physics/" style="font-size: 10px;">Physics</a> <a href="/tags/coding/" style="font-size: 11.67px;">coding</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/non-equilibrium/" style="font-size: 11.67px;">non-equilibrium</a> <a href="/tags/physics/" style="font-size: 15px;">physics</a> <a href="/tags/qutip/" style="font-size: 10px;">qutip</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E4%B8%9C%E5%8C%97/" style="font-size: 10px;">东北</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" style="font-size: 18.33px;">个人总结</a> <a href="/tags/%E4%BF%84%E8%AF%AD/" style="font-size: 10px;">俄语</a> <a href="/tags/%E5%8C%97%E4%BA%AC%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90/" style="font-size: 13.33px;">北京吃喝玩乐</a> <a href="/tags/%E5%8C%97%E4%BA%AC%E6%B8%B8%E7%8E%A9/" style="font-size: 16.67px;">北京游玩</a> <a href="/tags/%E5%8C%97%E8%88%AA/" style="font-size: 10px;">北航</a> <a href="/tags/%E5%8D%9A%E7%89%A9/" style="font-size: 10px;">博物</a> <a href="/tags/%E5%90%8D%E5%AD%97%E5%A7%93%E6%B0%8F/" style="font-size: 10px;">名字姓氏</a> <a href="/tags/%E5%91%8A%E5%88%AB/" style="font-size: 10px;">告别</a> <a href="/tags/%E5%A4%A7%E4%BA%8C%E7%9A%84%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 10px;">大二的生存指南</a> <a href="/tags/%E5%AD%A6%E9%99%A2%E8%B7%AF%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 11.67px;">学院路生存指南</a> <a href="/tags/%E5%AE%A1%E7%BE%8E%E7%90%86%E6%83%B3/" style="font-size: 10px;">审美理想</a> <a href="/tags/%E5%AE%B6%E4%B9%A1/" style="font-size: 10px;">家乡</a> <a href="/tags/%E5%B0%8F%E7%88%B1%E5%A5%BD/" style="font-size: 10px;">小爱好</a> <a href="/tags/%E6%80%80%E6%97%A7/" style="font-size: 11.67px;">怀旧</a> <a href="/tags/%E6%8A%97%E7%BE%8E%E6%8F%B4%E6%9C%9D/" style="font-size: 10px;">抗美援朝</a> <a href="/tags/%E6%95%85%E4%B9%A1/" style="font-size: 10px;">故乡</a> <a href="/tags/%E6%96%87%E5%8F%B2%E5%93%B2/" style="font-size: 11.67px;">文史哲</a> <a href="/tags/%E6%96%87%E5%AD%A6/" style="font-size: 10px;">文学</a> <a href="/tags/%E6%96%B0%E5%B9%B4%E5%A5%BD/" style="font-size: 10px;">新年好</a> <a href="/tags/%E6%97%85%E8%A1%8C/" style="font-size: 10px;">旅行</a> <a href="/tags/%E6%97%B6%E4%BB%A3/" style="font-size: 13.33px;">时代</a> <a href="/tags/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/" style="font-size: 16.67px;">春天来了</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">模型部署</a> <a href="/tags/%E6%B2%99%E6%B2%B3%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 11.67px;">沙河生存指南</a> <a href="/tags/%E6%B8%B8%E7%8E%A9/" style="font-size: 10px;">游玩</a> <a href="/tags/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">热爱生活</a> <a href="/tags/%E7%88%B1%E6%83%85/" style="font-size: 10px;">爱情</a> <a href="/tags/%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89/" style="font-size: 10px;">物理直觉</a> <a href="/tags/%E7%90%86%E6%83%B3%E4%B8%BB%E4%B9%89/" style="font-size: 10px;">理想主义</a> <a href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" style="font-size: 20px;">理想的生活</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E4%B8%8E%E6%AD%8C%E6%9B%B2/" style="font-size: 10px;">电影与歌曲</a> <a href="/tags/%E7%A7%8B%E5%AE%9E%E5%AD%A6%E5%9B%AD/" style="font-size: 10px;">秋实学园</a> <a href="/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/" style="font-size: 10px;">红楼梦</a> <a href="/tags/%E8%87%AA%E7%84%B6/" style="font-size: 10px;">自然</a> <a href="/tags/%E8%87%B4%E6%95%AC%E8%8B%B1%E9%9B%84/" style="font-size: 10px;">致敬英雄</a> <a href="/tags/%E8%88%AA%E5%A4%A9/" style="font-size: 10px;">航天</a> <a href="/tags/%E8%AF%84%E6%B5%8B/" style="font-size: 10px;">评测</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E9%94%AE%E7%9B%98/" style="font-size: 10px;">键盘</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a> <a href="/tags/%E9%AA%91%E8%BD%A6/" style="font-size: 11.67px;">骑车</a> <a href="/tags/%E9%AD%8F%E6%99%8B/" style="font-size: 10px;">魏晋</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/02/11/Download-without-sudo/">Download without sudo</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/09/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">2024年度总结</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/27/%E5%BD%92/">归</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/12/%E5%BE%B7%E5%9B%BD%E8%A7%81%E9%97%BB%E4%B8%80%E4%BA%8C%E8%AE%B0/">德国见闻一二记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/15/Diagonalization-and-Several-Linalg-Packages/">Diagonalization and Several Linalg Packages</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

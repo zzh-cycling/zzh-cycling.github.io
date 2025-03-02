@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Diagonalization and Several Linalg Packages | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Exact Diagonalization This is a note for some problems encountered in doing Exact Diagonalization of quantum many body physics, also serving as a notebook for learning. Here we first don’t consider th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Diagonalization and Several Linalg Packages">
+<meta property="og:url" content="http://example.com/2023/05/15/Diagonalization-and-Several-Linalg-Packages/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Exact Diagonalization This is a note for some problems encountered in doing Exact Diagonalization of quantum many body physics, also serving as a notebook for learning. Here we first don’t consider th">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-14T18:18:07.000Z">
+<meta property="article:modified_time" content="2024-11-05T07:30:50.466Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="physics">
+<meta property="article:tag" content="Fundamentals of computer and programming">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">[object Object]</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Diagonalization-and-Several-Linalg-Packages" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/15/Diagonalization-and-Several-Linalg-Packages/" class="article-date">
+  <time class="dt-published" datetime="2023-05-14T18:18:07.000Z" itemprop="datePublished">2023-05-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Diagonalization and Several Linalg Packages
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1>Exact Diagonalization</h1>
+<p>This is a note for some problems encountered in doing Exact Diagonalization of quantum many body physics, also serving as a notebook for learning. Here we first don’t consider the symmetry of Hamiltonian, just focus on coding. Thank to gxliu from Julia community, which is really helpful. <a target="_blank" rel="noopener" href="https://discourse.juliacn.com/t/topic/7202">Windows上Julia代码比Python慢了一倍并且在MacOS上正好反过来？</a></p>
+<h2 id="background">Background</h2>
+<p>I am writing a program for exact diagonalization in quantum many body physics, but due to Python being too slow, I turned to Julia, and thought it will behave much more bettr. Here are my two programs, where Julia was written in imitating Python.</p>
+<p>The Hamiltonian is:</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>=</mo><munder><mo>∑</mo><mi>i</mi></munder><mo stretchy="false">[</mo><msub><mi>ω</mi><mi>i</mi></msub><msub><mi>n</mi><mi>i</mi></msub><mo>+</mo><mi>V</mi><mo stretchy="false">(</mo><msub><mi>n</mi><mi>i</mi></msub><mo>−</mo><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>n</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">)</mo><mo>+</mo><msubsup><mi>c</mi><mi>i</mi><mo lspace="0em" rspace="0em">†</mo></msubsup><msub><mi>c</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>+</mo><msubsup><mi>c</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow><mo lspace="0em" rspace="0em">†</mo></msubsup><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msubsup><mi>c</mi><mrow><mi>i</mi><mo>+</mo><mn>2</mn></mrow><mo lspace="0em" rspace="0em">†</mo></msubsup><msub><mi>c</mi><mi>i</mi></msub><mo>+</mo><msubsup><mi>c</mi><mi>i</mi><mo lspace="0em" rspace="0em">†</mo></msubsup><msub><mi>c</mi><mrow><mi>i</mi><mo>+</mo><mn>2</mn></mrow></msub><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">H=\sum_i [\omega_i n_i+V(n_i-1/2)(n_{i+1}-1/2)+c^{\dagger}_ic_{i+1}+c^{\dagger}_{i+1}c_{i}+c^{\dagger}_{i+2}c_{i}+c^{\dagger}_ic_{i+2}]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.327674em;vertical-align:-1.277669em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0500050000000003em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mopen">[</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord">2</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord">2</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.2438799999999999em;vertical-align:-0.276864em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9670159999999998em;"><span style="top:-2.4231360000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.180908em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">†</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.276864em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.3022109999999998em;vertical-align:-0.335195em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9670159999999999em;"><span style="top:-2.423136em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.1809080000000005em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">†</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.335195em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.3022109999999998em;vertical-align:-0.335195em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9670159999999999em;"><span style="top:-2.423136em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.1809080000000005em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">†</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.335195em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.2438799999999999em;vertical-align:-0.276864em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9670159999999998em;"><span style="top:-2.4231360000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.180908em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">†</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.276864em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span></span></p>
+<p>where on-site potentials <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ω</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\omega_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> are independent Gaussian random numbers with mean zero and variance <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>W</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">W^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
+<p>I first write a python code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> scipy.sparse <span class="keyword">as</span> sp</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">os.environ[<span class="string">&quot;OMP_NUM_THREADS&quot;</span>] = <span class="string">&quot;1&quot;</span> <span class="comment"># export OMP_NUM_THREADS=4</span></span><br><span class="line">os.environ[<span class="string">&quot;OPENBLAS_NUM_THREADS&quot;</span>] = <span class="string">&quot;1&quot;</span> <span class="comment"># export OPENBLAS_NUM_THREADS=4 </span></span><br><span class="line">os.environ[<span class="string">&quot;NUMEXPR_NUM_THREADS&quot;</span>] = <span class="string">&quot;1&quot;</span> <span class="comment"># export NUMEXPR_NUM_THREADS=6</span></span><br><span class="line"></span><br><span class="line">t0 = datetime.datetime.now()</span><br><span class="line"><span class="comment"># 这一步是生成所有占据数为N/2的态，比如N=4的话就是即0011，0101,0110,1001,1010,1100一系列的态。最终返回一个列表，里面都是二次量子化基矢，以列表的形式存储。</span></span><br><span class="line"><span class="comment"># This step is to generate all computational basis which occupation is N/2, for example, if N=4, it is a series of states, namely 0011, 0101, 0110, 1001, 1010, 1100, listed in decimal order. Finally, return a list containing second quantization basis, stored in the form of a list.</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">half_filling</span>(<span class="params">N</span>):</span><br><span class="line">    basis = []</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">2</span>**N):</span><br><span class="line">        xb = <span class="built_in">bin</span>(x)[<span class="number">2</span>:].zfill(N)</span><br><span class="line">        <span class="keyword">if</span> xb.count(<span class="string">&#x27;1&#x27;</span>) == N//<span class="number">2</span>:</span><br><span class="line">            basis.append(<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, xb)))</span><br><span class="line">    <span class="keyword">return</span> basis</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这一部分是写哈密顿量，具体来说是用前文生成的半填充的基矢来展开哈密顿量</span></span><br><span class="line"><span class="comment"># This section is about writing the Hamiltonian, specifically using the half filled computational basis generated earlier to expand the Hamiltonian.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sparse_hamiltonian</span>(<span class="params">W,N,t=<span class="number">1</span>,tprime=<span class="number">1</span>,V=<span class="number">2</span></span>):</span><br><span class="line">    basis=half_filling(N) </span><br><span class="line">    basis=[<span class="built_in">list</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> basis]</span><br><span class="line">    L=<span class="built_in">len</span>(basis) </span><br><span class="line">    H=sp.dok_matrix((L,L))</span><br><span class="line">    omegalis=np.ones(N) <span class="comment"># Here should be np.normal(0,W**2)</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> <span class="built_in">range</span>(L): </span><br><span class="line">        rowstate=basis[row]</span><br><span class="line">        temp=<span class="number">0</span></span><br><span class="line"><span class="comment"># Write diagonal elements first</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">                    <span class="keyword">if</span> rowstate[i]==<span class="number">1</span>:</span><br><span class="line">                        temp+=omegalis[i]</span><br><span class="line">                        <span class="keyword">if</span> rowstate[(i+<span class="number">1</span>)%N]==<span class="number">1</span>:</span><br><span class="line">                            temp+=V/<span class="number">4</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            temp-=V/<span class="number">4</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        <span class="keyword">if</span> rowstate[(i+<span class="number">1</span>)%N]==<span class="number">1</span>:</span><br><span class="line">                            temp-=V/<span class="number">4</span></span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            temp+=V/<span class="number">4</span></span><br><span class="line">        H[row,row]=temp</span><br><span class="line"><span class="comment"># 再写非对角元素，因为c_i^&#123;\dagger&#125;c_&#123;i+1&#125;保持粒子数守恒所以作用后的基仍在我们已经写好的基矢空间内。遍历每一个基矢作为矩阵的横坐标，如果是比如0110态，就找对应的1010态作为纵坐标，以此类推。如果你不熟悉，可以参见Sandvik的精确对角化教程。</span></span><br><span class="line"><span class="comment"># Write non diagonal elements again, because c_i^&#123;\ dagger&#125;c_ &#123;i+1&#125; maintains the conservation of particle numbers, so the basis after the action remains within the subspace spanned by computational basis we have already written. Traverse each basis as the x-axis of the matrix. For example if it is the 0110 state, find the 1010 state as the corresponding  y-axis, and so on. If you are not familiar with it, you can refer to Sandvik&#x27;s tutorial on exact diagonalization.</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(N):</span><br><span class="line">            <span class="keyword">if</span> rowstate[j] == <span class="number">0</span> <span class="keyword">and</span> rowstate[(j+<span class="number">1</span>)%N] == <span class="number">1</span>:</span><br><span class="line">               newcolumnstate = rowstate.copy()</span><br><span class="line">               newcolumnstate[j] = <span class="number">1</span></span><br><span class="line">               newcolumnstate[(j+<span class="number">1</span>)%N] = <span class="number">0</span></span><br><span class="line">               column = basis.index(newcolumnstate)</span><br><span class="line">               H[row, column] += t</span><br><span class="line">            <span class="keyword">elif</span> rowstate[j] == <span class="number">0</span> <span class="keyword">and</span> rowstate[(j+<span class="number">2</span>)%N] == <span class="number">1</span>:</span><br><span class="line">                newcolumnstate = rowstate.copy()</span><br><span class="line">                newcolumnstate[j] = <span class="number">1</span></span><br><span class="line">                newcolumnstate[(j+<span class="number">2</span>)%N] = <span class="number">0</span></span><br><span class="line">                column = basis.index(newcolumnstate)</span><br><span class="line">                H[row, column] += tprime</span><br><span class="line">    H = H + H.T</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(L):</span><br><span class="line">        H[i, i] /= <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> H.toarray()</span><br><span class="line"></span><br><span class="line">energy=np.linalg.eigvalsh(sparse_hamiltonian(<span class="number">1</span>,<span class="number">16</span>))</span><br><span class="line"><span class="built_in">print</span>(datetime.datetime.now()-t0)</span><br></pre></td></tr></table></figure>
+<p>Imitating the above python code, I write its Julia version intended to accelerate computation.</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> SparseArrays</span><br><span class="line"><span class="keyword">using</span> LinearAlgebra</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> half_filling(N)</span><br><span class="line">    basis = []</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">2</span>^N-<span class="number">1</span>)</span><br><span class="line">        xb = string(x, base=<span class="number">2</span>, pad=N)</span><br><span class="line">        <span class="keyword">if</span> count(<span class="string">&#x27;1&#x27;</span>, xb) == N÷<span class="number">2</span></span><br><span class="line">            push!(basis, map(x -&gt; parse(<span class="built_in">Int64</span>, x), split(xb, <span class="string">&quot;&quot;</span>)))</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> basis</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> Hamiltonian(W,N,t=<span class="number">1</span>,tprime=<span class="number">1</span>,V=<span class="number">2</span>)</span><br><span class="line">    basis=half_filling(N)</span><br><span class="line">    L=length(basis)</span><br><span class="line">    H=spzeros(L,L)</span><br><span class="line">    omegalis=ones(N)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> <span class="number">1</span>:L</span><br><span class="line">        rowstate=basis[row]</span><br><span class="line">        temp=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:N</span><br><span class="line">            <span class="keyword">if</span> rowstate[i]==<span class="number">1</span></span><br><span class="line">                temp+=omegalis[i]</span><br><span class="line">                <span class="keyword">if</span> rowstate[mod1(i+<span class="number">1</span>,N)]==<span class="number">1</span></span><br><span class="line">                    temp+=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    temp-=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">if</span> rowstate[mod1(i+<span class="number">1</span>,N)]==<span class="number">1</span></span><br><span class="line">                    temp-=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    temp+=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        H[row,row]=temp</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="number">1</span>:N</span><br><span class="line">            <span class="keyword">if</span> rowstate[j]==<span class="number">0</span> &amp;&amp; rowstate[mod1(j+<span class="number">1</span>,N)]==<span class="number">1</span></span><br><span class="line">                newcolumnstate=copy(rowstate)</span><br><span class="line">                newcolumnstate[j]=<span class="number">1</span></span><br><span class="line">                newcolumnstate[mod1(j+<span class="number">1</span>,N)]=<span class="number">0</span></span><br><span class="line">                column = findfirst(x -&gt; isequal(x, newcolumnstate), basis)</span><br><span class="line">                H[row,column]+=t</span><br><span class="line"></span><br><span class="line">            <span class="keyword">elseif</span> rowstate[j] == <span class="number">0</span> &amp;&amp; rowstate[mod1(j+<span class="number">2</span>,N)] == <span class="number">1</span></span><br><span class="line">                newcolumnstate = copy(rowstate)</span><br><span class="line">                newcolumnstate[j] = <span class="number">1</span></span><br><span class="line">                newcolumnstate[mod1(j+<span class="number">2</span>,N)] = <span class="number">0</span></span><br><span class="line">                column = findfirst(x -&gt; isequal(x, newcolumnstate), basis)</span><br><span class="line">                H[row, column] += tprime</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    H=H+transpose(H)</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="number">1</span>:L</span><br><span class="line">        H[k,k]/=<span class="number">2</span> </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Matrix</span>(H)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@time</span> eigvals(Hamiltonian(<span class="number">1</span>,<span class="number">16</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="device-and-benchmark">Device and Benchmark</h2>
+<p>I have encountered the problem that my Python code runs twice as fast as Julia on my Windows platform, while in reverse on MacOS platform. So how come it can be true? We did a lot test on different platform.</p>
+<p>Here is Hardware device and package dependence environment.</p>
+<table>
+<thead>
+<tr>
+<th>Hardware</th>
+<th>OS</th>
+<th>CPU</th>
+<th>python version</th>
+<th>numpy version</th>
+<th>julia version</th>
+<th>BLAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AMD</td>
+<td>Windows10</td>
+<td>AMD Ryzen5 4600H</td>
+<td>3.7.12</td>
+<td>1.21.6</td>
+<td>1.8.5</td>
+<td>OpenBLAS</td>
+</tr>
+<tr>
+<td>Mac</td>
+<td>Ventura 13.2.1</td>
+<td>M1Max</td>
+<td>3.10.9</td>
+<td>1.24.2</td>
+<td>1.8.5</td>
+<td>OpenBLAS -&gt; MKL</td>
+</tr>
+<tr>
+<td>Intel</td>
+<td>Windows11</td>
+<td>i9-11900H</td>
+<td>/</td>
+<td>/</td>
+<td>1.8.5</td>
+<td>OpenBLAS -&gt; MKL</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>Centos7</td>
+<td>双路 至强金牌 6238R</td>
+<td>3.9.12</td>
+<td>1.21.5</td>
+<td>1.8.5</td>
+<td>numpy MKL, Julia OpenBLAS</td>
+</tr>
+</tbody>
+</table>
+<p>There are two main parts in my code spending time mostly: prepare the matrix, and<br>
+Here is my ED benchmark on parameter of Hamiltonian N=16:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>np.linalg.eigvalsh</th>
+<th>Linear.eigvals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OpenBLAS(AMD)</td>
+<td>70(scipy 75s)</td>
+<td>~160s</td>
+</tr>
+<tr>
+<td>OpenBLAS(AMD,1thread)</td>
+<td>120</td>
+<td>/</td>
+</tr>
+<tr>
+<td>OpenBLAS(mac)</td>
+<td>2min(scipy 1min)</td>
+<td>60s</td>
+</tr>
+<tr>
+<td>OpenBLAS(mac, 1thread)</td>
+<td>8min</td>
+<td>/</td>
+</tr>
+<tr>
+<td>veclib(mac)</td>
+<td>7min09s</td>
+<td>/</td>
+</tr>
+<tr>
+<td>OpenBLAS(Intel)</td>
+<td>5min</td>
+<td>140s</td>
+</tr>
+<tr>
+<td>MKL(Intel)</td>
+<td>33s</td>
+<td>37s</td>
+</tr>
+<tr>
+<td>MKL(Intel, 1 thread)</td>
+<td>66s</td>
+<td>231s</td>
+</tr>
+<tr>
+<td>MKL(Intel, Centos7)</td>
+<td>57s</td>
+<td>~85s</td>
+</tr>
+<tr>
+<td>MKL(Intel, Centos7,1 thread)</td>
+<td>64s</td>
+<td>95s</td>
+</tr>
+</tbody>
+</table>
+<p>my 1.21.6 run <code>np.show_config()</code> instruction return:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">blas_info:</span><br><span class="line">    libraries = [<span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>]</span><br><span class="line">    language = f77</span><br><span class="line">    define_macros = [(<span class="string">&#x27;HAVE_CBLAS&#x27;</span>, <span class="literal">None</span>)]</span><br><span class="line">blas_opt_info:</span><br><span class="line">    define_macros = [(<span class="string">&#x27;NO_ATLAS_INFO&#x27;</span>, <span class="number">1</span>), (<span class="string">&#x27;HAVE_CBLAS&#x27;</span>, <span class="literal">None</span>)]</span><br><span class="line">    libraries = [<span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>]</span><br><span class="line">    language = f77</span><br><span class="line">lapack_info:</span><br><span class="line">    libraries = [<span class="string">&#x27;lapack&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;lapack&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>]</span><br><span class="line">    language = f77</span><br><span class="line">lapack_opt_info:</span><br><span class="line">    libraries = [<span class="string">&#x27;lapack&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;lapack&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>, <span class="string">&#x27;cblas&#x27;</span>, <span class="string">&#x27;blas&#x27;</span>]</span><br><span class="line">    language = f77</span><br><span class="line">    define_macros = [(<span class="string">&#x27;NO_ATLAS_INFO&#x27;</span>, <span class="number">1</span>), (<span class="string">&#x27;HAVE_CBLAS&#x27;</span>, <span class="literal">None</span>)]</span><br><span class="line">Supported SIMD extensions <span class="keyword">in</span> this NumPy install:</span><br><span class="line">    baseline = SSE,SSE2,SSE3</span><br><span class="line">    found = SSSE3,SSE41,POPCNT,SSE42,AVX,F16C,FMA3,AVX2</span><br><span class="line">    <span class="keyword">not</span> found = AVX512F,AVX512CD,AVX512_SKX,AVX512_CLX,AVX512_CNL</span><br></pre></td></tr></table></figure>
+<p>my AMD machine run <code>versioninfo()</code> return:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Platform Info:</span><br><span class="line">  OS: Windows (x86_64-w64-mingw32) x86_64架构，也称为AMD64 or Intel <span class="number">64</span>，w64意思是windows64位，mingw32的开发工具链(Minimalist GNU <span class="keyword">for</span> Windows <span class="number">32</span>-bit)</span><br><span class="line">  CPU: <span class="number">12</span> × AMD Ryzen <span class="number">5</span> <span class="number">4600</span>H with Radeon Graphics</span><br><span class="line">  WORD_SIZE: <span class="number">64</span></span><br><span class="line">  LIBM: libopenlibm Julia解释器所链接的数学库</span><br><span class="line">  LLVM: libLLVM-<span class="number">13.0</span><span class="number">.1</span> (ORCJIT, znver2) LLVM编译器工具链的libLLVM-<span class="number">13.0</span><span class="number">.1</span>版本。ORCJIT是LLVM的即时编译器组件，znver2表示针对AMD Zen <span class="number">2</span>微架构进行了优化。与安装的Julia版本一起分发。</span><br><span class="line">  Threads: <span class="number">1</span> on <span class="number">12</span> virtual cores 计算机当前使用了<span class="number">1</span>个线程，并且您的处理器有<span class="number">12</span>个虚拟核心。</span><br></pre></td></tr></table></figure>
+<p><code>LinearAlgebra.BLAS.get_config()</code></p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LinearAlgebra.BLAS.LBTConfig</span><br><span class="line">Libraries:</span><br><span class="line">└ [ILP64] libopenblas64_.dll(支持ILP64（整数长为<span class="number">64</span>位）数据类型的OpenBLAS库。)</span><br></pre></td></tr></table></figure>
+<p>my pytorch run<code>torch.__config__.show()</code> return</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">PyTorch built <span class="keyword">with</span>:</span><br><span class="line">- C++ Version: <span class="number">199711</span></span><br><span class="line">- MSVC <span class="number">193431937</span></span><br><span class="line">- Intel(R) Math Kernel Library Version <span class="number">2020.0</span><span class="number">.2</span> ProductBuild <span class="number">20200624</span> <span class="keyword">for</span> Intel(R) <span class="number">64</span> architecture applications</span><br><span class="line">- Intel(R) MKL-DNN v2<span class="number">.7</span><span class="number">.3</span> (Git Hash6dbeffbae1f23cbbeae17adb7b5b13f1f37c080e)</span><br><span class="line">- OpenMP <span class="number">2019</span></span><br><span class="line">- LAPACK <span class="keyword">is</span> enabled (usually provided by MKL)</span><br><span class="line">- CPU capability usage: AVX2</span><br><span class="line">- CUDA Runtime <span class="number">11.7</span></span><br><span class="line">- NVCC architecture flags: -gencode;arch=compute_37code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencodearch=compute_60,code=sm_60;-gencode;arch=compute_61code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencodearch=compute_75,code=sm_75;-gencode;arch=compute_80code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencodearch=compute_37,code=compute_37</span><br><span class="line">- CuDNN <span class="number">8.5</span></span><br><span class="line">- Magma <span class="number">2.5</span><span class="number">.4</span></span><br><span class="line">- Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release,CUDA_VERSION=<span class="number">11.7</span>, CUDNN_VERSION=<span class="number">8.5</span><span class="number">.0</span>, CXX_COMPILER=C:/cbpytorch_1000000000000/work/tmp_bin/sccache-cl.exe,CXX_FLAGS=/DWIN32 /D_WINDOWS /GR /EHsc /w /bigobj /FS-DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI-DLIBKINETO_NOROCTRACER -DUSE_FBGEMM -DUSE_XNNPACK-DSYMBOLICATE_MOBILE_DEBUG_HANDLE, LAPACK_INFO=mkl,PERF_WITH_AVX=<span class="number">1</span>, PERF_WITH_AVX2=<span class="number">1</span>, PERF_WITH_AVX512=<span class="number">1</span>,TORCH_DISABLE_GPU_ASSERTS=OFF, TORCH_VERSION=<span class="number">2.0</span><span class="number">.0</span>,USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=<span class="number">1</span>,USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON,USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON,USE_ROCM=OFF,</span><br></pre></td></tr></table></figure>
+<h2 id="optimization">Optimization</h2>
+<p>Noticing that the list of basis have been sorted already, so we need not use the <code>list.index</code> and <code>findfirst</code> function but <code>bisect.bisect_left()</code> and <code>searchsortedfirst</code>, and the Type of function <code>half_filling</code> outcome has not been specified, so we could specify it to <code>String</code> Type explicitly. Then the codes become:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    newcolumnstate[(j+<span class="number">1</span>)%N] = <span class="number">0</span></span><br><span class="line">        column=bisect.bisect_left(basis,newcolumnstate)</span><br><span class="line">           H[row, column] += t</span><br><span class="line"><span class="keyword">elif</span> rowstate[j] == <span class="number">0</span> <span class="keyword">and</span> rowstate[(j+<span class="number">2</span>)%N] == <span class="number">1</span>:</span><br><span class="line">    newcolumnstate = rowstate.copy()</span><br><span class="line">    newcolumnstate[j] = <span class="number">1</span></span><br><span class="line">    newcolumnstate[(j+<span class="number">2</span>)%N] = <span class="number">0</span></span><br><span class="line">    <span class="comment"># column = basis.index(newcolumnstate)</span></span><br><span class="line">    column=bisect.bisect_left(basis,newcolumnstate)</span><br><span class="line">    <span class="comment">#换用这个查找函数后，构建矩阵的时间从之前24s到现在4.4s</span></span><br><span class="line">    H[row, column] += tprime</span><br></pre></td></tr></table></figure>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> SparseArrays</span><br><span class="line"><span class="keyword">using</span> LinearAlgebra</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> half_filling_v2(N)</span><br><span class="line">    <span class="meta">@assert</span> mod(N,<span class="number">2</span>) == <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    N2 = N ÷ <span class="number">2</span></span><br><span class="line">    basis = <span class="built_in">String</span>[]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">2</span>^N-<span class="number">1</span>)</span><br><span class="line">        xb = string(x, base=<span class="number">2</span>, pad=N)</span><br><span class="line">        <span class="keyword">if</span> count(<span class="string">&#x27;1&#x27;</span>, xb) == N2 </span><br><span class="line">            push!(basis, xb)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> basis</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> Hamiltonian_v2(W,N,t=<span class="number">1</span>,tprime=<span class="number">1</span>,V=<span class="number">2</span>)</span><br><span class="line">    basis = half_filling_v2(N)</span><br><span class="line"></span><br><span class="line">    L = length(basis)</span><br><span class="line">    H = spzeros(L,L)</span><br><span class="line">    omegalis=ones(N)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> <span class="number">1</span>:L</span><br><span class="line">        rowstate=basis[row]</span><br><span class="line">        temp=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:N</span><br><span class="line">            <span class="keyword">if</span> rowstate[i]==<span class="string">&#x27;1&#x27;</span></span><br><span class="line">                temp+=omegalis[i]</span><br><span class="line">                <span class="keyword">if</span> rowstate[mod1(i+<span class="number">1</span>,N)]==<span class="string">&#x27;1&#x27;</span></span><br><span class="line">                    temp+=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    temp-=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">if</span> rowstate[mod1(i+<span class="number">1</span>,N)]==<span class="string">&#x27;1&#x27;</span></span><br><span class="line">                    temp-=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    temp+=V/<span class="number">4</span></span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        H[row,row]=temp</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="number">1</span>:N</span><br><span class="line">            <span class="keyword">if</span> rowstate[j]==<span class="string">&#x27;0&#x27;</span> &amp;&amp; rowstate[mod1(j+<span class="number">1</span>,N)]==<span class="string">&#x27;1&#x27;</span></span><br><span class="line">                statearray = collect(rowstate)</span><br><span class="line">                statearray[j] = <span class="string">&#x27;1&#x27;</span></span><br><span class="line">                statearray[mod1(j+<span class="number">1</span>,N)] = <span class="string">&#x27;0&#x27;</span></span><br><span class="line">                newcolumnstate = join(statearray)</span><br><span class="line">                <span class="comment"># column = findfirst(x -&gt; isequal(x, newcolumnstate), basis)</span></span><br><span class="line">                column=searchsortedfirst(basis,newcolumnstate)</span><br><span class="line">                H[row,column]+=t</span><br><span class="line"></span><br><span class="line">            <span class="keyword">elseif</span> rowstate[j] == <span class="string">&#x27;0&#x27;</span> &amp;&amp; rowstate[mod1(j+<span class="number">2</span>,N)] == <span class="string">&#x27;1&#x27;</span></span><br><span class="line">                statearray = collect(rowstate)</span><br><span class="line">                statearray[j] = <span class="string">&#x27;1&#x27;</span></span><br><span class="line">                statearray[mod1(j+<span class="number">2</span>,N)] = <span class="string">&#x27;0&#x27;</span></span><br><span class="line">                newcolumnstate = join(statearray)</span><br><span class="line">                column=searchsortedfirst(basis,newcolumnstate)</span><br><span class="line">                H[row, column] += tprime</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    H=H+transpose(H)</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="number">1</span>:L</span><br><span class="line">        H[k,k]/=<span class="number">2</span> </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Matrix</span>(H)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">a=Hamiltonian_v2(<span class="number">1</span>,<span class="number">16</span>)</span><br><span class="line"><span class="comment"># energy=eigvals(Hamiltonian(1,16))</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Then the preparation parts optimization outcome becomes:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>python</th>
+<th>julia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>before</td>
+<td>24s</td>
+<td>26s</td>
+</tr>
+<tr>
+<td>after</td>
+<td>4s</td>
+<td>1s</td>
+</tr>
+</tbody>
+</table>
+<h2 id="conclusion">Conclusion</h2>
+<p>综合来看，上述最初版本的程序经过优化后，AMD上python从最开始的70s缩减到了50s，Julia程序从最开始的170s缩减到了144s，在Linux优化到了72s第一次，65s第二次。值得注意的是scipy和numpy的线代库不一样(<br>
+Another advantage of using scipy.linalg over numpy.linalg is that it is always compiled with BLAS/LAPACK support, while for numpy this is optional. Therefore, the scipy version might be faster depending on how numpy was installed. Therefore, unless you don’t want to add scipy as a dependency to your numpy program, use scipy.linalg instead of numpy.linalg). numpy的库和LinearAlgebra的线代库都是可以选择的，建议根据设备不同编译的时候选择链接到不同线代库上。Julia对OpenBLAS的支持属实不怎么好，建议在intel的芯片上还是用MKL，理论上AMD+OpenBLAS=Intel+MKL，在python表现出来了，Julia却没有，就很怪）。</p>
+<h1>Math Package</h1>
+<h2 id="basic-math-package">Basic Math Package</h2>
+<p>This basic linear algebra also have</p>
+<h3 id="blas">BLAS</h3>
+<p>Basic Linear Algebra Subprograms by Netliv in Fortran, not been optimized for operations too much. Various software and hardware manufacturers highly optimize the implementation of BLAS interfaces for their products.</p>
+<h3 id="lapack">LAPACK</h3>
+<p>Linear Algebra PACKage, whose bottom layer is BLAS, is more efficient than BLAS, by Netlib in Fortran.</p>
+<h3 id="scalapack">ScaLAPACK</h3>
+<p>short for Scalable LAPACK, suitable for MIMD(multiple instruction, multiple data)</p>
+<h2 id="advanced-math-package">Advanced Math Package</h2>
+<p>based on BLAS, LAPACK and ScaLAPACK which could be seen as interface standards, other packages are implemented. In which Atlas and OpenBLAS are open-accessed while others are commercial such as MKL cuBLAS.</p>
+<h3 id="atlas">Atlas</h3>
+<p>Automatically Tuned Linear Algebra Software, is possible to automatically adjust operating parameters during runtime based on hardware.</p>
+<h3 id="openblas">OpenBLAS</h3>
+<p>Just as its name, Open BLAS. (It is astonishing that its initial release is at 22 March 2011, and one of the developers is Chinese, Zhang Xianyi, Wang Qian)The optimization of OpenBLAS is done at compile time, so its running efficiency is generally higher than Atlas. But this also determines that Openblas has a high hardware dependency, and if the machine is changed, it may need to be recompiled.</p>
+<h3 id="mkl">MKL</h3>
+<p>based on Intel ® Built with C++ and Fortran compilers, and implemented threading using OpenMP *(Open Multi-Processing, a kind of parallel programming model). Support for Linux/Win (Intel chips such i9-11900H).</p>
+<p>Its bottom has:</p>
+<ol>
+<li>BLAS: All inter matrix operations (three levels) are threaded for dense and sparse BLAS. Many vector to vector operations (first level) and matrix to vector operations (second level) are aimed at Intel ® The dense matrix in 64 bit programs on the 64 architecture achieves threading. For sparse matrix, all secondary operations except triangle sparse matrix solver are threaded.</li>
+<li>LAPACK: Some computational routines have implemented threading for certain types of problems: linear equation solvers, orthogonal factorization, single valued factorization, and symmetric eigenvalue problems. LAPACK also calls BLAS, so even non threaded functions may run in parallel.</li>
+<li>ScaLAPACK: cluster oriented LAPACK Distributed memory parallel version.</li>
+<li>PARDISO: The three stages of the parallel direct sparse matrix solver are threaded: reordering (optional), factoring and solving (if multiple items on the right are used).</li>
+<li>DFTs: Discrete Fourier Transform</li>
+<li>VML: Vector Mathematics Library</li>
+<li>VSL: Vector Statistics Library</li>
+</ol>
+<h3 id="armadillo">Armadillo</h3>
+<p>Using template metaprogramming technology, the easy-to-use C++matrix library, similar to Matlab, provides efficient LAPACK, BLAS and ATLAS packages, including many high-performance versions such as Intel MKL, AMD ACM and OpenBLAS.</p>
+<p>bottom:</p>
+<p>BLAS/LAPACK: Supports OpenBLAS, ACML, and MKL</p>
+<h3 id="eigen-3">Eigen(3)</h3>
+<p>Its bottom:</p>
+<ol>
+<li>BLAS/LAPACK：支持所有基于F77的BLAS或LAPACK库作为底层（EIGEN_USE_BLAS、EIGEN_USE_LAPACKE）</li>
+<li>MKL：支持MKL作为底层（EIGEN_USE_MKL_ALL）</li>
+<li>CUDA：支持在CUDA kernels里使用CUDA</li>
+<li>OpenMP：多线程优化</li>
+</ol>
+<p>他们之间的关系</p>
+<ol>
+<li>狭义的BLAS/LAPACK可理解为用于线性代数运算库的API</li>
+<li>Netlib实现了Fortran/C版的BLAS/LAPACK、CBLAS/CLAPACK</li>
+<li>开源社区及商业公司针对API实现了BLAS（ATLAS、OpenBLAS）和LAPACK（MKL、ACML、CUBLAS）的针对性优化</li>
+<li>Eigen、Armadillo除自身实现线性代数运算库外还支持上述各种BLAS/LAPACK为基础的底层以加速运算</li>
+</ol>
+<p>他们之间的对比：</p>
+<ol>
+<li>备选：MKL、OpenBLAS、Eigen、Armadillo</li>
+<li>接口易用程度：Eigen &gt; Armadillo &gt; MKL/OpenBLAS</li>
+<li>速度：MKL≈OpenBLAS &gt; Eigen(with MKL) &gt; Eigen &gt; Armadillo<br>
+其中：</li>
+<li>OpenBLAS没有单核版本，强行指定OMP_NUM_THREADS=1性能损失大，不考虑</li>
+<li>MKL直接使用学习成本较高，但是性能最强</li>
+<li>Armadillo效率和接口易用性不如Eigen</li>
+<li>Eigen的原生BLAS/LAPACK实现速度不如MKL、OpenBLAS，但是使用MKL做后台性能和MKL原生几乎一样，所以可以视情况决定是否使用MKL</li>
+<li>AMD+openblas可以匹敌Intel+mkl，英特尔处理器无脑选择mkl，AMD 处理器下openblas的速度是mkl的两倍。</li>
+<li>2018 MATLAB用户反馈在 Zen CPU 上的运行效率奇低，还不如几年前的 Intel CPU。人们才发现MATLAB 用的MKL在非 Intel CPU 上不开启 AVX2 指令集，后来有人逆向 MKL，挖出了那个著名的环境变量MKL_DEBUG_CPU_TYPE=5，在 Zen CPU 上强制启用 AVX2。但是2020 年 Intel 在新版本 MKL 里删掉了这个环境变量，一批 AMD 用户又各种降级。不过好在这个时候已经有可用的开源替代品 OpenBLAS 了，虽然某些性能还赶不上 MKL，但是也比没有加速强多了。并且从这个时候开始，NumPy 等一票计算库也渐渐向开源的 OpenBLAS 靠拢。后续有人进一步逆向 MKL，还能用动态库劫持的方法强制开启对 Zen AVX/AVX2 指令集的完整支持。</li>
+</ol>
+<p>Above are focusing on CPU, nvidia invented cuBLAS in CUDA on GPU, others GPU accelerating packages have cuSOLVER, MAGMA, ROCm SMI Library.</p>
+<p>Others parallel computation platform have, OpenCL, ROCm, except CUDA.</p>
+<h2 id="compilation-instruction">Compilation instruction</h2>
+<p><code>-O4 -msse2 -msse3 -msse4 </code></p>
+<p>-O4 是编译器优化级别的选项，表示最高级别的优化。该选项会启用各种优化技术，以尽可能提高代码执行速度和性能。不同的编译器可能对优化级别有不同的定义和实现。</p>
+<p>-msse2、-msse3 和 -msse4 是指令集扩展选项，用于启用特定的SIMD（单指令多数据）指令集。这些指令集扩展允许并行处理多个数据元素，从而提高代码的执行效率。SSE（Streaming SIMD Extensions）指令集是一组在x86架构上用于向量化运算的指令集。</p>
+<p>常见的SIMD指令集有：</p>
+<ol>
+<li>
+<p>SSE（Streaming SIMD Extensions）：这是最早的SIMD指令集，包括SSE、SSE2、SSE3、SSSE3等版本。它们广泛支持x86和x86-64架构的处理器。</p>
+</li>
+<li>
+<p>AVX（Advanced Vector Extensions）：AVX是一组SIMD指令集扩展，包括AVX、AVX2和AVX-512等版本。它们提供更高的矢量化性能和更大的向量寄存器。</p>
+</li>
+<li>
+<p>NEON：NEON是ARM架构上的SIMD指令集，广泛用于移动设备和嵌入式系统。</p>
+</li>
+<li>
+<p>AltiVec：AltiVec是PowerPC架构上的SIMD指令集。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/05/15/Diagonalization-and-Several-Linalg-Packages/" data-id="cm7r4k11z000bxd82bl5dcene" data-title="Diagonalization and Several Linalg Packages" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fundamentals-of-computer-and-programming/" rel="tag">Fundamentals of computer and programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/physics/" rel="tag">physics</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/11/12/%E5%BE%B7%E5%9B%BD%E8%A7%81%E9%97%BB%E4%B8%80%E4%BA%8C%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          德国见闻一二记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/03/11/%E5%A4%A7%E4%B8%89%E4%B8%8B%E7%9A%84%E5%BE%80%E4%BA%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">大三下的往事 and 2023年终总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">个人总结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/">春天来了</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%8B%E5%A4%A9%E6%9D%A5%E4%BA%86/">秋天来了</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%84%E6%B5%8B/">评测</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B6%A6/" rel="tag"> 润</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fundamentals-of-computer-and-programming/" rel="tag">Fundamentals of computer and programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-and-macOS/" rel="tag">Linux and macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medical-Imaging/" rel="tag">Medical Imaging</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PekingUni-Summer-School/" rel="tag">PekingUni Summer School</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics/" rel="tag">Physics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/latex/" rel="tag">latex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/non-equilibrium/" rel="tag">non-equilibrium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/physics/" rel="tag">physics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qutip/" rel="tag">qutip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%9C%E5%8C%97/" rel="tag">东北</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" rel="tag">个人总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%84%E8%AF%AD/" rel="tag">俄语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E4%BA%AC%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90/" rel="tag">北京吃喝玩乐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E4%BA%AC%E6%B8%B8%E7%8E%A9/" rel="tag">北京游玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E8%88%AA/" rel="tag">北航</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E7%89%A9/" rel="tag">博物</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E5%AD%97%E5%A7%93%E6%B0%8F/" rel="tag">名字姓氏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%8A%E5%88%AB/" rel="tag">告别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E4%BA%8C%E7%9A%84%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">大二的生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E9%99%A2%E8%B7%AF%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">学院路生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%A1%E7%BE%8E%E7%90%86%E6%83%B3/" rel="tag">审美理想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B6%E4%B9%A1/" rel="tag">家乡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%88%B1%E5%A5%BD/" rel="tag">小爱好</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%80%E6%97%A7/" rel="tag">怀旧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%97%E7%BE%8E%E6%8F%B4%E6%9C%9D/" rel="tag">抗美援朝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E4%B9%A1/" rel="tag">故乡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%8F%B2%E5%93%B2/" rel="tag">文史哲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%A6/" rel="tag">文学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E5%B9%B4%E5%A5%BD/" rel="tag">新年好</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%85%E8%A1%8C/" rel="tag">旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E4%BB%A3/" rel="tag">时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/" rel="tag">春天来了</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" rel="tag">模型部署</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%99%E6%B2%B3%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">沙河生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E7%8E%A9/" rel="tag">游玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/" rel="tag">热爱生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%B1%E6%83%85/" rel="tag">爱情</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89/" rel="tag">物理直觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E4%B8%BB%E4%B9%89/" rel="tag">理想主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" rel="tag">理想的生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%BD%B1%E4%B8%8E%E6%AD%8C%E6%9B%B2/" rel="tag">电影与歌曲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%8B%E5%AE%9E%E5%AD%A6%E5%9B%AD/" rel="tag">秋实学园</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/" rel="tag">红楼梦</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E7%84%B6/" rel="tag">自然</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E6%95%AC%E8%8B%B1%E9%9B%84/" rel="tag">致敬英雄</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%88%AA%E5%A4%A9/" rel="tag">航天</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%84%E6%B5%8B/" rel="tag">评测</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%AE%E7%9B%98/" rel="tag">键盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AA%91%E8%BD%A6/" rel="tag">骑车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AD%8F%E6%99%8B/" rel="tag">魏晋</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B6%A6/" style="font-size: 10px;"> 润</a> <a href="/tags/Fundamentals-of-computer-and-programming/" style="font-size: 11.67px;">Fundamentals of computer and programming</a> <a href="/tags/Linux-and-macOS/" style="font-size: 10px;">Linux and macOS</a> <a href="/tags/Medical-Imaging/" style="font-size: 10px;">Medical Imaging</a> <a href="/tags/PekingUni-Summer-School/" style="font-size: 10px;">PekingUni Summer School</a> <a href="/tags/Physics/" style="font-size: 10px;">Physics</a> <a href="/tags/coding/" style="font-size: 11.67px;">coding</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/non-equilibrium/" style="font-size: 11.67px;">non-equilibrium</a> <a href="/tags/physics/" style="font-size: 15px;">physics</a> <a href="/tags/qutip/" style="font-size: 10px;">qutip</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E4%B8%9C%E5%8C%97/" style="font-size: 10px;">东北</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" style="font-size: 18.33px;">个人总结</a> <a href="/tags/%E4%BF%84%E8%AF%AD/" style="font-size: 10px;">俄语</a> <a href="/tags/%E5%8C%97%E4%BA%AC%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90/" style="font-size: 13.33px;">北京吃喝玩乐</a> <a href="/tags/%E5%8C%97%E4%BA%AC%E6%B8%B8%E7%8E%A9/" style="font-size: 16.67px;">北京游玩</a> <a href="/tags/%E5%8C%97%E8%88%AA/" style="font-size: 10px;">北航</a> <a href="/tags/%E5%8D%9A%E7%89%A9/" style="font-size: 10px;">博物</a> <a href="/tags/%E5%90%8D%E5%AD%97%E5%A7%93%E6%B0%8F/" style="font-size: 10px;">名字姓氏</a> <a href="/tags/%E5%91%8A%E5%88%AB/" style="font-size: 10px;">告别</a> <a href="/tags/%E5%A4%A7%E4%BA%8C%E7%9A%84%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 10px;">大二的生存指南</a> <a href="/tags/%E5%AD%A6%E9%99%A2%E8%B7%AF%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 11.67px;">学院路生存指南</a> <a href="/tags/%E5%AE%A1%E7%BE%8E%E7%90%86%E6%83%B3/" style="font-size: 10px;">审美理想</a> <a href="/tags/%E5%AE%B6%E4%B9%A1/" style="font-size: 10px;">家乡</a> <a href="/tags/%E5%B0%8F%E7%88%B1%E5%A5%BD/" style="font-size: 10px;">小爱好</a> <a href="/tags/%E6%80%80%E6%97%A7/" style="font-size: 11.67px;">怀旧</a> <a href="/tags/%E6%8A%97%E7%BE%8E%E6%8F%B4%E6%9C%9D/" style="font-size: 10px;">抗美援朝</a> <a href="/tags/%E6%95%85%E4%B9%A1/" style="font-size: 10px;">故乡</a> <a href="/tags/%E6%96%87%E5%8F%B2%E5%93%B2/" style="font-size: 11.67px;">文史哲</a> <a href="/tags/%E6%96%87%E5%AD%A6/" style="font-size: 10px;">文学</a> <a href="/tags/%E6%96%B0%E5%B9%B4%E5%A5%BD/" style="font-size: 10px;">新年好</a> <a href="/tags/%E6%97%85%E8%A1%8C/" style="font-size: 10px;">旅行</a> <a href="/tags/%E6%97%B6%E4%BB%A3/" style="font-size: 13.33px;">时代</a> <a href="/tags/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/" style="font-size: 16.67px;">春天来了</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">模型部署</a> <a href="/tags/%E6%B2%99%E6%B2%B3%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 11.67px;">沙河生存指南</a> <a href="/tags/%E6%B8%B8%E7%8E%A9/" style="font-size: 10px;">游玩</a> <a href="/tags/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">热爱生活</a> <a href="/tags/%E7%88%B1%E6%83%85/" style="font-size: 10px;">爱情</a> <a href="/tags/%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89/" style="font-size: 10px;">物理直觉</a> <a href="/tags/%E7%90%86%E6%83%B3%E4%B8%BB%E4%B9%89/" style="font-size: 10px;">理想主义</a> <a href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" style="font-size: 20px;">理想的生活</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E4%B8%8E%E6%AD%8C%E6%9B%B2/" style="font-size: 10px;">电影与歌曲</a> <a href="/tags/%E7%A7%8B%E5%AE%9E%E5%AD%A6%E5%9B%AD/" style="font-size: 10px;">秋实学园</a> <a href="/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/" style="font-size: 10px;">红楼梦</a> <a href="/tags/%E8%87%AA%E7%84%B6/" style="font-size: 10px;">自然</a> <a href="/tags/%E8%87%B4%E6%95%AC%E8%8B%B1%E9%9B%84/" style="font-size: 10px;">致敬英雄</a> <a href="/tags/%E8%88%AA%E5%A4%A9/" style="font-size: 10px;">航天</a> <a href="/tags/%E8%AF%84%E6%B5%8B/" style="font-size: 10px;">评测</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E9%94%AE%E7%9B%98/" style="font-size: 10px;">键盘</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a> <a href="/tags/%E9%AA%91%E8%BD%A6/" style="font-size: 11.67px;">骑车</a> <a href="/tags/%E9%AD%8F%E6%99%8B/" style="font-size: 10px;">魏晋</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/02/11/Download-without-sudo/">Download without sudo</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/09/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">2024年度总结</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/27/%E5%BD%92/">归</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/12/%E5%BE%B7%E5%9B%BD%E8%A7%81%E9%97%BB%E4%B8%80%E4%BA%8C%E8%AE%B0/">德国见闻一二记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/15/Diagonalization-and-Several-Linalg-Packages/">Diagonalization and Several Linalg Packages</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>物理壬踩坑记录including_qutip_python | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="qutip是个很有用的量子计算集成开发包，abbreviated from Quantum toolbox in Python. 但是确实使用时候遇到了很多困难和坑，正好目前所在的量子计算组和大创项目需要用到，就记录一下遇到的问题。  绘制Bloch Sphere用add_states()方法  123sphere&#x3D;qutip.Bloch()sphere.add_states(result.sta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="物理壬踩坑记录including_qutip_python">
+<meta property="og:url" content="http://example.com/2022/05/04/%E7%89%A9%E7%90%86%E5%A3%AC%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95including_qutip_python/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="qutip是个很有用的量子计算集成开发包，abbreviated from Quantum toolbox in Python. 但是确实使用时候遇到了很多困难和坑，正好目前所在的量子计算组和大创项目需要用到，就记录一下遇到的问题。  绘制Bloch Sphere用add_states()方法  123sphere&#x3D;qutip.Bloch()sphere.add_states(result.sta">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/05/04/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220525110143.jpg">
+<meta property="article:published_time" content="2022-05-04T14:24:26.000Z">
+<meta property="article:modified_time" content="2024-11-05T07:30:50.473Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="coding">
+<meta property="article:tag" content="qutip">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/05/04/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220525110143.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">[object Object]</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-物理壬踩坑记录including_qutip_python" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/05/04/%E7%89%A9%E7%90%86%E5%A3%AC%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95including_qutip_python/" class="article-date">
+  <time class="dt-published" datetime="2022-05-04T14:24:26.000Z" itemprop="datePublished">2022-05-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      物理壬踩坑记录including_qutip_python
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><code>qutip</code>是个很有用的量子计算集成开发包，abbreviated from Quantum toolbox in Python.</p>
+<p>但是确实使用时候遇到了很多困难和坑，正好目前所在的量子计算组和大创项目需要用到，就记录一下遇到的问题。</p>
+<ol>
+<li>绘制Bloch Sphere用<code>add_states()</code>方法</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sphere=qutip.Bloch()</span><br><span class="line">sphere.add_states(result.states)</span><br><span class="line">sphere.show()</span><br></pre></td></tr></table></figure>
+<p>报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object has no attribute &#x27;do_3d_projection&#x27;</span><br></pre></td></tr></table></figure>
+<p>原因是我用的matplotlib版本是3.5.1，的确没有了这个属性，需要降到3.3.2</p>
+<ol start="2">
+<li>在计算基态某个物理量的平均值时，用<code>Qobj.groundstates()</code>方法</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(qt.expect(qt.simgaz(),H.groundstate()))</span><br></pre></td></tr></table></figure>
+<p>报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: Arguments must be quantum objects or eseries</span><br></pre></td></tr></table></figure>
+<p>改正方法，<code>H.groundstate()</code>返回本征值和本征矢</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(qt.expect(qt.simgaz(),H.groundstate()[1]))</span><br></pre></td></tr></table></figure>
+<p>尝试过将<code>H.groundstate()</code>强制转化成Qobj，也尝试过将<code>qt.simgaz(),H.groundstate()</code>转化成array用numpy恩算。</p>
+<ol start="3">
+<li>Ising模型$\sigma^z_i \sigma^z_{i+1} $ for循环叠加</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">N=10</span><br><span class="line"></span><br><span class="line">def sigma_x(index):</span><br><span class="line">    sigma_x=qt.tensor(qt.qeye(2**index),qt.tensor(qt.tensor(qt.sigmax(),qt.qeye(2)), qt.qeye(2**(N-index-2))))</span><br><span class="line">   </span><br><span class="line">def hamiltionian_groundstate(g):</span><br><span class="line">    H=0</span><br><span class="line">    for i in range(N-1):</span><br><span class="line">        H=H+g*sigma_x(i)-sigma_z(i)</span><br><span class="line">    return H.groundstate()[1]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>报错，thx to <a target="_blank" rel="noopener" href="https://qiita.com/dtakashi/items/0722bbdb44ad67a71502">QuTiP不完全ガイド</a>，日本人写的都比中文互联网全。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Incompatible quantum object dimensions</span><br></pre></td></tr></table></figure>
+<p>需要让每个sigma_x(i)都是相同dims的Qobj，解决方案</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def sigma_x(index):</span><br><span class="line">    sigma_x=qt.tensor(qt.qeye(2**index),qt.tensor(qt.tensor(qt.sigmax(),qt.qeye(2)), qt.qeye(2**(N-index-2))))</span><br><span class="line">    return qt.Qobj(sigma_x, dims=[[2**N,2**N],[2**N,2**N]])</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>将数据保存成.csv and .xls等文件时若单元格空白则再用pandas读取时该数据为<code>np.nan</code>，应该用<code>df.replace(np.nan,0)</code>,报错：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FutureWarning: elementwise comparison failed</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>if 循环时，判断单元格是否为文本，否则加入列表中，结果最后列表都是空列表。noting that the judgement of type do not need the like <code>isdigit()</code> func <code>isalpha()</code>, just<code> type ==type</code>.</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i in range(len(df.columns)):</span><br><span class="line">    if type(df[i][1])==type(&#x27;a&#x27;):</span><br><span class="line">        break</span><br></pre></td></tr></table></figure>
+<p>肯定不能用pass对吧，否则这条就没啥用了。用break的话只执行当前的i，后续的i都不执行力。那应该：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i in range(len(df.columns)):</span><br><span class="line">    if type(df[i][1])==type(&#x27;a&#x27;):</span><br><span class="line">        continue</span><br></pre></td></tr></table></figure>
+<p>这样跳过此i，执行下一个i。By the way it is worthing to pointing out that if the data is digit of string type, then transforming it to number type:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a=&#x27;123&#x27;</span><br><span class="line">a=int(&#x27;&#x27;.join(a))</span><br><span class="line">#or rather:</span><br><span class="line">a=int(a)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>join方法是字符串的操作函数，<code>str.join(iterable)</code>，对一个可迭代对象执行用str分割，最后返回一个str。这个函数很好玩，可以玩出来花来，比如把列表每个元素分行打印：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lst=[&#x27;a&#x27;,&#x27;a&#x27;,&#x27;a&#x27;]</span><br><span class="line">&#x27;\n&#x27;.join(list)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">print(*lst,sep=&#x27;\n&#x27;)</span><br><span class="line"></span><br><span class="line">for i in lst:</span><br><span class="line">    print(i,sep=&#x27;\n&#x27;)</span><br></pre></td></tr></table></figure>
+<p><img src="../%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220525110143.jpg" alt=""></p>
+<p>matplotlib配色</p>
+<ol start="6">
+<li>高精度计算问题<br>
+在计算</li>
+</ol>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mi>B</mi></msub><mo>=</mo><msub><mrow><mo fence="true">(</mo><mfrac><mrow><mi mathvariant="normal">∂</mi><mi>E</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>T</mi></mrow></mfrac><mo fence="true">)</mo></mrow><mi>B</mi></msub><mo>=</mo><mo>−</mo><mfrac><mrow><mi>N</mi><msup><mi>μ</mi><mn>2</mn></msup><msup><mover accent="true"><mi>B</mi><mo>ˉ</mo></mover><mn>2</mn></msup><mi>ln</mi><mo>⁡</mo><mn>2</mn></mrow><mrow><msub><mi>k</mi><mi>B</mi></msub><msup><mi>T</mi><mn>2</mn></msup></mrow></mfrac><mtext>csch</mtext><mrow><mo fence="true">(</mo><mfrac><mrow><mi>μ</mi><mover accent="true"><mi>B</mi><mo>ˉ</mo></mover></mrow><mrow><msub><mi>k</mi><mi>B</mi></msub><mi>T</mi></mrow></mfrac><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">C_{B}=\left( \frac{\partial E}{\partial T}\right) _{B}=-\frac{N\mu^{2}\bar{B}^{2}\ln{2}}{k_{B}T^{2}}\text{csch}\left( \frac{\mu\bar{B}}{k_{B}T} \right)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.4497299999999997em;vertical-align:-0.99973em;"></span><span class="minner"><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:-0.5213990000000001em;"><span style="top:-1.7002700000000002em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.99973em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.4471399999999996em;vertical-align:-0.95003em;"></span><span class="mord">−</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4971099999999997em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mord"><span class="mord mathdefault">μ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201099999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.16666em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">ln</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord text"><span class="mord">csch</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.4971099999999997em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">μ</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8201099999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05017em;">B</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.16666em;"><span class="mord">ˉ</span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span></p>
+<p>时，因带着<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo separator="true">,</mo><msub><mi>k</mi><mi>B</mi></msub></mrow><annotation encoding="application/x-tex">\mu,k_{B}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">μ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05017em;">B</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，其数量级为-e12，e-23,而cschx=2<em>np.exp(x)/(np.exp(2</em>x)-1)  # 2/(np.exp(x)-np.exp(-x))上溢，为零。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RuntimeWarning: overflow encountered in exp</span><br><span class="line">print(np.exp(1e30))</span><br></pre></td></tr></table></figure>
+<p>所以就成了计算exp(-e30)问题，python精度最大为2^52，直接溢出，lg(exp(1e30))大概等于e29这么多位，，，，能算出来就有鬼了，解决办法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 每一步计算都转换科学记数法分别算前面和10的次数部分，只计算科学计数法前半部分，后半部分就带着</span><br><span class="line"></span><br><span class="line">2. 字符串处理，和科学计数法差不多，有点类似于c语言字符串处理高精,double11位指数位可以支持2^-2047,调gmp或者mpfr的计算后端</span><br><span class="line"></span><br><span class="line">3. c=ab d=lgc=lga+lgb c=exp(d) </span><br><span class="line">    lg能降低次数，还保证单调递增,把要存的实数转化为浮点数最精确的幅度内进行计算,别有特别大和特别小的数相加减,否则损失精度，如果用lg的话也可能会遇到比如这个数字有1e100那么多位，这也爆了</span><br><span class="line"></span><br><span class="line">4. 转化单位制，就像自然单位制一样，c=hbar=G=1</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>量子多体数值就别tm用qutip了<br>
+因为之前做的量子优化控制偏量子光学，所以现在来做量子多体习惯性的继续用qutip，但是遇到到大失败！以下是用qutip and scipy.sparse来做相关计算的用时记录。对于橫场伊辛模型来说，发现qutip生成多体Hamiltionian的速度极快，比scipy.sparse还要快，但是求解矩阵本征态有着多项式级别的差异，同时矩阵点乘的速度也相差不多，而且qutip还有内存的问题。qutip老老实实算量子光学得了。</li>
+</ol>
+<p>L=8</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">t0=datetime.datetime.now()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>,<span class="number">22</span>):</span><br><span class="line">    E,states=sl.eigs(test_H(),k=i，which=<span class="string">&#x27;SA&#x27;</span>) <span class="comment">#the parameter(often translated as formal parameter), while argument often refers to actual parameter. </span></span><br><span class="line">    t2=datetime.datetime.now()</span><br><span class="line">    <span class="built_in">print</span>(E)</span><br><span class="line">    <span class="built_in">print</span>(t2-t0)</span><br></pre></td></tr></table></figure>
+<p>求解一个本征矢需要多花0:00:00.05</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E,states=sl.eigs(test_H(),k=<span class="number">2</span>**<span class="number">8</span>-<span class="number">2</span>,which=<span class="string">&#x27;SR&#x27;</span>)</span><br><span class="line">E1,states1=sl.eigsh(test_H(),k=<span class="number">2</span>**<span class="number">8</span>-<span class="number">2</span>,which=<span class="string">&#x27;SA&#x27;</span>) <span class="comment">#最大只能到N-1，不太理解为什么不能生成N个本征矢。t1=0:00:00.278994</span></span><br><span class="line">t2=<span class="number">0</span>:<span class="number">00</span>:<span class="number">00.199048</span></span><br></pre></td></tr></table></figure>
+<p>所以可能还是eigsh faster than eigs.</p>
+<p>L=12 10times<br>
+qutip H.eigenstats() 0:00:59.843034<br>
+sl.eigsh 0:00:01.549344<br>
+sl.eigs 0:00:01.491331<br>
+E1,states1=scipy.linalg.eig(test_H().toarray()) 0:00:45.689474 #one time</p>
+<p>L=14<br>
+eigsh 0:00:00.806247<br>
+eigs 0:00:00.908200</p>
+<p>L=16 10 times<br>
+eigsh 0:00:27.331040<br>
+eigs 0:00:24.588102<br>
+此时qutip会爆内存，因为32GB的电脑最大存储16个格点的系统, 2^16<em>2^16</em>2^3=32GB，一个float类型变量占8B.</p>
+<p>dot<br>
+np.dot(H,v[:,i]) 0:00:00.090018 #取本征矢时用 v[:,i]<br>
+H*states 0:00:00.096038</p>
+<p>conclusion: Viva la scipy, go bitch qutip</p>
+<p>In fact, the eigsh func is a packaging of Arpack package of C and Fortran, using the lanczos algorithm.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">lanczos</span>(<span class="params">hm,length</span>):</span><br><span class="line">    dimension = <span class="number">2</span>**length</span><br><span class="line">    diagElements = []</span><br><span class="line">    subDiagElements = []</span><br><span class="line">    </span><br><span class="line">    f0 = np.random.rand(dimension)</span><br><span class="line">    f0 = f0 / norm(f0)</span><br><span class="line">    </span><br><span class="line">    f1 = hm @ f0</span><br><span class="line">    lastEnergy = <span class="number">0</span></span><br><span class="line">    groundEnergy = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> truncationIndex <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,dimension):</span><br><span class="line">        hdiag = f0 @ f1</span><br><span class="line">        f1 = f1 - hdiag * f0</span><br><span class="line">        </span><br><span class="line">        hsub = norm(f1)</span><br><span class="line">        f1 = f1 / hsub </span><br><span class="line">        </span><br><span class="line">        [f0 , f1] = [f1 , hm @ f1 -hsub*f0]</span><br><span class="line">        diagElements.append(hdiag)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 常规方法对角化</span></span><br><span class="line">        <span class="comment"># [va,ve] = scipy.linalg.eigh(self.fillElements(diagElements,subDiagElements,len(diagElements)))</span></span><br><span class="line">        <span class="comment"># groundEnergy = va[0]</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># if abs(groundEnergy - lastEnergy) &lt; 1e-10:</span></span><br><span class="line">        <span class="comment">#     break</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 三对角矩阵方法</span></span><br><span class="line">        [va,ve] = eigh_tridiagonal(np.array(diagElements),np.array(subDiagElements))</span><br><span class="line">        groundEnergy = va[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(groundEnergy - lastEnergy) &lt; <span class="number">1e-10</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        lastEnergy = groundEnergy</span><br><span class="line">        subDiagElements.append(hsub)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> groundEnergy</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1>Reference</h1>
+<p><a target="_blank" rel="noopener" href="https://qutip.org/docs/latest/index.html">User Guide for QuTip</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/05/04/%E7%89%A9%E7%90%86%E5%A3%AC%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95including_qutip_python/" data-id="cm7r4k128004jxd821bvfa1lw" data-title="物理壬踩坑记录including_qutip_python" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/qutip/" rel="tag">qutip</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/25/%E4%BA%94%E6%9C%88%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          五月总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/03/%E5%AF%86%E5%BA%A6%E7%9F%A9%E9%98%B5%E5%92%8C%E9%87%8F%E5%AD%90%E9%9A%8F%E6%9C%BA%E8%BF%87%E7%A8%8B%EF%BC%882%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">密度矩阵和量子随机过程（2）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">个人总结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/">春天来了</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%8B%E5%A4%A9%E6%9D%A5%E4%BA%86/">秋天来了</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%84%E6%B5%8B/">评测</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B6%A6/" rel="tag"> 润</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fundamentals-of-computer-and-programming/" rel="tag">Fundamentals of computer and programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-and-macOS/" rel="tag">Linux and macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medical-Imaging/" rel="tag">Medical Imaging</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PekingUni-Summer-School/" rel="tag">PekingUni Summer School</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics/" rel="tag">Physics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/latex/" rel="tag">latex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/non-equilibrium/" rel="tag">non-equilibrium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/physics/" rel="tag">physics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qutip/" rel="tag">qutip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%9C%E5%8C%97/" rel="tag">东北</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" rel="tag">个人总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%84%E8%AF%AD/" rel="tag">俄语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E4%BA%AC%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90/" rel="tag">北京吃喝玩乐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E4%BA%AC%E6%B8%B8%E7%8E%A9/" rel="tag">北京游玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E8%88%AA/" rel="tag">北航</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E7%89%A9/" rel="tag">博物</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E5%AD%97%E5%A7%93%E6%B0%8F/" rel="tag">名字姓氏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%8A%E5%88%AB/" rel="tag">告别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E4%BA%8C%E7%9A%84%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">大二的生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E9%99%A2%E8%B7%AF%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">学院路生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%A1%E7%BE%8E%E7%90%86%E6%83%B3/" rel="tag">审美理想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B6%E4%B9%A1/" rel="tag">家乡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%88%B1%E5%A5%BD/" rel="tag">小爱好</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%80%E6%97%A7/" rel="tag">怀旧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%97%E7%BE%8E%E6%8F%B4%E6%9C%9D/" rel="tag">抗美援朝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E4%B9%A1/" rel="tag">故乡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%8F%B2%E5%93%B2/" rel="tag">文史哲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%A6/" rel="tag">文学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E5%B9%B4%E5%A5%BD/" rel="tag">新年好</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%85%E8%A1%8C/" rel="tag">旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E4%BB%A3/" rel="tag">时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/" rel="tag">春天来了</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" rel="tag">模型部署</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%99%E6%B2%B3%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">沙河生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E7%8E%A9/" rel="tag">游玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/" rel="tag">热爱生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%B1%E6%83%85/" rel="tag">爱情</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89/" rel="tag">物理直觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E4%B8%BB%E4%B9%89/" rel="tag">理想主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" rel="tag">理想的生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%BD%B1%E4%B8%8E%E6%AD%8C%E6%9B%B2/" rel="tag">电影与歌曲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%8B%E5%AE%9E%E5%AD%A6%E5%9B%AD/" rel="tag">秋实学园</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/" rel="tag">红楼梦</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E7%84%B6/" rel="tag">自然</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E6%95%AC%E8%8B%B1%E9%9B%84/" rel="tag">致敬英雄</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%88%AA%E5%A4%A9/" rel="tag">航天</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%84%E6%B5%8B/" rel="tag">评测</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%AE%E7%9B%98/" rel="tag">键盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AA%91%E8%BD%A6/" rel="tag">骑车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AD%8F%E6%99%8B/" rel="tag">魏晋</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E6%B6%A6/" style="font-size: 10px;"> 润</a> <a href="/tags/Fundamentals-of-computer-and-programming/" style="font-size: 11.67px;">Fundamentals of computer and programming</a> <a href="/tags/Linux-and-macOS/" style="font-size: 10px;">Linux and macOS</a> <a href="/tags/Medical-Imaging/" style="font-size: 10px;">Medical Imaging</a> <a href="/tags/PekingUni-Summer-School/" style="font-size: 10px;">PekingUni Summer School</a> <a href="/tags/Physics/" style="font-size: 10px;">Physics</a> <a href="/tags/coding/" style="font-size: 11.67px;">coding</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/non-equilibrium/" style="font-size: 11.67px;">non-equilibrium</a> <a href="/tags/physics/" style="font-size: 15px;">physics</a> <a href="/tags/qutip/" style="font-size: 10px;">qutip</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E4%B8%9C%E5%8C%97/" style="font-size: 10px;">东北</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" style="font-size: 18.33px;">个人总结</a> <a href="/tags/%E4%BF%84%E8%AF%AD/" style="font-size: 10px;">俄语</a> <a href="/tags/%E5%8C%97%E4%BA%AC%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90/" style="font-size: 13.33px;">北京吃喝玩乐</a> <a href="/tags/%E5%8C%97%E4%BA%AC%E6%B8%B8%E7%8E%A9/" style="font-size: 16.67px;">北京游玩</a> <a href="/tags/%E5%8C%97%E8%88%AA/" style="font-size: 10px;">北航</a> <a href="/tags/%E5%8D%9A%E7%89%A9/" style="font-size: 10px;">博物</a> <a href="/tags/%E5%90%8D%E5%AD%97%E5%A7%93%E6%B0%8F/" style="font-size: 10px;">名字姓氏</a> <a href="/tags/%E5%91%8A%E5%88%AB/" style="font-size: 10px;">告别</a> <a href="/tags/%E5%A4%A7%E4%BA%8C%E7%9A%84%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 10px;">大二的生存指南</a> <a href="/tags/%E5%AD%A6%E9%99%A2%E8%B7%AF%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 11.67px;">学院路生存指南</a> <a href="/tags/%E5%AE%A1%E7%BE%8E%E7%90%86%E6%83%B3/" style="font-size: 10px;">审美理想</a> <a href="/tags/%E5%AE%B6%E4%B9%A1/" style="font-size: 10px;">家乡</a> <a href="/tags/%E5%B0%8F%E7%88%B1%E5%A5%BD/" style="font-size: 10px;">小爱好</a> <a href="/tags/%E6%80%80%E6%97%A7/" style="font-size: 11.67px;">怀旧</a> <a href="/tags/%E6%8A%97%E7%BE%8E%E6%8F%B4%E6%9C%9D/" style="font-size: 10px;">抗美援朝</a> <a href="/tags/%E6%95%85%E4%B9%A1/" style="font-size: 10px;">故乡</a> <a href="/tags/%E6%96%87%E5%8F%B2%E5%93%B2/" style="font-size: 11.67px;">文史哲</a> <a href="/tags/%E6%96%87%E5%AD%A6/" style="font-size: 10px;">文学</a> <a href="/tags/%E6%96%B0%E5%B9%B4%E5%A5%BD/" style="font-size: 10px;">新年好</a> <a href="/tags/%E6%97%85%E8%A1%8C/" style="font-size: 10px;">旅行</a> <a href="/tags/%E6%97%B6%E4%BB%A3/" style="font-size: 13.33px;">时代</a> <a href="/tags/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/" style="font-size: 16.67px;">春天来了</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">模型部署</a> <a href="/tags/%E6%B2%99%E6%B2%B3%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 11.67px;">沙河生存指南</a> <a href="/tags/%E6%B8%B8%E7%8E%A9/" style="font-size: 10px;">游玩</a> <a href="/tags/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">热爱生活</a> <a href="/tags/%E7%88%B1%E6%83%85/" style="font-size: 10px;">爱情</a> <a href="/tags/%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89/" style="font-size: 10px;">物理直觉</a> <a href="/tags/%E7%90%86%E6%83%B3%E4%B8%BB%E4%B9%89/" style="font-size: 10px;">理想主义</a> <a href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" style="font-size: 20px;">理想的生活</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E4%B8%8E%E6%AD%8C%E6%9B%B2/" style="font-size: 10px;">电影与歌曲</a> <a href="/tags/%E7%A7%8B%E5%AE%9E%E5%AD%A6%E5%9B%AD/" style="font-size: 10px;">秋实学园</a> <a href="/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/" style="font-size: 10px;">红楼梦</a> <a href="/tags/%E8%87%AA%E7%84%B6/" style="font-size: 10px;">自然</a> <a href="/tags/%E8%87%B4%E6%95%AC%E8%8B%B1%E9%9B%84/" style="font-size: 10px;">致敬英雄</a> <a href="/tags/%E8%88%AA%E5%A4%A9/" style="font-size: 10px;">航天</a> <a href="/tags/%E8%AF%84%E6%B5%8B/" style="font-size: 10px;">评测</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E9%94%AE%E7%9B%98/" style="font-size: 10px;">键盘</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a> <a href="/tags/%E9%AA%91%E8%BD%A6/" style="font-size: 11.67px;">骑车</a> <a href="/tags/%E9%AD%8F%E6%99%8B/" style="font-size: 10px;">魏晋</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/02/11/Download-without-sudo/">Download without sudo</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/09/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">2024年度总结</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/27/%E5%BD%92/">归</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/12/%E5%BE%B7%E5%9B%BD%E8%A7%81%E9%97%BB%E4%B8%80%E4%BA%8C%E8%AE%B0/">德国见闻一二记</a>
+          </li>
+        
+          <li>
+            <a href="/2023/05/15/Diagonalization-and-Several-Linalg-Packages/">Diagonalization and Several Linalg Packages</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
