@@ -1,1163 +1,311 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Hexo - [object Object]</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="https://zzh-cycling.github.io/page/4/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zzh-cycling.github.io/img/buaa-second-year/avatar2.jpg">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zzh-cycling.github.io/img/buaa-second-year/avatar2.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://zzh-cycling.github.io/page/4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2025-03-02 16:03:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-<meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">[object Object]</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
         
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zzh-cycling.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-铁做的月亮-我的东北" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/05/02/%E9%93%81%E5%81%9A%E7%9A%84%E6%9C%88%E4%BA%AE-%E6%88%91%E7%9A%84%E4%B8%9C%E5%8C%97/" class="article-date">
-  <time class="dt-published" datetime="2022-05-02T12:18:44.000Z" itemprop="datePublished">2022-05-02</time>
-</a>
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
-  </div>
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.3.0"><link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/buaa-second-year/avatar2.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">52</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">56</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-sitemap"></i><span> 关于</span></a></li><li><a class="site-page child" href="/myself/"><i class="fa-fw fa fa-id-card"></i><span> myself</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly/"><i class="fa-fw fa fa-heart"></i><span> butterfly主题</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/buaa-second-year/banner.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Hexo</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 菜单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fa fa-sitemap"></i><span> 关于</span></a></li><li><a class="site-page child" href="/myself/"><i class="fa-fw fa fa-id-card"></i><span> myself</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly/"><i class="fa-fw fa fa-heart"></i><span> butterfly主题</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/zzh-cycling" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2276780832@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.zhihu.com/people/zhi-zhao-hui-89" target="_blank" title="Zhihu"><i class="fa-brands fa-zhihu"></i></a><a class="social-icon" href="https://www.youtube.com/channel/UCdkrKOftTBoeyEXqpCSKlGA" target="_blank" title="Youtube"><i class="fa-brands fa-youtube"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2022/05/02/%E9%93%81%E5%81%9A%E7%9A%84%E6%9C%88%E4%BA%AE-%E6%88%91%E7%9A%84%E4%B8%9C%E5%8C%97/" title="铁做的月亮-我的东北"><img class="post_bg" src="https://pic.cyol.com/img/20211104/img_969113cd43854fa0f3ecdf0d2a1e3e8fe6_c.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="铁做的月亮-我的东北"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/02/%E9%93%81%E5%81%9A%E7%9A%84%E6%9C%88%E4%BA%AE-%E6%88%91%E7%9A%84%E4%B8%9C%E5%8C%97/" title="铁做的月亮-我的东北">铁做的月亮-我的东北</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-02T12:18:44.000Z" title="Created 2022-05-02 20:18:44">2022-05-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></span></div><div class="content">我很喜欢南方，尤其是江南，可能是因为我是北方人，一直很向往南方水镇。回望历史，我追思的那些朝代总是在江南卷起阵阵浪潮，追思的那些文人也总是在中国地图上的长江流域留下一幅幅文学历史地图，那些作品也总是把我的念想带到长江流域、秦淮以南、风流池畔。那片碧波浩渺、岸柳依依、荡舟心许、远山青黛、云峰橫乱的湖啊，西湖的水自动消解了杭州的三分热气，桥边行人举着伞来来往往，一瞬间我恍惚看到了一千年前的北宋颐宁元丰年间同样在此桥上撑着油纸伞来来回回的粗衣布袍者、纨绔绫罗者。千年之后繁华俱没，唯此湖悠悠。那座大江边上的城，有“清新庾开府，俊逸鲍参军。”，谢朓、沈约、竟陵八友嬉游建康。南唐君臣在金陵喟叹：“细雨湿流光”，“春日宴，绿酒一杯歌一遍。”，后只落得后主登楼而生故国不堪回首春水东流之愁。曹雪芹用在江宁府小园的岁月织就了红楼里的梦。漫步南京城内，谁人不能想起所谓江雨霏霏江草齐，六朝如梦鸟空啼呢？这六朝霏雨，雨幕帘锁，是潜藏在中国人血脉中的意象。那一年冠盖云集、灯花如雨，结绮临春事最奢，可惜只有日暮东风怨啼鸟，飞入寻常百姓家了。古典诗歌的意象中的江南，从六朝唐宋起所赋予江南的文化，让江南从一个地理名词真 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/05/02/%E7%AB%99%E5%8F%B0/" title="列车与站台"><img class="post_bg" src="https://tse1-mm.cn.bing.net/th/id/R-C.67f7210533a39d8740d4cae909017ef4?rik=FUo269JxYvhxVw&amp;riu=http%3a%2f%2fwww.sznews.com%2fnews%2fpic%2f2021-03%2f18%2fe0274d88-988f-434f-af0a-c13947be6e68.jpg&amp;ehk=tKaznf%2fn%2b39ZsxMpZ7r2HNSTxsOzcYy%2bYrDqNGm%2fhUs%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="列车与站台"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/02/%E7%AB%99%E5%8F%B0/" title="列车与站台">列车与站台</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-02T12:13:41.000Z" title="Created 2022-05-02 20:13:41">2022-05-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></span></div><div class="content">列车与站台
+这是一篇关于怀旧，告别和时代的文章。
+一些杂谈
+但在谈那些之前，我想先谈一谈另一些东西。一个文学问题，旧体诗的意象问题。旧体诗是封建时代传统文学遗留下来的最为光辉璀璨的遗产，承载了那些呕心沥血的诗人最真挚的情感，但是却在后世逐渐流于庸俗与奢繁。这大抵是文学创作不适合时代的结果。汉唐已远去了几百年，却还要吟咏只存于黄纸上汉唐的意象，遵循着定好的格律和形式带着镣铐跳舞，扭捏着进行精巧的文字组合的游戏，看谁能作出花团锦簇的文章来，就像是比谁能给不朽的棺木雕刻出最华美的纹饰。时至今日，现代社会瞬息千变，过去的时光一去不复返了，仍然有一些人坚守着故老的体裁，效仿着宋永嘉四灵，江湖派姜夔，明唐宋派归有光，公安派三袁，七子李攀龙，竟陵派等人去做文学改革，尝试让旧体诗合于现代。
+那么旧体诗究竟能否成功地适应于现代呢？我们不妨来看一个例子，毛主席在1923年11月妻子杨开慧生下次子毛岸青后，得知党中央通知他回上海转广州准备参加将于1924年1月举行的国民党第一次全国代表大会。此时杨开慧正在家坐月子，而毛主席奉命要到外地工作，但为了革命工作的需要，他们还是毅然分别。于是，他写了这首《贺新郎·别 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/05/02/good-old-day/" title="good old days"><img class="post_bg" src="https://th.bing.com/th/id/R.f533013a4a5e3f0af04d29406256d2ca?rik=hMB%2bzr56xfhrIA&amp;riu=http%3a%2f%2fpic127.huitu.com%2fres%2f20190812%2f895959_20190812115209989050_1.jpg&amp;ehk=L%2bwjFTgGDMkYks5aF6Ezp8DHVYZeHe1YZR0VhStNYaU%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="good old days"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/02/good-old-day/" title="good old days">good old days</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-02T12:13:24.000Z" title="Created 2022-05-02 20:13:24">2022-05-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></span></div><div class="content">Golden days
+很多人都会有着那种怀旧的心绪，或者进一步地可以叫恋旧癖，Nostalgia，或是一直回忆幼时的时光，或是一直向往曾经的时代。比如对大唐盛世的神往，比如对毛主席时代的向往，比如对小时候的无忧无虑的夏天的怀念。这些年华，真真切切的，似水一般，缓缓流淌，流向远方。每个人都有自己的Golden days。
+怀旧，是出于什么呢？
+也许是在时间线上的后端，对前端的美化罢。过去的终究过去了，留给我们的要么是我们自己的记忆要么是停留在文字、
+照片、史书上的描述与刻画，历史是客观的，我们对于历史的认识是主观的，这就必然掺入了主观的价值判断，对曾经的不堪、无趣、痛苦进行遗忘，只留住了美好的瞬间和高光的判断。
+也许是因为现实太过于痛苦与无趣罢，我们才会倾向于去另一个时代寻找力量、寻找慰藉。过去的都是美好的，是田园牧歌式的自然淳朴的理想生活，在夕阳的余辉中时间仿佛定格拉得无比漫长。这也许就是英文所说的good old days.
+我们要从怀旧中得到什么？
+李白忆谢脁，是为了发思古之幽情，叙往事，思来者，自比于谢朓来自命高洁，追忆前贤，大多是郁郁不得志，渴望于历史书中找到知己。谢朓鲍照和 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/05/02/%E7%91%B6%E5%A7%AC%E4%B8%80%E5%8E%BB%E4%B8%89%E5%8D%83%E5%B9%B4/" title="瑶姬一去三千年"><img class="post_bg" src="https://www.tanmizhi.com/img/allimg/08/22-1ZR0163044405.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="瑶姬一去三千年"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/02/%E7%91%B6%E5%A7%AC%E4%B8%80%E5%8E%BB%E4%B8%89%E5%8D%83%E5%B9%B4/" title="瑶姬一去三千年">瑶姬一去三千年</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-02T12:12:57.000Z" title="Created 2022-05-02 20:12:57">2022-05-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></span></div><div class="content">瑶姬一去三千年——姓氏名字
+坐标
+人生在世是需要坐标的，人们常说：“人是社会关系的总和。”，用社会这一复杂网络中的坐标来标记每一个个体是自然的，你是谁人的父亲，谁人的妻儿，隔壁的大叔，开店的老板。当然也可以用职业，地理位置，生物信息（比如人种，基因传承，外貌）来标记，更自然的是为每个人取一个独特的代号用来标记信息，于是便有了名字（The name）。当然，人越来越多的情况下，就会不得不取越来越多重坐标来identify people from others(identity)，也就导致了中国古代开始时，每个人的名字是有四重坐标的：姓，所以别婚姻，氏，所以别贵贱。（《通志·氏族略》语），名，长辈所赐，介绍自己的谦称；字，己所取，他人用来尊称。后来便姓氏合流，太史公甚至写下“字仲尼，姓孔氏”之句。比如追溯起来，鄙人便可以称为荀姓，智氏，字丝逸。比如成汤谥成汤，以谥号为氏。其子孙便成为汤氏。比如秦始皇便是氏赵，名政，姓嬴，无字行（秦国的祖先少昊氏以燕子（玄鸟）为图腾，嬴与燕异字同音，故成为嬴姓的始祖，少昊的后代曾封于赵地而立氏，所以才有了嬴姓赵氏。所以其实，岂止是秦赵，诸多诸侯国也算得上是同 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/05/02/%E5%8D%9A%E7%89%A9/" title="博物"><img class="post_bg" src="/img/buaa-second-year/blue_cloud_suki.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博物"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/02/%E5%8D%9A%E7%89%A9/" title="博物">博物</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-02T12:03:07.000Z" title="Created 2022-05-02 20:03:07">2022-05-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></span></div><div class="content">之所以想写这个文章，是看到了这段逸趣横生宛如汪曾祺笔下的文字：
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+作者：苏耷水(妹想到竟然还是学长啊，是《中国国家地理》的编辑+撰稿人，令人艳羡的工作)
+链接：https://www.zhihu.com/question/61922034/answer/276596844
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+(《中国国家地理》杂志社）工作的最高原则是“地理决定论”，一切都要“有地理味有科学味”。从前杂志社人少，每年都会有一次全体员工集体野外考察的活动，基本上去的都是人迹罕至的很冷门但很美的地方，一般来说会有保护区或不对外开放的地方，会有随队的科学家一路讲解。后来单位人太多了不好组织，又因为是半体制内单位，怕外人告杂志社腐败，就取消了。
+但是《中国国家地理》的员工天天做名山大川的稿子，如果自己不能亲临现场往往做的很没感觉，很多新员工就没法体会地理的美，做稿子很痛苦，常被领导批评“不够地理味不够科学”。于是一些部门依然会以部门为单位组织集体外出考察，寻找所谓“地理味”。比如我所在的部门今年是去黔东南考察的。《博物》比较拉仇恨啊，这两年不是台湾就 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/05/02/%E7%88%B1%E6%83%85/" title="爱情"><img class="post_bg" src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGxvdmV8ZW58MHx8MHx8&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="爱情"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/02/%E7%88%B1%E6%83%85/" title="爱情">爱情</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-02T07:09:05.000Z" title="Created 2022-05-02 15:09:05">2022-05-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></span></div><div class="content">虽然我没拥有过爱情，仅有的几次青春时的心动也都无疾而终，（“和很多校友一样，我直到三十岁了也还没谈过恋爱”.jpg[滑稽])但我觉得我还是有很多话想说，很多话想谈，谈一谈自己的爱情理想和美好憧憬。
+啥事爱情捏。你问我肯定就如同问道于盲，那我就只能姑且盲人摸象谈上一谈。其实有时候我也会不由得迷茫为什么会渴求两性关系的建立。为什么就是她而不是她。我的理想中爱情应该就是由最开始的心动、对彼此外貌气质内心的欣赏、彼此相处的舒适到三观和性格的契合、想要更进一步的试探、对彼此的拥有和占据、激情地承诺到从两性关系中共同成长、积极情感价值的正向输出和消极的抚慰、和对彼此的责任与担当。其实两性关系的建立可能本身就是需要双方去一点点探索尝试，理想就是虽不能至，心向往之，参照理想将现实逐步地趋于理想。
+所见过的爱情故事有很多。生活中、书上、历史中，符合这些条件的终究是少数。很多时候觉得两个人就像飞鸟和鱼一样。飞鸟在天空翱翔，鱼儿在水里遨游，二人仅在水面上有一次相会，却以为那就是一生，其实鱼儿还是要入水，鸟儿还是要回到天空，他们俩有各自的广阔世界。
+当我去了北京植物园，在樱桃谷顶看到了那棵著名的石中树。我抬头 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/05/02/%E5%96%9C%E6%AC%A2%E8%AF%BB%E7%9A%84%E4%B9%A6/" title="喜欢读的书"><img class="post_bg" src="https://images.unsplash.com/photo-1543497415-75c0a27177c0?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGJvb2t8ZW58MHx8MHx8&amp;auto=format&amp;fit=crop&amp;w=800&amp;q=60" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="喜欢读的书"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/02/%E5%96%9C%E6%AC%A2%E8%AF%BB%E7%9A%84%E4%B9%A6/" title="喜欢读的书">喜欢读的书</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-02T07:08:04.000Z" title="Created 2022-05-02 15:08:04">2022-05-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></span></div><div class="content">我是自幼就喜欢看书的，小时候上课也不听课就看书，那时候看的是图书馆里卖的经典名著，喜欢看HP系列啦，喜欢看科幻系列比如凡尔纳啦，再就是西游记，还有三国演义和水浒传（退休了再看一遍），隋唐演义，封神演义等等这些描述古代战争的书，那时候看的都是古白话版的，四开纸四百多页的大部头，导致现在的古文功底很扎实，倒是不会喜欢看《童年》、钢炼、《红与黑》这种更现实主义的书hhh，看完了没啥感想。
+等我上了初中就开始看数理教材，起因还是因为小学五六年级时候开始看起了网络小说，从此一发不可收拾陆陆续续看了几十本，有一本让我印象很深刻就是《奥术神座》，讲的物理学成神，知识就是力量的故事，这对于中二病少年具有莫大的吸引力，那时候我边看边搜索不懂得词汇，什么“曲率”、“薛定谔方程”、“复变函数”，发现……我tm也看不懂啊，或者说只是感性层面上的理解，于是我发了狠决心要弄懂，就一个词一个词的挨个查下去终于查到了最基本的知识概念和逻辑，于是我就开始一点点bottom up，发现对我来说还是太玄奥了难以捕捉，于是我就开始买来高中课本和淑芬课本来看。那真是段充实的时光啊，每天都有大把大把的知识点轰炸，就这样陆陆续续的 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/05/01/%E6%B2%99%E6%B2%B3%E9%82%A3%E4%BA%9B%E5%B9%B3%E5%87%A1%E7%9A%84%E4%BA%BA/" title="沙河那些平凡的人"><img class="post_bg" src="/img/buaa-second-year/trivial_shahe.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="沙河那些平凡的人"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/01/%E6%B2%99%E6%B2%B3%E9%82%A3%E4%BA%9B%E5%B9%B3%E5%87%A1%E7%9A%84%E4%BA%BA/" title="沙河那些平凡的人">沙河那些平凡的人</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-05-01T15:20:20.000Z" title="Created 2022-05-01 23:20:20">2022-05-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></span></div><div class="content">五月一号，想记录一下在沙河遇到的平凡但却是在认真生活、诚实劳动的普通人。
+卖水果的大叔
+因着优购水果的价格高昂，各个私人的水果群就有了发展空间，在水果群里要上一份水果，等到下课叔叔阿姨送来就可以开吃。于是我就认识了众多小贩中的一个老板。
+我倒是与他交流不多，零零散散了解到的信息大概就是老板是2010年沙河高教园修建起来六所大学开设分校区之后就开始在这边做生意了，学生需要水果，老板需要挣钱，于是大家皆大欢喜。我在有早市的时候一般不在水果群里买，或者可能去更远的郊区骑车路过采摘园顺便买点。在他这买水果呢，就得在东门等一位干瘦的中年男子骑着电动三轮拉来一箱水果，跟他说是哪群哪号买了啥，次数多了他也会记住你直接递给你。
+老板在这做了十年的生意了，和学生们有了感情，做生意也很诚信，一天要给六个大学送四次水果，水果这么容易坏都几乎没很少出质量问题，即使是很忙，别人不满意的水果也能给换。
+
+还有一次是我转发了一个患病的北航学长的水滴筹，学长刚本科毕业就患上了重病，叔叔看到了之后就问我，然后把水滴筹转发到了他经营的各个大学的水果群和同事的群里，这应该就是人间的对陌生人的善意，出于同感或是相似经历，都想 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/04/30/%E5%9B%9B%E6%9C%88%E6%80%BB%E7%BB%93/" title="四月总结"><img class="post_bg" src="/img/buaa-second-year/plum_blossom_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="四月总结"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/30/%E5%9B%9B%E6%9C%88%E6%80%BB%E7%BB%93/" title="四月总结">四月总结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-04-30T08:49:18.000Z" title="Created 2022-04-30 16:49:18">2022-04-30</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">个人总结</a></span></div><div class="content">以为三月多风，四月多雨，却没想到四月的雨水却出乎意料的不多，记忆里也就三四次，这个月本以为是闲下来的一个月，结果闲下来的显然不是我。五月份希望有好心情和好时光，能够闲下来（但显然不可能，大创、冯如杯又得来）。
+
+阴阴绿树黄鹂语，将与人间作夏凉。
+
+四月份总结
+四月份出乎意料的忙碌，先是冯如杯和大创的中期答辩，再是入党的答辩，还有给学弟学妹做的专业分流讲座虽然人家不感兴趣，不过尽力就行了。入党的材料好多上万上千字，然后我又开始写了量子计算的波形优化github project.净给自己找事…
+读书
+这个月读的还是挺多的，把《我的阿勒泰》看完了，把《刘慈欣短篇小说合集看完了》，为了写《是谓风流》也翻了好多材料，发现人文社科的东西就是这样的，批判比较观点，给出论据，很多东西写的时候都需要自己思考，比如自然审美的自觉时期究竟是什么时候？汉代还是魏晋？还零零散散地开始读《朗道理论物理系列》的《力学》、《场论》、《统计力学》、《流体力学》、《统计力学》by黄克孙,physics from symmetry.
+《我的阿勒泰》是我很早就听闻了的，在我印象中那片广袤的西北大地上，悠远空旷的总是寂寞，一望 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/04/14/%E7%89%A9%E7%90%86%E5%A3%AC%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95including_vscode_latex/" title="物理壬踩坑记录including_vscode_latex"><img class="post_bg" src="/img/buaa-second-year/plum_blossom_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="物理壬踩坑记录including_vscode_latex"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/14/%E7%89%A9%E7%90%86%E5%A3%AC%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95including_vscode_latex/" title="物理壬踩坑记录including_vscode_latex">物理壬踩坑记录including_vscode_latex</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-04-13T17:28:27.000Z" title="Created 2022-04-14 01:28:27">2022-04-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></span></div><div class="content">
+
+
+问题描述：
+在vscode里切换了解释器后，该环境下的某个包无法被import, Run Code之后发现输出窗口显示no module named xxx. 但是切换到console后（此时会自动进入你当前的conda环境），cd进该路径，python .\xxx.py, 可以运行。
+解决办法
+把原来的
+‘’’
+“python.defaultInterpreterPath”: “D:\Anaconda3\envs\quantum\python.exe”
+‘’’
+一句注释掉，输入code-runner.executorMap: 这一句后会出现一大串提示点了后就会导入这个部分的语句。如下：
+‘’’
+“code-runner.executorMap”: {
+“javascript”: “node”,
+“java”: “cd $dir &amp;&amp; javac $fileName &amp;&amp; java $fileNameWithoutExt”,
+“c”: “cd $dir &amp;&amp; gcc $fileName -o $fileNameWithoutExt  ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="page-number" href="/page/6/#content-inner">6</a><a class="extend next" rel="next" href="/page/5/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/buaa-second-year/avatar2.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">52</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">56</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zzh-cycling"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zzh-cycling" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2276780832@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.zhihu.com/people/zhi-zhao-hui-89" target="_blank" title="Zhihu"><i class="fa-brands fa-zhihu"></i></a><a class="social-icon" href="https://www.youtube.com/channel/UCdkrKOftTBoeyEXqpCSKlGA" target="_blank" title="Youtube"><i class="fa-brands fa-youtube"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome to zhaohui zhi's personal blog, and you're welcome to contribute.</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/02/11/Download-without-sudo/" title="Download without sudo"><img src="/img/buaa-second-year/physics_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Download without sudo"/></a><div class="content"><a class="title" href="/2025/02/11/Download-without-sudo/" title="Download without sudo">Download without sudo</a><time datetime="2025-02-11T08:34:42.000Z" title="Created 2025-02-11 16:34:42">2025-02-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/02/09/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" title="2024年度总结"><img src="/img/buaa-second-year/plum_blossom_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2024年度总结"/></a><div class="content"><a class="title" href="/2025/02/09/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" title="2024年度总结">2024年度总结</a><time datetime="2025-02-09T15:54:09.000Z" title="Created 2025-02-09 23:54:09">2025-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/27/%E5%BD%92/" title="归"><img src="/img/buaa-second-year/plum_blossom_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="归"/></a><div class="content"><a class="title" href="/2024/03/27/%E5%BD%92/" title="归">归</a><time datetime="2024-03-27T00:20:12.000Z" title="Created 2024-03-27 08:20:12">2024-03-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/12/%E5%BE%B7%E5%9B%BD%E8%A7%81%E9%97%BB%E4%B8%80%E4%BA%8C%E8%AE%B0/" title="德国见闻一二记"><img src="/img/buaa-second-year/plum_blossom_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="德国见闻一二记"/></a><div class="content"><a class="title" href="/2023/11/12/%E5%BE%B7%E5%9B%BD%E8%A7%81%E9%97%BB%E4%B8%80%E4%BA%8C%E8%AE%B0/" title="德国见闻一二记">德国见闻一二记</a><time datetime="2023-11-12T12:30:54.000Z" title="Created 2023-11-12 20:30:54">2023-11-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/15/Diagonalization-and-Several-Linalg-Packages/" title="Diagonalization and Several Linalg Packages"><img src="/img/buaa-second-year/physics_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Diagonalization and Several Linalg Packages"/></a><div class="content"><a class="title" href="/2023/05/15/Diagonalization-and-Several-Linalg-Packages/" title="Diagonalization and Several Linalg Packages">Diagonalization and Several Linalg Packages</a><time datetime="2023-05-14T18:18:07.000Z" title="Created 2023-05-15 02:18:07">2023-05-15</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/"><span class="card-category-list-name">个人总结</span><span class="card-category-list-count">17</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/"><span class="card-category-list-name">学习</span><span class="card-category-list-count">9</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/"><span class="card-category-list-name">春天来了</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%A7%8B%E5%A4%A9%E6%9D%A5%E4%BA%86/"><span class="card-category-list-name">秋天来了</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AF%84%E6%B5%8B/"><span class="card-category-list-name">评测</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/"><span class="card-category-list-name">随笔</span><span class="card-category-list-count">15</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E6%B6%A6/" style="font-size: 1.1em; color: #999"> 润</a> <a href="/tags/Fundamentals-of-computer-and-programming/" style="font-size: 1.18em; color: #999ca1">Fundamentals of computer and programming</a> <a href="/tags/Linux-and-macOS/" style="font-size: 1.1em; color: #999">Linux and macOS</a> <a href="/tags/Medical-Imaging/" style="font-size: 1.1em; color: #999">Medical Imaging</a> <a href="/tags/PekingUni-Summer-School/" style="font-size: 1.1em; color: #999">PekingUni Summer School</a> <a href="/tags/Physics/" style="font-size: 1.1em; color: #999">Physics</a> <a href="/tags/coding/" style="font-size: 1.18em; color: #999ca1">coding</a> <a href="/tags/latex/" style="font-size: 1.1em; color: #999">latex</a> <a href="/tags/non-equilibrium/" style="font-size: 1.18em; color: #999ca1">non-equilibrium</a> <a href="/tags/physics/" style="font-size: 1.34em; color: #99a3b0">physics</a> <a href="/tags/qutip/" style="font-size: 1.1em; color: #999">qutip</a> <a href="/tags/vscode/" style="font-size: 1.1em; color: #999">vscode</a> <a href="/tags/%E4%B8%9C%E5%8C%97/" style="font-size: 1.1em; color: #999">东北</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" style="font-size: 1.5em; color: #99a9bf">个人总结</a> <a href="/tags/%E4%BF%84%E8%AF%AD/" style="font-size: 1.1em; color: #999">俄语</a> <a href="/tags/%E5%8C%97%E4%BA%AC%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90/" style="font-size: 1.26em; color: #999fa8">北京吃喝玩乐</a> <a href="/tags/%E5%8C%97%E4%BA%AC%E6%B8%B8%E7%8E%A9/" style="font-size: 1.42em; color: #99a6b7">北京游玩</a> <a href="/tags/%E5%8C%97%E8%88%AA/" style="font-size: 1.1em; color: #999">北航</a> <a href="/tags/%E5%8D%9A%E7%89%A9/" style="font-size: 1.1em; color: #999">博物</a> <a href="/tags/%E5%90%8D%E5%AD%97%E5%A7%93%E6%B0%8F/" style="font-size: 1.1em; color: #999">名字姓氏</a> <a href="/tags/%E5%91%8A%E5%88%AB/" style="font-size: 1.1em; color: #999">告别</a> <a href="/tags/%E5%A4%A7%E4%BA%8C%E7%9A%84%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 1.1em; color: #999">大二的生存指南</a> <a href="/tags/%E5%AD%A6%E9%99%A2%E8%B7%AF%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 1.18em; color: #999ca1">学院路生存指南</a> <a href="/tags/%E5%AE%A1%E7%BE%8E%E7%90%86%E6%83%B3/" style="font-size: 1.1em; color: #999">审美理想</a> <a href="/tags/%E5%AE%B6%E4%B9%A1/" style="font-size: 1.1em; color: #999">家乡</a> <a href="/tags/%E5%B0%8F%E7%88%B1%E5%A5%BD/" style="font-size: 1.1em; color: #999">小爱好</a> <a href="/tags/%E6%80%80%E6%97%A7/" style="font-size: 1.18em; color: #999ca1">怀旧</a> <a href="/tags/%E6%8A%97%E7%BE%8E%E6%8F%B4%E6%9C%9D/" style="font-size: 1.1em; color: #999">抗美援朝</a> <a href="/tags/%E6%95%85%E4%B9%A1/" style="font-size: 1.1em; color: #999">故乡</a> <a href="/tags/%E6%96%87%E5%8F%B2%E5%93%B2/" style="font-size: 1.18em; color: #999ca1">文史哲</a> <a href="/tags/%E6%96%87%E5%AD%A6/" style="font-size: 1.1em; color: #999">文学</a> <a href="/tags/%E6%96%B0%E5%B9%B4%E5%A5%BD/" style="font-size: 1.1em; color: #999">新年好</a> <a href="/tags/%E6%97%85%E8%A1%8C/" style="font-size: 1.1em; color: #999">旅行</a> <a href="/tags/%E6%97%B6%E4%BB%A3/" style="font-size: 1.26em; color: #999fa8">时代</a> <a href="/tags/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/" style="font-size: 1.42em; color: #99a6b7">春天来了</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" style="font-size: 1.1em; color: #999">模型部署</a> <a href="/tags/%E6%B2%99%E6%B2%B3%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 1.18em; color: #999ca1">沙河生存指南</a> <a href="/tags/%E6%B8%B8%E7%8E%A9/" style="font-size: 1.1em; color: #999">游玩</a> <a href="/tags/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/" style="font-size: 1.1em; color: #999">热爱生活</a> <a href="/tags/%E7%88%B1%E6%83%85/" style="font-size: 1.1em; color: #999">爱情</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">February 2025</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/03/"><span class="card-archive-list-date">March 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">November 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">May 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">March 2023</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">December 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/11/"><span class="card-archive-list-date">November 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/10/"><span class="card-archive-list-date">October 2022</span><span class="card-archive-list-count">2</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">52</div></div><div class="webinfo-item"><div class="item-name">Run time :</div><div class="item-count" id="runtimeshow" data-publishDate="2022-01-31T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">216.2k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-03-02T08:03:52.691Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Switch Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    window.typed = new Typed("#subtitle", {
+      strings: ["桃李春风一杯酒 | 江湖夜雨十年灯","Physics, Poetry, Per aspera ad astra"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("subtitle").innerHTML = '桃李春风一杯酒 | 江湖夜雨十年灯'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div><div class="aplayer no-destroy" data-id="466692088" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true" data-lrcType="-1"> </div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="true" data-click="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/05/02/%E9%93%81%E5%81%9A%E7%9A%84%E6%9C%88%E4%BA%AE-%E6%88%91%E7%9A%84%E4%B8%9C%E5%8C%97/">铁做的月亮-我的东北</a>
-    </h1>
-  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>我很喜欢南方，尤其是江南，可能是因为我是北方人，一直很向往南方水镇。回望历史，我追思的那些朝代总是在江南卷起阵阵浪潮，追思的那些文人也总是在中国地图上的长江流域留下一幅幅文学历史地图，那些作品也总是把我的念想带到长江流域、秦淮以南、风流池畔。那片碧波浩渺、岸柳依依、荡舟心许、远山青黛、云峰橫乱的湖啊，西湖的水自动消解了杭州的三分热气，桥边行人举着伞来来往往，一瞬间我恍惚看到了一千年前的北宋颐宁元丰年间同样在此桥上撑着油纸伞来来回回的粗衣布袍者、纨绔绫罗者。千年之后繁华俱没，唯此湖悠悠。那座大江边上的城，有“清新庾开府，俊逸鲍参军。”，谢朓、沈约、竟陵八友嬉游建康。南唐君臣在金陵喟叹：“细雨湿流光”，“春日宴，绿酒一杯歌一遍。”，后只落得后主登楼而生故国不堪回首春水东流之愁。曹雪芹用在江宁府小园的岁月织就了红楼里的梦。漫步南京城内，谁人不能想起所谓江雨霏霏江草齐，六朝如梦鸟空啼呢？这六朝霏雨，雨幕帘锁，是潜藏在中国人血脉中的意象。那一年冠盖云集、灯花如雨，结绮临春事最奢，可惜只有日暮东风怨啼鸟，飞入寻常百姓家了。古典诗歌的意象中的江南，从六朝唐宋起所赋予江南的文化，让江南从一个地理名词真正变为一个包含着美丽、文气与富庶，被世人不断向往和憧憬的词。</p>
-<p>回到现代，我对江南的幻想总是和雨为伴，即“值得回忆的哀乐人事常是湿的”（沈从文语），更是浮现在我们脑海里的那一碧万顷的无边荷田，那接天碧绿的田田莲叶，是我们会联想起来的一系列美好的品格与人物，是那么一整个烟波浩渺的江南水乡，细雨中的乌篷船，垆边人似月，溪头卧剥莲蓬，雨巷中忧愁的丁香……是中国人文中不可割舍的水乡情节。像是沈从文的湘西，古典诗歌的意象中的江南（太湖流域）。记得在乌镇看过的雨满足了我对江南的幻想，阁中观烟雨，烟雨暗千家，半壕春水一城花。两旁水乡的酒家也撑开了棂窗，在江边洒下昏黄的灯光，酒旗招展，一路上真就有了白太傅“青旗沽酒趁梨花”之感。岸两旁的人撑着伞或单纯享受着雨在岸上来来往往。期间也穿过数座石板桥，人们穿着花花绿绿的衣服，有说有笑着。烟雨一词真的妙极，如烟的雨雾，丝丝袅袅轻罗，细密得可以被风吹起大片大片。阴沉带着点青色的天，一整天都是雾蒙蒙的。我一直很喜欢雨，那淡淡的丝线一般的雨幕笼罩着整个人世，心灵也不由自主的宁静下来，在山顶上什么也不想，又或者什么都可以想，全是你的自由。</p>
-<p>记得曾经在雷峰塔最顶楼一望西湖水。登高望远，天远地旷，郁塞顿开，而生吞吐宇宙之心，觉人事无穷之意，无怪于古人“登高赋新诗”须“有酒斟酌之”，“我辈复登临”须览景必怀古。近处是密密的绿林，再远些就是澄澈的西湖如同蓝宝石一般镶嵌在武林山中，湖上偶有几只船只来来往往，亮起几盏渔火。再远处则是蓝晕晕的天下深青的山脉绵亘向远处更远处。所谓远山如黛，近水含烟，合该如是，让人想起姜夔姜白石诗“长记曾携手处，千树压、西湖寒碧。”秋季的杭州，应也是另一番美好，夜爬西湖在满月照耀下看一番满觉陇路的万里共清辉的桂子，看一番平湖秋月，桂棹兰桨击空明兮溯流光，前往绍兴的若耶溪，会有“蝉噪林逾静，鸟鸣山更幽”，也会有“人闲桂花落，夜静春山空。月出惊山鸟，时鸣春涧中。”，“若耶溪傍采莲女，笑隔荷花共人语。日照新妆水底明，风飘香袂空中举。”等一系列的美好。</p>
-<p>记得在南京，长干里，桃叶渡，那些生活的气息，热闹的小巷，盛夏傍晚间，有剥莲蓬的孩童，有青瓷盘中的瓜果，有穿花的纷纷蝴蝶；繁华的渡口，有归来的船家，渔网中活蹦乱跳的鲈鱼，餐盘中的莼菜，吴侬软语轻漾。在街坊里拐进小巷子，还会听到不知道从哪里传来的吱吱呀呀的唱词，“我有一段情呀 唱给诸公听 诸公各位 静呀静静心呀 让我来 唱一支秦淮景呀 细细呀 道来 唱给诸公听呀 秦淮缓缓流呀 盘古到如今 江南锦绣 金陵风雅情呀 瞻园里 堂阔宇深呀 白鹭洲 水涟涟 世外桃源呀”。</p>
-<p>都很好，都很美好，美得让人心碎。</p>
-<p>可惜他们都不是我的东北。</p>
-<p>我心里想到的，是在快傍晚的油田里，天空没有云，只是一片偏红调的橘色，铺的到处都是，磕头机已经不再磕头了，就静静地待在那，留下一座黑色的剪影，它抽干了自己的生命，远处的山黑的像铁一样横亘在黑土地上。东北也抽干了自己的生命，去供养那时候的中国，它的弟弟妹妹，它也曾繁华过。会想起一首现代诗，“我咽下一枚铁做的月亮，他们管它叫做螺丝”，东北是一颗螺丝做的月亮，它沉重坚硬，但它同样温暖又浪漫。我想到的是林海雪原中一片白茫茫的白桦树，田地里埋着的一垛垛秸秆根，查干湖一尾尾跃出水面的胖头鱼，红砖墙的窗台上冻得一个个又大又圆的冻柿子和冻梨，炕后面一个低矮的灶上面永远热气腾腾的大锅，酸菜缸里结霜的石头和白菜冒出诱人的酸气，地窖里永远储存着的过冬用的土豆茄子和白菜，一个个大盘子里装满堆成山的溜肉段，锅包肉，烧茄子，凉拌大拉皮，乱炖，闹哄哄的早市人们哈出的白气和早餐铺豆腐脑、豆浆油条的烟气混合在一起往上升，干完活的男人们女人们聚在饭桌旁大声谈笑着。东北是鲜活的，充满生命力的。我会想到一个个具有聪明的头脑，坚强的体魄的东北人生来就是为了离开故乡，前往北京、上海、广州、深圳等一个个大城市，另把他乡作故乡，只有少数心中有着坚守的人会选择故乡。</p>
-<p>我心里想到的是，1953年抗美援朝的伟大胜利结束后中国开始了第一个五年计划，开始了三大改造和工业体系的建设，东北承接了大部分苏联援助的156个工业项目，之后随着工业基础的雄厚，东北也开始支援全国各地工业，输出技术、产品、人才、经验，鞍钢的钢铁，沈机的机床，一汽的汽车，大庆的石油，全国各地，没有像东北这样依赖国有企业和重工业的省份。我心里想到的是在现在看来简直是一段美好的童话的那时候的国企，就好像50年代的“少年宫”、“疗养院”一样，有8小时工作制，有工作餐，有奖金，有加班费，有社保，有公积金，公司做重大决议需要和职工大会的工人共同商议，甚至还会有厂办杂志和电视台。工人们在伺候完一天的螺丝、扳手、柴油、机床、高炉、织床后，还有有工人自发组成的篮球、乒乓球俱乐部举办比赛（这也是为什么东北出了那么多奥运冠军），美声俱乐部放声《我的太阳》，文学俱乐部读海子、毕淑敏、朱光潜、陀思妥耶夫斯基，谈美学、诗歌、远方。那是个充满生命力的时代。</p>
-<p>我心里想到的是，那段岁月对东北人来说回想起来黑暗的时代，承受时代的阵痛的个体是东北的普通工人，在国有企业改革和资产重组的过程中，部分国有资产被贱卖私吞，工人下岗后的安置政策如同虚设，两千万的东北工人没有能力养家，甚至得不到安置费，又不会经商，甚至沦落到吃不饱饭，冬天交不起暖气费的地步。就好像，时代的大江大河中，难以找到承载他们的船。</p>
-<p>就好像另一篇小说中贩卖荣誉的片段，“我说的是20年前的事了，那时我才四岁。那个冬天真冷啊，暖气停了，房间里结了冰，我只好抱着电视机取暖，听着总统在我怀中向俄罗斯人许诺一个温暖的冬天。我哭着喊冷，喊饿，爷爷默默地看着我，终于下了决心，拿出他珍藏的勋章，带着我走了出去，来到这里。那时这儿是自由市场，人们什么都卖。一个美国人看上了爷爷的勋章，但只肯出40美元。他说红旗勋章和红星勋章都不值钱的，但如果有赫梅利尼茨基勋章，他肯出100美元，光荣勋章，150美元，纳希莫夫勋章，200美元，乌沙科夫勋章，250美元，最值钱的胜利勋章当然不可能有，那只授给元帅，但苏沃洛夫勋章也值钱，他可以出450美元……爷爷默默地走开了。我们沿着寒冬的阿尔巴特街走啊走，后来爷爷走不动了，天也快黑了，他无力地坐到那家古玩店的台阶上，让我先回家。第二天人们发现他冻死在那里，一只手伸进怀中，握着他用鲜血换来的勋章，睁大双眼看着这个他在70多年前从古德里安的坦克群下拯救的城市……”</p>
-<p>我知道，从产业结构的角度来说，东北辉煌的时期是也正是中国刚刚开始重工业化的时代，东北的主要产业结构也都是重工业。最近二三十年，实际是轻工业、服务业、信息产业崛起的时代。不仅是东北，全球的重工业区相比以前的辉煌都有明显的下滑。东北衰落的时期正是全球化的时期。全球化必然导致经济重心向南方的港口城市转移，东北亚被打散必然导致东北的衰落。这是时代的选择，也是时代的错位。</p>
-<p>东北是时代的错位。我们不曾辜负时代。</p>
+  typeof typed === 'object' && typed.destroy()
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzh-cycling.github.io/2022/05/02/%E9%93%81%E5%81%9A%E7%9A%84%E6%9C%88%E4%BA%AE-%E6%88%91%E7%9A%84%E4%B8%9C%E5%8C%97/" data-id="cm7rc8qoj008edl8268og4s1m" data-title="铁做的月亮-我的东北" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%9C%E5%8C%97/" rel="tag">东北</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%85%E4%B9%A1/" rel="tag">故乡</a></li></ul>
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
 
-    </footer>
-  </div>
-  
-</article>
+})
 
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
 
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
 
-  
-    <article id="post-站台" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/05/02/%E7%AB%99%E5%8F%B0/" class="article-date">
-  <time class="dt-published" datetime="2022-05-02T12:13:41.000Z" itemprop="datePublished">2022-05-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
-  </div>
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/05/02/%E7%AB%99%E5%8F%B0/">列车与站台</a>
-    </h1>
-  
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1>列车与站台</h1>
-<p>这是一篇关于怀旧，告别和时代的文章。</p>
-<h2 id="一些杂谈">一些杂谈</h2>
-<p>但在谈那些之前，我想先谈一谈另一些东西。一个文学问题，旧体诗的意象问题。旧体诗是封建时代传统文学遗留下来的最为光辉璀璨的遗产，承载了那些呕心沥血的诗人最真挚的情感，但是却在后世逐渐流于庸俗与奢繁。这大抵是文学创作不适合时代的结果。汉唐已远去了几百年，却还要吟咏只存于黄纸上汉唐的意象，遵循着定好的格律和形式带着镣铐跳舞，扭捏着进行精巧的文字组合的游戏，看谁能作出花团锦簇的文章来，就像是比谁能给不朽的棺木雕刻出最华美的纹饰。时至今日，现代社会瞬息千变，过去的时光一去不复返了，仍然有一些人坚守着故老的体裁，效仿着宋永嘉四灵，江湖派姜夔，明唐宋派归有光，公安派三袁，七子李攀龙，竟陵派等人去做文学改革，尝试让旧体诗合于现代。</p>
-<p>那么旧体诗究竟能否成功地适应于现代呢？我们不妨来看一个例子，毛主席在1923年11月妻子杨开慧生下次子毛岸青后，得知党中央通知他回上海转广州准备参加将于1924年1月举行的国民党第一次全国代表大会。此时杨开慧正在家坐月子，而毛主席奉命要到外地工作，但为了革命工作的需要，他们还是毅然分别。于是，他写了这首《贺新郎·别友》赠给爱妻杨开慧：“今朝霜重东门路，照横塘半天残月，凄清如许。汽笛一声肠已断，从此天涯孤旅。”。几年后，在白色恐怖中，杨开慧英勇就义。不知道当初那个青年，在结霜的早晨踏上火车告别妻子，离开家乡的时候，是怎样的肝肠寸断？是否又能料到之后的生离死别？不知道在站台抱着两个儿子目送丈夫远去的妻子又是怎样挥手告别，痴痴凝望呢？在这一诗句中，诗人成功地把汽笛和火车这一意象融入到古典诗歌中，是极佳的创新。虽然之前也有“别肠转如轮，一刻既万周。眼见双轮驰，益增中心忧。”，“所愿君归时，快乘轻气球。”这样极具古诗十五首之风却又摹写新兴意象的尝试，但却不如毛主席之句倾注的凄苦。这也就启发我们，旧体诗适应时代的核心不在于表面上描写现代的意象，而在于把和生活中那些最能牵动我们情绪的事物融入文中。现代生活的离别，当然是在码头，在机场，但最多的，还是车站的站台与火车。别之一字，极写古今之痛楚。</p>
-<p>所以文学的活力，并不在于那些表面上的能否容纳时代的意象，倒不如说，在于能否承载这个时代人们的情感。不同时代情感之所系，寓情之物也有所不同。比如古代送别，唐代是在西安的灞陵桥，是当时人们到全国各地去时离别长安的必经之地，而灞陵桥两边又是杨柳掩映，故成了古人折柳送别之所。“年年柳色，灞陵伤别”，“今宵酒醒何处 杨柳岸，晓风残月”；在陆地上，又会在长亭送别，“何处是归程？长亭更短亭。”，“寒蝉凄切，对长亭晚。”，“长亭外，古道边，芳草碧连天。”。“天下伤心处，劳劳送客亭。春风知别苦，不遣柳条青。”；在水边又会在南浦，横塘送别，“与子交手兮东行，送美人兮南浦。”，“春草碧色，春水渌波，送君南浦，伤如之何？”，“南浦凄凄别，西风袅袅秋，一看肠一断，好去莫回头。”，“年年送客横塘路，细雨垂杨系画船”，还有“劳歌一曲解行舟，红叶青山水急流。日暮酒醒人已远，满天风雨下西楼”。不论别离的地点怎么变，感兴的事物如何更改，古今的情感是一致的。这就是王羲之所说，“虽世殊事异，所以兴怀，其致一也。后之览者，亦将有感于斯文。”。</p>
-<p>社会在发展，时代在变快，列车在变快，节奏在变快，可人心中的情感还是不变的。恋人的手掌、母亲的怀抱、父亲的背影、远行的行囊、远方、故乡、眷恋、不舍、未知、迷茫，这些全部在离别的时候交织。站台，是见证了最多真挚的泪水的地方，最多的别离的地点。火车上，承载着太多他乡的疲倦与远方的理想，穿山越岭，走过一座座陌生的城市，把离愁扯成两半，但还留给身后那座站台的身影一个线，就像风筝一样。</p>
-<p>黯然销魂者，唯别而已矣。</p>
-<h2 id="那些记忆">那些记忆</h2>
-<p>关于列车与站台的记忆有哪些呢？还记得很小的时候被妈妈牵着，在昏黄的灯光下，排着长长的队伍，等待着穿暗蓝色制服的检票员用钢钳咔嚓一声在红色的票上剪出一个缺口，穿过老旧的站台上拥挤的人潮，挤上闹闹哄哄的绿皮火车前往一个很远很远叫北京的地方，那个地方能治好你的病。昏黄的灯光下人多的时候你拥我挤，我得紧紧地握住妈妈的手才能不至于走丢。有一次甚至我爸把我从窗户送了进去。在车上有的时候是坐卧铺，有的时候只抢到了硬座，便躺在母亲怀里，听着车轮碾过铁轨哐当哐当的声音，窗外偶尔有橘黄的路灯闪过。车窗内便是拥挤的人间，打牌的声音，聊天的声音，打呼噜的声音，康师傅红烧牛肉面的味道，大葱蘸酱的味道，到了终点又会全部消散，如同墨水混入海洋一般汇入大城市，最终每个个体隐入尘烟，终不可见。日后回忆起来只能记得那窗外掠过的昏黄的昏黄的灯光，昭示着远离的故乡。现在红色的票早已变成了蓝色的票，不过现在已经不叫票了，叫报销凭证。再也没有了小小的船票，凝聚乡愁的味道。</p>
-<p>稍长后，便是和几个同样没心没肺的少年结伴，坐不起卧铺，便彻夜硬座，彼此叠在一起依靠着睡去，或者压根就不睡觉一直打扑克，匆匆地前往一个个陌生的城市。这时压根没有多少离别的愁绪，全然是兴奋与好奇，面对着站台上挥着手臂的父母也只是匆匆一别。上大学之后，那辉煌的站台不复幼时人潮熙攘，背着大包小裹，拎着塑料袋和背着蛇皮袋的人群，不见贩卖烤肠和玉米的小贩，也不见吵吵嚷嚷的招呼和叫卖声和昏黄的灯光了。在现代的站台上，不见了远行送别的人群，没有了离别的场景，作别的只有故乡的万里长风和无边的旷野。背起行囊默默去远方. 转过头身后的城市已是一片雪茫茫。告诉自己从此和故乡只余冬夏，再无春秋。</p>
-<p>中国的大片肥沃的土地上生长着绵延不绝的小农经济，这里每个人的生命都与土地相连。我们热爱它，供奉它，保卫它，我们与土地的感情里有数不清的难言与深刻。一辈辈人日出而作，日落而息，安土重迁，一块土地便穷尽一生。就像巴尔干半岛破碎的海域孕育的自由超逸的希腊人，亚平宁半岛上肥沃的拉丁平原养育出坚韧现实的罗马人一样，我们民族的性格里养成了内敛和含蓄的特点。我们相思时不说相思，只说天上的明月，说南国的红豆，说沧海和巫山，说驿站的梅花，鱼和鸿雁；难过和失落时只说梧桐和细雨，说晨雾和蝉鸣；不说倾慕和春心，说南风和西洲，说山木和芷兰；说喜怒不形于色，说发乎情止乎礼。那些话少的女子，一大片脸红便是一大片对白。所有的这些，都是含蓄里的美。</p>
-<p>有时我会想，这些含蓄是不是会让人的情感表达变得笨拙不堪？让人的生命里凭白多上些悔恨？因为身体里流淌着的那些含蓄和难为情，我们很少会在离别时认真表达出心中的不舍，却又总是在离别后的某天某个不经意的黄昏或是夜晚突然间想起当时的场景，然后后悔起离别时故作出的的仓促、淡漠和无所谓，以及没有认真地哭丧着脸着说一句，“我舍不得你”。可是，后悔就后悔吧，“人生自是有情痴，此恨无关风与月”。</p>
-<p>再远一些的记忆，要数朱自清的回忆。“月台的栅栏外有几个卖东西的等着顾客。走到那边月台，须穿过铁道，须跳下去又爬上去。父亲是一个胖子，走过去自然要费事些。我本来要去的，他不肯，只好让他去。我看见他戴着黑布小帽，穿着黑布大马褂，深青布棉袍，蹒跚地走到铁道边，慢慢探身下去，尚不大难。可是他穿过铁道，要爬上那边月台，就不容易了。他用两手攀着上面，两脚再向上缩；他肥胖的身子向左微倾，显出努力的样子，这时我看见他的背影，我的泪很快地流下来了。我赶紧拭干了泪。怕他看见，也怕别人看见。我再向外看时，他已抱了朱红的桔子往回走了。过铁道时，他先将桔子散放在地上，自己慢慢爬下，再抱起桔子走。到这边时，我赶紧去搀他。他和我走到车上，将桔子一股脑儿放在我的皮大衣上。于是扑扑衣上的泥土，心里很轻松似的。过一会儿说：“我走了，到那边来信！””。还有就是在那个如火如荼建设社会的年代，人们会跳上列车，就像那个红色的时代经常传唱的苏联老歌《山楂树》那样，“ 歌声轻轻荡漾在黄昏的水面上，暮色中的工厂在远处闪着光。列车飞驰而过，车窗的灯火辉煌”，以极大的热情投入的生产生活中去。</p>
-<p>然后是我父母那一辈的记忆，大多来源于影视作品和父母的讲述中。印象很深刻的是和父母一起看《情深深雨濛濛》里杜飞追着火车上的依萍，放起了一首《离别的车站》：</p>
-<blockquote>
-<p>当你紧紧握着我的手</p>
-<p>再三说着珍重珍重</p>
-<p>当你深深看着我的眼</p>
-<p>再三说着别送别送</p>
-<p>当你走上离别的车站</p>
-<p>我终于不停的呼唤呼唤</p>
-<p>眼看你的车子越走越远</p>
-<p>我的心一片凌乱凌乱</p>
-<p>千言万语还来不及说</p>
-<p>我的泪早已泛滥泛滥</p>
-</blockquote>
-<p>还有贾樟柯的电影《站台》中，五十年前的人们背着长长的双卡四喇叭录音机放着，“长长的站台，漫长的等待。长长的列车，载着我短暂的爱。”，这时候县城里迷茫的青年就站在空地上望着远方长长的列车穿山越岭，传来一声悠长的汽笛声。</p>
-<p>我父亲说，那个时候的车票是硬板票，车票上印一道杠的是直快，两道杠是特快，儿童票会斜着减掉半截。那时候也完全没有联网，窗口准备的票卖完了就没了。在列车上有的时候甚至站得和现在早高峰北京地铁一样挤。有的站，火车停了不开门，直接从窗户往里跳。春运的时候经常困在车站12个小时以上，火车晚点或者干脆不停，从家里到北京甚至要走九个小时。他说大学毕业的时候，车站前太壮观了，去火车站送南下的同学，看到整个列车都被送行的学生占满，到处是青春之悲泣。他说其实我们怀念的不是那些落后的技术和艰苦的岁月，而是那些年生活过的生活。他说其实火车的车窗就像一个很长很长很长的长镜头。虽然人生道路各不相同，但是感谢你陪我走过这一段路。</p>
-<p>高铁很快，快的到你记不清邻座人的样子，可是火车很慢，慢到你可以听一个人讲完他的一生。在火车上，</p>
-<p>高铁很快，快的到你记不清邻座人的样子，可是火车很慢，慢到你可以听一个人讲完他的一生。在火车上，怀揣着理想北漂的青年也许会听着，“许多人来来去去，相聚又别离，也有人喝醉哭泣，在一个人的北京。”回想起在中关村深夜下班的日子，在天通苑拥挤的楼房，听着有关或无关的“我走在，鼓楼下面，路在堵着。睡不着的后海边，月亮还在抽着烟”，想起抽空看到的香山满山的红叶，玉渊潭池中樱花的倒影。也许会有舍不得买坐票的185的做运车营当的大叔，混上车后补站票，晚上在别人的座位下面铺张报纸躺着睡，赶回家乡，最终生意慢慢做大，给妻子孩子买了心爱的衣服。也许会有着如潮水搬涌入城市的农民工大哥，拎起座位下编织袋中的瓦工或者木工的工具走出车站，走入马驹桥镇，举着牌子叫卖，等着日结的活计。火车上网很差，大家被迫放下手机去和座位周边的陌生人聊天消遣，侃大山，喧嚣都被火车远远落下，东北的大哥掏出了干豆腐皮，赤峰的姐姐拿出自家做的烧鸡，山东的大爷翻出小酒和花生米，大家彼此分享着，最终在终点处挥手告别，真有种《爱在黎明破晓前》的浪漫。</p>
-<p>最后以一首小诗结尾吧：</p>
-<blockquote>
-<p>去什么地方呢？这么晚了</p>
-<p>美丽的火车</p>
-<p>孤独的火车<br>
-凄苦是你汽笛的声音</p>
-<p>令人记起了</p>
-<p>许多事情</p>
-<p>为什么呢</p>
-<p>我不该挥舞手巾？</p>
-<p>乘客多少都跟我有亲</p>
-<p>去吧，</p>
-<p>但愿你一路平安。</p>
-<p>桥都坚固，</p>
-<p>隧道都光明。</p>
-</blockquote>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=29429854&auto=1&height=66"></iframe>
-<p><img src="/img/gallery/red_like_fire/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_202211271537581.jpg" alt="广州站的站台"></p>
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzh-cycling.github.io/2022/05/02/%E7%AB%99%E5%8F%B0/" data-id="cm7rc8qoi008adl823enc0nl9" data-title="列车与站台" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%91%8A%E5%88%AB/" rel="tag">告别</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%80%E6%97%A7/" rel="tag">怀旧</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%B6%E4%BB%A3/" rel="tag">时代</a></li></ul>
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
 
-    </footer>
-  </div>
-  
-</article>
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
 
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
 
+  typeof preloader === 'object' && preloader.endLoading()
+})
 
-  
-    <article id="post-good-old-day" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/05/02/good-old-day/" class="article-date">
-  <time class="dt-published" datetime="2022-05-02T12:13:24.000Z" itemprop="datePublished">2022-05-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/05/02/good-old-day/">good old days</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1>Golden days</h1>
-<p>很多人都会有着那种怀旧的心绪，或者进一步地可以叫恋旧癖，Nostalgia，或是一直回忆幼时的时光，或是一直向往曾经的时代。比如对大唐盛世的神往，比如对毛主席时代的向往，比如对小时候的无忧无虑的夏天的怀念。这些年华，真真切切的，似水一般，缓缓流淌，流向远方。每个人都有自己的Golden days。</p>
-<p>怀旧，是出于什么呢？</p>
-<p>也许是在时间线上的后端，对前端的美化罢。过去的终究过去了，留给我们的要么是我们自己的记忆要么是停留在文字、<br>
-照片、史书上的描述与刻画，历史是客观的，我们对于历史的认识是主观的，这就必然掺入了主观的价值判断，对曾经的不堪、无趣、痛苦进行遗忘，只留住了美好的瞬间和高光的判断。</p>
-<p>也许是因为现实太过于痛苦与无趣罢，我们才会倾向于去另一个时代寻找力量、寻找慰藉。过去的都是美好的，是田园牧歌式的自然淳朴的理想生活，在夕阳的余辉中时间仿佛定格拉得无比漫长。这也许就是英文所说的good old days.</p>
-<p>我们要从怀旧中得到什么？</p>
-<p>李白忆谢脁，是为了发思古之幽情，叙往事，思来者，自比于谢朓来自命高洁，追忆前贤，大多是郁郁不得志，渴望于历史书中找到知己。谢朓鲍照和萧纲文学集团的后起之秀徐陵、庾信，是梁朝之后二百多年间文学的偶像，唐元和年间才被“元和诗变”的推动者们以杜甫取而代之。当不得志者成了前贤，又被后代不得志者奉为知音。历史总是这么奇怪，有的人显赫于当时，有的人流芳于万世，如今的伤心者是后人的偶像，后人又是后世寂寞者的偶像，代代如此，只要伤心亘古。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">　    于易水送别</span><br><span class="line">　　         骆宾王</span><br><span class="line"></span><br><span class="line">此地别燕丹，壮士发冲冠。</span><br><span class="line"></span><br><span class="line">昔时人已没，今日水犹寒。</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     与诸子登岘山</span><br><span class="line"></span><br><span class="line">            孟浩然</span><br><span class="line"></span><br><span class="line">人事有代谢，往来成古今。</span><br><span class="line"></span><br><span class="line">江山留胜迹，我辈复登临。</span><br><span class="line"></span><br><span class="line">水落鱼梁浅，天寒梦泽深。</span><br><span class="line"></span><br><span class="line">羊公碑尚在，读罢泪沾襟。</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>海明威说“如果你年轻时有幸在巴黎生活过，那么以后无论你走到哪里，巴黎都会一生追随着你，因为巴黎是一场流动的盛宴。”</p>
-</blockquote>
-<blockquote>
-<p>海姆说：“巴黎是一座非常古老的城市，而我们却很年轻，这里什么都不简单，甚至贫穷，意外所得的钱财，月光，是与非以及那在月光下睡在你身边的人的呼吸，都不简单。”</p>
-</blockquote>
-<p>伍迪艾伦的《午夜巴黎》中，有怀旧癖的男主想念海明威笔下的流动盛宴，想念巴黎，想念1920s那个黄金时代，那些闪耀的名字，欧内斯特·海明威，斯科特·菲兹杰拉德，达利，布努埃尔，毕加索，然而他的crush却认为la belle époque才是黄金时代，其实每个人都有自己的Golden day，我们总是会想La vie est ailleurs（生活在别处，兰波语）</p>
-<p><img src="https://pic1.zhimg.com/80/v2-035b1f273d60d503f349db50a0563df0_1440w.jpg" alt=""><br>
-<img src="http://www.sfs-cn.com/node3/ypjs/node21026/node21031/images/171034.jpg" alt=""><br>
-<img src="http://n.sinaimg.cn/fashion/crawl/303/w826h1077/20210602/68c4-kquziik4705174.jpg" alt=""></p>
-<p>类似的电影和音乐不由得让我想起了贾樟柯和刘森，两位</p>
-<div style="position: relative; padding: 100% 100%;">
-    <iframe style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;" src="https://www.bilibili.com/video/BV1GQ4y1N7AR" frameborder="no" scrolling="no"></iframe>
-</div>
-双厨狂喜。
-<p>想一想我自己的怀旧罢，做一个时间线上的行者。</p>
-<p>我怀念我自己的过去。“如果我不记得他们，那还有谁记得呢？”。不管是物还是人，都带给过我美好的回忆，那一刻的我是开心快乐的。美好的事物总是让人值得留恋。我也并不觉得恋旧和过好现在有冲突，回忆都是由一个个当下组成的，我明白现在的一切未来都会变成回忆，为了让未来的回忆变得美好，珍惜现在的每一刻，以免未来回忆之时惊觉后悔。我怀念我的童年，那时候一切都过的很慢又很快，每天都是夏天的风、冬天的雪、春天的花和秋天的月，蝉鸣一直叫着时光偷偷溜走。我怀念我的初中，那时候我终于有了挚友，有了热爱的东西和自己的想法，逐步建立起来了自己的三观，并为我一生的岁月打下了基础，窗外的阳光透过窗帘在教室里洒下一片金黄，每个人都被镀上了金色的色彩，我痴痴地望着这一幕，留在心底到永远。我怀念我的高中，那是个充实虽然并没有学到太多东西的时间，每天都是和朋友一起充实的奋斗，共同为这同一个梦想而努力，留在我记忆深处的是在第一排的靠窗户旁的我的小天地中，同学们在前面拖地擦黑板，在我前面的水盆里搓抹布，每天讲题的同学再认真誊写题目，窗外种着不知道什么花什么草长得甚高，给我们的窗子挡的很严，于是我们就在这绿色的阴影下度过了一个夏天。那时候读过一篇应试文章，甚为惊叹，感觉说的很棒——《追忆似水流年，珍惜美好今天》，有一句话说，“时代总是在变好的，只是我们看着之前那些缓缓流过的岁月，浸润着我们的心田，却忘了现在的年岁，来的轰轰烈烈，来的浓墨重彩。”我现在便在日后的年岁里，怀念着从前的岁月，越是远离，越是想念，并努力珍惜已有的现在。</p>
-<blockquote>
-<p>欲买桂花同载酒，终不似，少年游。</p>
-</blockquote>
-<p>我怀念父母的时代。我想要一窥那段时光，去拼凑他们在成为父亲母亲之前的模样，他们的生活、朋友、经历，回首那个真真切切地存在过的岁月。那是三十年前老旧的县城，狭窄的街道，大街上穿来穿去的晾衣线，一辆辆自行车从大街小巷穿梭而过，就像是电影《山楂树之恋》、《芳华》、《阳光灿烂的日子》、《站台》和《山河故人》描绘的那些场景一样，泛黄的老照片上黑白色一下子生动地有了色彩，他们也曾年轻过啊，也像我们现在一样爱恨贪痴怨，脑海中的情形一下子生动起来了，就像是《夏洛特烦恼》中那一幕：夏洛终于回到了他曾经拥有过的1997年，坐在床上弹起了那首《那些花儿》,金色的阳光透过窗帘洒满了狭小的卧室，“</p>
-<blockquote>
-<p>那片笑声让我想起，我的那些花儿。</p>
-<p>在我生命里每个角落，静静为我开着。</p>
-<p>我曾以为，我会永远，守在她身旁。</p>
-<p>今天我们，已经离去，在人海茫茫。</p>
-<p>她们都老了吧，她们在哪里啊。</p>
-<p>我们就这样，散落在天涯。</p>
-<p>啦啦啦啦，啦啦啦啦，啦啦啦去呀。</p>
-</blockquote>
-<p>”随着歌声的转合，镜头一幕幕出现了那么多年轻的同学的青春，在学习、在臭美、在看huangpian，在傻呵地打游戏。其实这些都过去了。但是像我父母他们一样在狭小的房间里享受着自己的那个小天地，沐浴着金色的余辉那一瞬间是永恒的。</p>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/zvideo/1446800969580978177">可以看看知乎回答，我想直接html标签引用视频知乎服务器也不给响应，引用网页答案也不响应我服了</a></p>
-<p>我怀念一些老歌，虽然不是我这个时代的，但勾起了我很多回忆，也是很多人共同的记忆与怀恋。一个好的歌曲能引起很多人共同的回忆。比如《同一首歌》</p>
-<blockquote>
-<p>在阳光灿烂，欢乐的日子里，我们手拉手啊，想说的太多。</p>
-</blockquote>
-<p>《让我们荡起双桨》、《澎湖湾》这种种听起来很欢快却又让人觉得淡淡的悲伤，还有《心愿》，这首歌是96年作者他们的青春，也是那个时代，我们这个时代的青春，就像一个评论，“这首歌的作者和演唱者，还有听者也已经奔四了，时光真是一个奇怪的东西。”</p>
-<blockquote>
-<p>湖水是你的眼神,梦想满天星辰<br>
-心情是一个传说<br>
-亘古不变地等候<br>
-成长是一扇树叶的门<br>
-童年有一群亲爱的人<br>
-春天是一段路程<br>
-沧海桑田的拥有<br>
-那些我爱的人<br>
-那些离逝的风<br>
-那些永远的誓言一遍一遍</p>
-</blockquote>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=379785&auto=1&height=66"></iframe>
-<p>《最美好的前途》</p>
-<blockquote>
-<p>最美好的前途，千万不要对我冷酷。</p>
-</blockquote>
-<p>《明天会更好》、《凤凰花开的路口》，小时候听过的丁香花。<br>
-还有《山楂树》</p>
-<blockquote>
-<p>这时，车内响起了《山楂树》。</p>
-<p>车停了下来，“下去。”孩子的父亲冷冷地说，母亲和孩子看他的眼光也如外面的秋雨般冰凉。</p>
-<p>罗辑没有动，他想听那首歌。</p>
-<p>“请下去。”那男人又说，罗辑读出了他们目光中的话：没有救世的能力不是你的错，但给世界以希望后又打碎它就是一种不可饶恕的罪恶了。</p>
-<p>罗辑只好起身下车，他的旅行包随后被扔了出来，车启动时他跟着跑了几步，想再听听那首歌，但还是无奈地听着《山楂树》消失在冰冷的雨夜中。</p>
-</blockquote>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=4438223&auto=1&height=66"></iframe>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/49688722/answer/1257856291">可以看看知乎回答，我想直接html标签引用视频知乎服务器也不给响应，引用网页答案也不响应我服了</a></p>
-<blockquote>
-<p>Вечер тихой песнею над рекой плывёт,<br>
-歌声轻轻荡漾在黄昏水面上，<br>
-Дальними зарницами светится завод,<br>
-暮色中的工厂已发着光，<br>
-Где-то поезд катится точками огня,<br>
-列车飞快地奔驰，车窗的灯火辉煌，<br>
-Где-то под рябинушкой парни ждут меня.<br>
-两个青年等我在山楂树两旁。<br>
-Ой, рябина кудрявая, белые цветы,<br>
-哦，那茂密的山楂树，白花开满枝头，<br>
-Ой, рябина, рябинушка, что взгрустнула ты.<br>
-哦，那可爱的山楂树，你为何要发愁？<br>
-Лишь гудки певучие смолкнут над водой,<br>
-当那嘹亮的汽笛声刚刚停息，<br>
-Я иду к рябинушке тропкою крутой.<br>
-我就沿着小路向树下走去。<br>
-Треплет под кудрявою ветер без конца<br>
-清风吹拂不停，在茂密的山楂树下，<br>
-Справа кудри токаря, слева - кузнеца.<br>
-吹乱了青年镟工和锻工的头发。<br>
-Ой, рябина кудрявая, белые цветы,<br>
-哦，那茂密的山楂树，白花开满枝头，<br>
-Ой, рябина, рябинушка, что взгрустнула ты.<br>
-哦，那可爱的山楂树，你为何要发愁？</p>
-</blockquote>
-<p>我怀念我未曾经历过的历史上的时代，每个时代的那些耀眼的名字和精神风貌，那些理想信念和气度。我时常回想起上个世纪五十年代社会主义建设时期，那种集体主义的理想信念和共同奋斗的共同理想和最高理想的美好的追求和向往，回想起抗美援朝和两万五千里长征涌现出来的伟大精神力量。回想起土地革命时期、抗日战争时期、和平解放时期涌现出来的数不清的英雄人物和可歌可泣的英雄事迹。</p>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1914679871&auto=1&height=66"></iframe>
-<p>回想起春秋战国时期诸子百家思想争鸣，回想起大汉“犯我强汉者，虽远必诛”那种打出来的底气和自信，万国来朝的盛唐，“七分化为了月光，余下三分啸成剑气，绣口一吐，就是半个盛唐。”……<br>
-（这块写的好烂，但是饿了开始摆烂。）</p>
-<p>过去你以为那是将来，现在你以为那是过去，其实都是你从未拥有过的美好。或者说你一直拥有的美好，只是你没有认真去生活、认真去热爱。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzh-cycling.github.io/2022/05/02/good-old-day/" data-id="cm7rc8qo6000mdl82671c17l1" data-title="good old days" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%80%E6%97%A7/" rel="tag">怀旧</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%B6%E4%BB%A3/" rel="tag">时代</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%B5%E5%BD%B1%E4%B8%8E%E6%AD%8C%E6%9B%B2/" rel="tag">电影与歌曲</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-瑶姬一去三千年" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/05/02/%E7%91%B6%E5%A7%AC%E4%B8%80%E5%8E%BB%E4%B8%89%E5%8D%83%E5%B9%B4/" class="article-date">
-  <time class="dt-published" datetime="2022-05-02T12:12:57.000Z" itemprop="datePublished">2022-05-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/05/02/%E7%91%B6%E5%A7%AC%E4%B8%80%E5%8E%BB%E4%B8%89%E5%8D%83%E5%B9%B4/">瑶姬一去三千年</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>瑶姬一去三千年——姓氏名字</p>
-<h1>坐标</h1>
-<p>人生在世是需要坐标的，人们常说：“人是社会关系的总和。”，用社会这一复杂网络中的坐标来标记每一个个体是自然的，你是谁人的父亲，谁人的妻儿，隔壁的大叔，开店的老板。当然也可以用职业，地理位置，生物信息（比如人种，基因传承，外貌）来标记，更自然的是为每个人取一个独特的代号用来标记信息，于是便有了名字（The name）。当然，人越来越多的情况下，就会不得不取越来越多重坐标来identify people from others(identity)，也就导致了中国古代开始时，每个人的名字是有四重坐标的：姓，所以别婚姻，氏，所以别贵贱。（《通志·氏族略》语），名，长辈所赐，介绍自己的谦称；字，己所取，他人用来尊称。后来便姓氏合流，太史公甚至写下“字仲尼，姓孔氏”之句。比如追溯起来，鄙人便可以称为荀姓，智氏，字丝逸。比如成汤谥成汤，以谥号为氏。其子孙便成为汤氏。比如秦始皇便是氏赵，名政，姓嬴，无字行（秦国的祖先少昊氏以燕子（玄鸟）为图腾，嬴与燕异字同音，故成为嬴姓的始祖，少昊的后代曾封于赵地而立氏，所以才有了嬴姓赵氏。所以其实，岂止是秦赵，诸多诸侯国也算得上是同一支，最后却囿于利益自相残杀）。</p>
-<p>最早追溯起来，母系社会时，姓氏多带女字旁，比如我们耳熟能详的上古八姓：姬、姚、妫、姒、姜、嬴、姞、妘。西周铜器铭文中，可以明确考定的姓不到三十个，但大多数都从女旁，如：姜、姚、姒、姬、娲、婢、妊、妃、好、嬴等等。不仅古姓多与“女”字相关，就连“姓”这个字本身也从女旁。妇女在生产生活中居于支配地位，实行群婚制，兄弟姐妹之间可以通婚，现在仍然还有泸沽湖的摩梭人，母亲在家庭地位更高；意大利人也是有类似的老祖母文化。各姓氏互相通婚，同姓氏族内禁婚，子女归母亲一方，以母亲为姓。姓源于母系社会，同一个姓表示同一个母系的血缘关系，氏是指氏族，是和有血缘关系的人在一起生活的种族。姓和氏有严格区别又同时使用的局面表明，母权制已让位于父权制，但母系社会的影响还存在，这种影响一直到春秋战国以后才逐渐消亡。</p>
-<p>那么氏是用来区分什么的呢？随着同一祖先所繁衍的子孙越来越多，一个家族往往会分成若干支系，并散居到各个不同的地方。各个分支的子孙除了保留姓以外，为了相互区别以表示自己的特异性，便要取一个称号作为标志，这样就产生了“氏”。氏族社会时期实行“族外婚”，同一个氏族的男女不能结婚，“姓”因而也起到了“别婚姻”的作用。《国语·周语》云：“姓者，生也，以此为祖，令之相生，虽不及百世，而此姓不改。族者，属也，享其子孙共相连属，其旁支别属，则各自为氏。”由此可见，姓为氏之本，氏由姓所出。</p>
-<p>然而这一精妙的标记法却早已如同瑶姬神女一样，一去三千年，杳无踪影，只余下巫山的故事还在流传。我们回到过去，回顾历史可以发现：周代，姓氏制度已相当严密，成为宗法制度的重要组成部分。在周朝的分封制中，继承君位的为大宗，其他子孙为分支，其姓不变，而以所分封的国、邑、地或官名、谥号等为氏，这就是小宗。“礼不娶同姓”被以法律的形式确定下来。宗法制度明确规定，只有贵族男子可以有姓有氏，平民百姓无姓无氏，同时，贵族女子只有姓没有氏，贵族男子只称氏不称姓。《通志·氏族略》记载：“贵者有氏，贱者有名无氏。”也就是说，先秦时期，男子称氏，女子称姓，但姓与氏都是贵族才有权使用的称号，没有名字的平民百姓，人们统一以其职业称呼，如庖丁是对姓丁的厨子的称呼、优孟是指姓孟的俳优，“盗跖起义”中“盗”就是强盗，“跖”就是赤脚奴隶等。在后面我们会看到这一现象在其他的文化中也同样存在。</p>
-<p>秦汉时期，姓和氏的区别已经微乎其微，并渐渐合二为一 。《通志·氏族略》云：“秦灭六国，子孙或以国为姓，或以姓为氏，或以氏为氏，姓氏之失，由此始……兹姓与氏浑为一者也。”司马迁在写《史记》时，更将姓氏混同成一个概念。顾炎武在《日知录》中说：“姓氏之称，自太史公始混而为一，《本纪》于秦始皇则曰‘姓赵氏’，于汉高祖则曰‘姓刘氏’，是也。”</p>
-<h1>溯源</h1>
-<p>姓的来源是什么众说纷纭，有人说，根据出生地或生活的地方就用这个地为姓，“立肖德以为诸侯，因其所由生以赐姓，谓若舜由妫汭，故陈为妫姓；报之以土，而命氏曰陈”。所以舜在妫出生的，就赐舜姓妫；封给他的土地在陈，舜氏陈。郑樵也说居于姚圩者，赐以姚；居于赢滨者，赐以赢；居于姜水、姬水者，赐以姜、姬。</p>
-<p>不过氏的来源倒是基本形成了统一意见。</p>
-<p>有以受封的国名为氏，如齐环（齐灵公）、宋王臣（宋成公）、蔡甲午（蔡庄公）；或以封国为姓氏，如虞、夏、商、宋；或以采邑为姓氏，如崔、卢、鲍、晏；或以居住地为氏，如嵇、蒙、桥、颍；或以世系为氏，如公子、公孙；或以官爵为氏，如王、侯、太史、司马；或以技艺为氏，如巫、卜、陶、屠、甄。</p>
-<p>氏也随着封地官职的变化而变化。比如商鞅，姬姓，公孙氏，名鞅，卫国人他原本是卫国公孙后代，所以又叫卫鞅和公孙鞅，秦国封他为商君后，他又称为商鞅。</p>
-<h1>合流</h1>
-<p>在秦后，随着奴隶制宗法制度的崩溃，作为社会生产力主要代表的奴隶和平民，其社会地位和经济地位逐渐得到了提高，奴隶主们也失去了对奴隶生杀予夺的支配权。同时随着户籍制度的推进，秦朝为了加强基层掌控力和管理，土地便和个体身份坐标中剥离开来，化成了另一种形式的坐标，捆绑了中国人几千年。</p>
-<p>这时旧有姓氏体系也逐渐混乱，大家开始以氏为姓，逐渐就姓氏不分，姓氏合一，姓氏连体。平民百姓也开始普遍用姓氏了，可以以居住的地方或从事的职业等为自己的姓氏，如东郭、西门、南宫。到了汉代，中国姓氏制度基本趋于稳定和普及，每个家族有了自己固定的姓氏，子孙后辈代代相传。</p>
-<h1>印证</h1>
-<p>从一个更广阔的文化视域来看，姓的来源和土地对人姓氏的影响是普遍的。</p>
-<p>欧美人的姓的来源也无非是贵族的封地，他人名字，职业名，地名。封地为姓的例子比如大家都很熟悉的法国人荷兰人德国人西班牙人会在姓上加上特殊字词，比如de van von don，最开始标志着贵族的封地，后来也不局限，表示这一个人何所从来，很著名的有de Brogile（德布罗意）, van Beethoven（凡·贝多芬）, von Neumann（冯·诺依曼）, von Braun（冯·布劳恩），von Goethe（冯·歌德）， Don Quixote（堂·吉诃德）。</p>
-<p>至于他人名字为姓，可见例子：在德语中名姓分别指Nachname, Familienname或者叫Vorname，阿伦德（Ahrend）变为姓氏阿伦茨（Ahrends），结尾缀以“-s”的所有格后缀，意为“阿伦德之子”。例：阿伦茨（Ahrends / Ahrens），本茨（Benz），弗里茨（Fritz）等。俄罗斯人的名字除了姓以外还会有父亲名字，即中间名为父称，组成是：男性在父名后加后缀-ич、-ович、-евич（音译分别为-依奇、-奥维奇、-耶维奇），女性在父名后加后缀-овна、-евна、-нична（音译分别为-奥夫娜、-耶夫娜、-妮契娜）</p>
-<p>来源于职业的姓的例子则就更多了。在德语中，有施密特（Schmidt，铁匠），米勒（Müller，磨坊工人），迈尔（Meier，农场管家），霍夫曼（Hoffmann，农场主，什么霍夫曼重排），舒尔茨（Schulze，警官，也有写成Scholze的，著名数学家，以及总理），菲舍尔（Fischer，渔夫），施耐德（Schneider，裁缝），加施勒（Gaschler，吹玻璃工人），鲍尔（Bauer，农夫），瓦格纳（Wagner，车夫），齐默尔曼（Zimmermann，木匠），特普费尔（Töpfer / Toepfer，陶工）。一些和王室贵族头衔相关的姓氏也很常见，如凯泽（Kaiser，皇帝），柯尼希（König，国王）。在法语中则是布朗热（Boulanger，面包师傅）、沙普利耶（Chapelier，制帽工人）、库蒂里耶（Couturier，裁缝）、费夫尔（Fèvre，锅炉工）、富尔热龙（Forgeron，铁匠）、富隆（Foulon，缩绒工）、富尼耶（Fournier，面包师傅）、波捷（Potier，陶瓷工）、塔耶尔（Tailleur，裁缝）、贝尔热（Berger，羊倌） 、比舍龙（Bûcheron，伐木工人）、沙博尼耶（Charbonnier，烧炭人）、沙勒捷（Charretier，赶大车的人）、福舍尔（Faucheur，割草工） 、福科尼耶（Fauconnier，训练猎隼或猎鹰的人）、穆瓦索尼耶（Moissonnier，收割者） 、瓦谢（Vacher，牛倌） 。英语中是Smith（金属工匠）、Goldsmith（金匠）、Blacksmith（马蹄铁匠）、Baker（面包师）、Archer（弓箭手）。</p>
-<p>来源于地名或者地理特征。该地名一般是使用者所在的城镇或村落名，或是住宅名。以德语为例，这些姓氏常常以后缀“-er”结尾，如基辛格（Kissinger，基辛根），拜尔（Bayer，巴伐利亚），施瓦岑内格（Schwarzenegger，英语译法为施瓦辛格，源于城镇名Schwarzenegg）。姓氏波姆（Böhm）指这一家族来自波希米亚。姓氏巴赫曼/巴赫（Bachmann/Bach）的祖先可能居住在小溪边，因为Bach原意为小溪。在街道名称和号码体系尚未完善的时代，甚至这一体系完善之后的很长一段时间内，许多重要建筑物如客栈、工厂和农庄等，都有特定的房名（Hofnamen），如罗特席尔德（Rothschild，英文译作罗斯柴尔德，“红盾记”），拉赫斯（Lachs，“鲑鱼记”），恩格斯（Engels，“天使记”）等。这样的房名亦可以和职业名组合形成姓氏，如罗森鲍尔（Rosenbauer，“玫瑰记农夫”，指工作在玫瑰记农庄的农夫），金德尔米勒（Kindlmüller，“孩童记磨坊工”，工作于一家名为某某孩童的磨坊）。法语中的例子属于此类的姓氏有博韦（Beauvais）、布尔热（Bourges）、肖蒙（Chaumont）、弗雷奈（Fresnay）、卢瓦西（Loisy）、米兰（Milan）、圣迪齐耶（Saint-Dizier）、图尔（Tours）、达米安（Damiens）、德克利希（de Clichy）、德蒙彼利埃（de Montpellier）等，都源自地名本身。源自山地的蒙特尔（Montel）、蒙泰（Montet）、蒙泰伊（Monteil）和迪蒙（Dumont）；源于山谷的瓦莱（Vallée）、拉瓦尔（Laval）、拉沃（Lavaud, Lavaux）、杜瓦尔（Duval）；源自河流的莱奥（Leau）、里维埃（Rivière）、里夫（Rives）、里瓦尔（Rival）等；源自树林的布瓦（Bois）和迪布瓦（Dubois）；源自大树的德拉布雷（Delarbre）；源自栎树的迪谢纳（Duchêne, Duchesne）；源自梨树的普瓦里耶（Poirier）等。源自地标和住所特征的姓氏，如拉卡斯（Lacase，小茅舍）、迈松（Maison，独门独院）、卡班（Cabane，小屋）、拉福热（Laforge，铁匠铺）、迪皮伊（Dupuis，井）、杜邦（Dupont，桥）等。英语中的例子是Hill（住在山中）、Riverside（住在河边）London（伦敦）、Oxford（牛津）、Sheffield（谢菲尔德）、Lincoln（林肯）。</p>
-<p>有些则是源于事物名词的姓氏，如德语中的阿德勒（Adler，鹰），沃尔夫（Wolf，狼），福格尔（Vogel，鸟），福克斯（Fuchs，狐狸），布卢默（Blume，花），佐默（Sommer，夏天），贝格（Berg，山）等。</p>
-<p>有些姓氏源于体貌和性格特征，如德语中的克劳泽（Krause，卷头发），施瓦茨科普夫（Schwarzkopf，黑头发），克莱因（Klein，小个子），格罗斯（Groß，大个子）等。法语中的，如格朗（Grand，大个子）、朗（Long，高个子）、珀蒂（Petit，矮子） 、格罗斯（Gros，胖子） 、肖韦（Chauvet，秃子）、布兰（Brun，棕头发）、鲁（Roux，红头发）、加缪（Camus，塌鼻子） 、博尔涅（Borgne，独眼龙） 、 若利韦（Jolivet，俊男） 、维兰（Vilain，丑男）、库尔图瓦（Courtois，有礼貌的）、米尼昂（Mignon，娇小可爱的）、福尔（Fol，疯子） 等。<br>
-英语中则是Short（短的，个子矮小）、Brown（棕色，肤色较黑）、Whitehead（白头，头发较白）。</p>
-<h1>文明的星火</h1>
-<p>从一叶可知天下秋，从一个姓氏可以看出文化的兴衰、传承。当我们回顾自己姓氏的来源，回顾祖先的起源，氏族的繁荣传承，我们能切身感受到千年文明的脉络。我们可以知道祖先在哪里长大，在哪里耕作，在哪里撒下一把跨越千年的谷种，在哪里战斗与歌诗。也能感受到眼见他起朱楼，眼见他宴宾客，眼见他“陋室空堂，当年笏满床，衰草枯杨，总为歌舞场。”，千年的王朝一朝厦倾，百代的世家转瞬离散。问鼎中原，逐鹿大地的牌手换了一批又一批，黄河边，长江旁日夜耕作的百姓，才是这片土地上的主任。文脉未断，星火总是不息。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzh-cycling.github.io/2022/05/02/%E7%91%B6%E5%A7%AC%E4%B8%80%E5%8E%BB%E4%B8%89%E5%8D%83%E5%B9%B4/" data-id="cm7rc8qoe004odl821r6x19hv" data-title="瑶姬一去三千年" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8D%E5%AD%97%E5%A7%93%E6%B0%8F/" rel="tag">名字姓氏</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%87%E5%8F%B2%E5%93%B2/" rel="tag">文史哲</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-博物" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/05/02/%E5%8D%9A%E7%89%A9/" class="article-date">
-  <time class="dt-published" datetime="2022-05-02T12:03:07.000Z" itemprop="datePublished">2022-05-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/05/02/%E5%8D%9A%E7%89%A9/">博物</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>之所以想写这个文章，是看到了这段逸趣横生宛如汪曾祺笔下的文字：</p>
-<blockquote>
-<p>作者：苏耷水(妹想到竟然还是学长啊，是《中国国家地理》的编辑+撰稿人，令人艳羡的工作)<br>
-链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/61922034/answer/276596844">https://www.zhihu.com/question/61922034/answer/276596844</a><br>
-来源：知乎<br>
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<p>(《中国国家地理》杂志社）工作的最高原则是“地理决定论”，一切都要“有地理味有科学味”。从前杂志社人少，每年都会有一次全体员工集体野外考察的活动，基本上去的都是人迹罕至的很冷门但很美的地方，一般来说会有保护区或不对外开放的地方，会有随队的科学家一路讲解。后来单位人太多了不好组织，又因为是半体制内单位，怕外人告杂志社腐败，就取消了。</p>
-<p>但是《中国国家地理》的员工天天做名山大川的稿子，如果自己不能亲临现场往往做的很没感觉，很多新员工就没法体会地理的美，做稿子很痛苦，常被领导批评“不够地理味不够科学”。于是一些部门依然会以部门为单位组织集体外出考察，寻找所谓“地理味”。比如我所在的部门今年是去黔东南考察的。《博物》比较拉仇恨啊，这两年不是台湾就是非洲大草原，想想就嫉妒。</p>
-<p>另外因为社长本身就是个地理学家加科考队队长，全社比较热衷户外运动。社长拉着社里爱跑步的员工，搞了个马拉松俱乐部，经常去奥森跑步，以及参加各种马拉松比赛。这里的员工如果没有点公众眼里不正经的爱好，其实是挺受鄙视的，主要是这意味着你没也啥稿子可写。比如养各种昆虫蜥蜴小乌龟大蛤蟆一只虫子盯半天，比如带个马扎和望远镜去看鸟看松鼠，比如带着求生装备钻进山里有打火机不用非要钻木取火，比如倒腾各国古董矿石标本上山下乡就为拍摄根草，比如从城市到荒野四处找古代石碑认字玩。</p>
-</blockquote>
-<p>读罢在会心一笑的同时，也应该能感受到这种发自心底的对于自然界的热爱，《博物》杂志也可能是一些人的青春，和《中国国家地理》一样，那好奇的双眸紧盯着那图册上的万里河山、星河阑干、草木鱼虫、奇妙大千。</p>
-<p>仰观宇宙之大，俯察品类之盛，所以游目骋怀，足以极视听之娱，信可乐也。</p>
-<h1>为何喜欢？</h1>
-<p>那么为什么博物学是令人快乐与满足的呢？为什么“仰观宇宙之大，俯察品类之盛”是可乐的呢？当我们躺在夏日草地上或者海边沙滩上，如果光污染很少的话，你可以看到那扑面而来拥满整片天空的繁星和银河，穹顶之上，尽被笼盖，卧看牵牛织女星，岂不快哉。这时我们怎么不会被星空的深邃崇高所吸引呢，这是我们与生俱来的好奇心与敬畏感。我们上溯百亿年前原初核形成时期即和那些原子同源，我们即是星尘，天体即是我体。你渴望那些触摸不到的光点，你希冀铭记这一刻，在天与海的交界处你直立着，背后一条银河横跨天际。</p>
-<p><img src="/img/buaa-second-year/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_202208241608541.jpg" alt=""></p>
-<center>在海南月亮湾的沙滩上仰面而来的银河</center>
-<p>同样的，可能是在小时候，你可以在树荫底下，山谷林中，花木丛里，画上大半天一整天来细细的看那叶子的纹，看蚂蚁打架，给石头起名字，幻想着林中走兽演绎各种各样的故事，看风拂过枝头而后一朵朵花开了又落。在日光下斜晖里消磨寸日的光阴，那时你不知道长大后再也没那时的闲情逸致、时间和机会了。但现在你仍然对自然界保留着从孩子时就有的好奇与喜爱，初为感性后为理性。你总感觉着there exists a much bigger world to explore. 于是就有了博物学。</p>
-<h1>什么是博物学？</h1>
-<p>关于博物学的一般性的解释是：博物学在宏观层面与大自然打交道，试图了解大自然中存在的动物、植物、菌类、矿物、星星、云等，对它们进行描述和分类，同时也关注大自然中各个部分之间、各个层面之间的关联。</p>
-<p>通俗点讲，观鸟、看花、种菜、采集标本、给自然物分类等，都算在博物的范围，如果做得精致些、有条理些，就接近博物学了。</p>
-<p>就像是我很喜欢的在书店里买的书《XX图鉴》、《XX观赏/拍摄手册》focusing on special topics，或者是类似《水经注》、《天工开物》、《齐民要术》、《梦溪笔谈》、《徐霞客游记》、《夜观星空》、《云彩收集者手册》这样的书，都可以说是博物学，只不过有的看偏向于实用性、有的偏向于审美文学性、有的偏向于学科建设意义。更延伸一点就像集邮，we collect the knowledge of nature. 包括人文性和自然性两方面，自然性就是了解动物植物的种类、云彩的种类、星座、石头的种类，人文性就像我去外地旅游喜欢了解这个城市的发展历史、当地交通干线、民俗风情、历史典故，当然也会有铁道迷、军迷们。著名的博物学家有怀特、华莱士、达尔文、洛克（Joseph F. Rock）、迈尔、古尔德、威尔逊（Edward Osborne Wilson）、林奈。</p>
-<p>博物学是有关于知识的扩张和探索的精神的，强调宏观描述、分类及系统关联。与还原论、数理科学形成鲜明对照，但并不是完全对立，是关于动物学植物学矿物学古生物学考古学人类学历史学民俗学地理学的，是像孩子一样用好奇的眼光来看这个世界，是了解万事万物（追究万事万物运行的机理是物理学的事情），就像我们常说的好读书不求甚解，但耽于书却也足以快然自悦一样。是想knows everything, meanwhile not care about know how much.从这一角度来说，博物学本身是抵制“系统化”的。博物学家Louis Agassiz有句名言：Study nature, not books。是需要我们行在知先的。</p>
-<h1>为什么要学？</h1>
-<p>那么我们为什么要学博物学呢？其实博物学可以说是一种无用的科学。梅特林克（1862－1949）说世上存在大量“无用且美好的”东西！在急功近利的人看来，文学、美学、哲学，甚至纯科学，统统没用。不过，当下的无用性有可能蕴藏着长远的有用性。</p>
-<p>首先就是人类的环境以及自然之间的疏离。人和动植物之间有着很复杂的关系。从文化史的角度，对动植物进行描述，这就好像是在人和自然之间建起了一座桥梁。拿动物来讲，它们不仅仅具有与人一样的生物性，同时也是人的一面镜子。</p>
-<p>再就是那些基础的集邮似的知识使得我们看起来什么都知道一些，但是可能仅仅是普及性的知识，甚至大脑中80%的知识都是百度分分钟能够查到的内容，这样的话，意义是什么呢？</p>
-<p>首先我想到的就是钱锺书先生在他的《宋诗选注》的序里对宋人以及后来明前后七子“以流为源”的批判，说其</p>
-<blockquote>
-<p>“从古人各种著作里收集自己诗歌的材料和词句，从古人的诗里孳生出自己的诗来，把书架子和书箱砌成了一座象牙之塔，偶尔向人生现实居高临远的凭栏眺望一番。内容就愈来愈贫薄，形式也愈变愈严密。偏重形式的古典主义发达到极端，可以使作者丧失了对具体事物的感受性，对外界视而不见，恰像玻璃缸里的金鱼，生活在一种透明的隔离状态里。”</p>
-</blockquote>
-<p>即对现世的认知是出于他人的认知转述出的文字，经过了三重的流失最终形成的印象真的是我们应有的对世界的认知吗？“人民生活是文学艺术的第一源泉”，当我们谈论木棉花时，想到的应该是曾经亲眼所见、所闻的那一朵朵火烧般绽开的花朵，而不只是从诗句里得来的印象，后者是更高一层的认知，根本还是要来源于现实世界，这也就是博物学的意义。</p>
-<p>其实就是求知是快乐的。快乐不来自于和其他人、事相互作用带来的意义，而仅仅是来自于我本身。从一个起始点出发，比如一部有趣的电影，一首诗。看完以后我感觉很有趣，在网上搜索相关，然后在搜索的过程中发现某些比较有趣的（但不一定是重点）的知识/信息，然后就此再进行发散性的搜索和获取，然后知识就开始重合、交叉、印证，建立初步的知识体系，就像二叉树或者蛛网一样扩散开来，最终又重归一点，这具有无与伦比的爽感。像玩刺客信条的时候把十字军东征，蒙古西征，文艺复兴，中世纪的骑士团之类的资料翻了一遍啊像玩个最终幻想顺带挖了北欧神话，乃至转进到D&amp;D规则体系啊。诸如此类。</p>
-<p>这些知识有用处吗？大多数时候我连拿来用都不会，至少我对欧洲的历史文化的了解程度，还很难形成见解，连在知乎答题的水平都达不到。但是有意义吗？有啊，我高兴。我知道了，原来如此。原来如此。这就是知识给我带来的最根本的意义。是一种拨云见雾一般的明晰的快乐。做个自大的比喻，就像那些做理论研究的科学家一样。虽然我这些知识和他们所研究所发现的东西不在一个水平线上，但是那种“原来如此”的感觉，绝对是共通的。“原来如此，真高兴”这就是意义所在除此之外，我必须要说，知识可以有意义。但是确实，在这个获取知识成本无限之低的时代，知识本身没什么价值。只有消化了知识，形成了见解，才有开始有属于自己的价值。当然这些也为我们日后进行系统性的知识架构铺垫了一些经验的基础。这是后话了，反正只需要快乐的学就完了！</p>
-<h1>Reference</h1>
-<p><a target="_blank" rel="noopener" href="https://www.fx361.cc/page/2021/1111/9089820.shtml">为什么今天我们还需要博物学？</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/34484578/answer/60767997">如何系统地学习博物学？</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzh-cycling.github.io/2022/05/02/%E5%8D%9A%E7%89%A9/" data-id="cm7rc8qo9001xdl8265099o6u" data-title="博物" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E7%89%A9/" rel="tag">博物</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%8F%E7%88%B1%E5%A5%BD/" rel="tag">小爱好</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" rel="tag">理想的生活</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E7%84%B6/" rel="tag">自然</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-爱情" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/05/02/%E7%88%B1%E6%83%85/" class="article-date">
-  <time class="dt-published" datetime="2022-05-02T07:09:05.000Z" itemprop="datePublished">2022-05-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/05/02/%E7%88%B1%E6%83%85/">爱情</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>虽然我没拥有过爱情，仅有的几次青春时的心动也都无疾而终，（“和很多校友一样，我直到三十岁了也还没谈过恋爱”.jpg[滑稽])但我觉得我还是有很多话想说，很多话想谈，谈一谈自己的爱情理想和美好憧憬。</p>
-<p>啥事爱情捏。你问我肯定就如同问道于盲，那我就只能姑且盲人摸象谈上一谈。其实有时候我也会不由得迷茫为什么会渴求两性关系的建立。为什么就是她而不是她。我的理想中爱情应该就是由最开始的心动、对彼此外貌气质内心的欣赏、彼此相处的舒适到三观和性格的契合、想要更进一步的试探、对彼此的拥有和占据、激情地承诺到从两性关系中共同成长、积极情感价值的正向输出和消极的抚慰、和对彼此的责任与担当。其实两性关系的建立可能本身就是需要双方去一点点探索尝试，理想就是虽不能至，心向往之，参照理想将现实逐步地趋于理想。</p>
-<p>所见过的爱情故事有很多。生活中、书上、历史中，符合这些条件的终究是少数。很多时候觉得两个人就像飞鸟和鱼一样。飞鸟在天空翱翔，鱼儿在水里遨游，二人仅在水面上有一次相会，却以为那就是一生，其实鱼儿还是要入水，鸟儿还是要回到天空，他们俩有各自的广阔世界。</p>
-<p>当我去了北京植物园，在樱桃谷顶看到了那棵著名的石中树。我抬头仰望着那片石壁时，触不可及的除了天空还有树，和理想中的美好爱情。她遒劲的枝干伸向天空，翠绿的枝叶映衬着蓝天，根则深深地插入石中——“咱两个一起永不分离”。这就是《红楼梦》中“木石前缘”的来历。</p>
-<p><img src="/img/buaa-second-year/wood_and_stone.jpg" alt=""></p>
-<p>回想起作品中宝黛二人，</p>
-<blockquote>
-<p>“黛玉用手整理，轻轻笼住束发冠，将笠沿掖在抹额之上，将那一颗核桃大的绛绒簪缨扶起，颤巍巍露于笠外。”</p>
-</blockquote>
-<p>黛玉为宝玉戴好斗笠细节瞬间。</p>
-<blockquote>
-<p>“黛玉因看见宝玉左边腮上有纽扣大小的一块血渍，便欠身凑近前来，以手抚之细看。”</p>
-</blockquote>
-<p>二人在同榻亲昵言语。</p>
-<p>更有二人同读西厢记彼此取笑等瞬间</p>
-<blockquote>
-<p>“我就是个‘多愁多病身’，你就是那‘倾城倾国貌’，”</p>
-</blockquote>
-<p>让人不由得生羡，可是我终究想要什么样的她呢？换句话说，我理想中的她应该是什么样的呢？</p>
-<p>我觉得自己的理想型那个她应该是耐看（不一定是好看），身材匀称（bmi在正常范围内），最好有自己喜欢的一两项运动（最好是户外），有自己喜欢并且深耕的领域（最好是理科工科和汉语言文学等等），即有自己的旨趣在此当中挖掘到了深度，有过蜕变的历程、独到的东西……由此有其独立之思想、自由之精神。喜欢看书，喜欢学习，有基本的科学与人文素养和对知识的敬畏与热爱（一众学术狗的渴求）。有成熟稳定的三观和性格并且相契合，相处起来轻松愉快并且独立自主，活泼开朗，勇敢坚强，可以一起谈天说地，畅论古今，善良细腻（或者叫马列主义者？），态度认真，当然一定要对我有感觉，最重要是的要热爱生活，热爱生命。</p>
-<p>我理想中的爱情其实就还是那种牵着手在草地上散步，她穿着白色的裙子懒懒的晒太阳；又或者是在图书馆里各自读一本喜欢的书，窗外是如茵绿草，风吹过来卷起扉页和她的长发；又或者是一起周游风景，在国道上一起吹着万里长风，公路旁是呼啸而过的山林和不息的河水；在山顶看日落日出，看云瀑如水流淌，又或者是穿梭于大街小巷寻找美食，涮肉、爆肚或其他。面对生活中的不如意和快意有一个分享的对象，想要情感的陪伴和支持，使得漫长的岁月变不再漫长，在人生的路上像是有了盔甲，也像有了软肋，总之，一起在路上。</p>
-<blockquote>
-<p>И так же, как в жизни каждый,<br>
-就像每个青年一样，<br>
-Любовь ты встретишь однажды,<br>
-你也会遇见个姑娘，<br>
-С тобою, как ты, отважно,<br>
-她将和你一路前往，<br>
-Сквозь бури она пойдет.<br>
-勇敢穿过风和浪。</p>
-</blockquote>
-<p><img src="https://www.thisiscolossal.com/wp-content/uploads/2014/03/clouds.jpg" alt=""></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzh-cycling.github.io/2022/05/02/%E7%88%B1%E6%83%85/" data-id="cm7rc8qod004edl82clxp08g5" data-title="爱情" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B8%B8%E7%8E%A9/" rel="tag">游玩</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%88%B1%E6%83%85/" rel="tag">爱情</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" rel="tag">理想的生活</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/" rel="tag">红楼梦</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-喜欢读的书" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/05/02/%E5%96%9C%E6%AC%A2%E8%AF%BB%E7%9A%84%E4%B9%A6/" class="article-date">
-  <time class="dt-published" datetime="2022-05-02T07:08:04.000Z" itemprop="datePublished">2022-05-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/05/02/%E5%96%9C%E6%AC%A2%E8%AF%BB%E7%9A%84%E4%B9%A6/">喜欢读的书</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>我是自幼就喜欢看书的，小时候上课也不听课就看书，那时候看的是图书馆里卖的经典名著，喜欢看HP系列啦，喜欢看科幻系列比如凡尔纳啦，再就是西游记，还有三国演义和水浒传（退休了再看一遍），隋唐演义，封神演义等等这些描述古代战争的书，那时候看的都是古白话版的，四开纸四百多页的大部头，导致现在的古文功底很扎实，倒是不会喜欢看《童年》、钢炼、《红与黑》这种更现实主义的书hhh，看完了没啥感想。</p>
-<p>等我上了初中就开始看数理教材，起因还是因为小学五六年级时候开始看起了网络小说，从此一发不可收拾陆陆续续看了几十本，有一本让我印象很深刻就是《奥术神座》，讲的物理学成神，知识就是力量的故事，这对于中二病少年具有莫大的吸引力，那时候我边看边搜索不懂得词汇，什么“曲率”、“薛定谔方程”、“复变函数”，发现……我tm也看不懂啊，或者说只是感性层面上的理解，于是我发了狠决心要弄懂，就一个词一个词的挨个查下去终于查到了最基本的知识概念和逻辑，于是我就开始一点点bottom up，发现对我来说还是太玄奥了难以捕捉，于是我就开始买来高中课本和淑芬课本来看。那真是段充实的时光啊，每天都有大把大把的知识点轰炸，就这样陆陆续续的看完了线性代数、力学、电磁学、分析力学、量子力学，开始看了点广义相对论和量子场论，不过这时候就觉得自己没啥天赋以后也不一定会干这个看他作甚？于是高中开始看诗集比如余冠英诗经选六朝诗选啥的还有一些文学评论人文社科的学术论著。</p>
-<p>我现在的话变了很多了，当然还是喜欢看科幻作品（物理壬都会喜欢吧hhh），大刘的作品读了个遍，但是对于一些以前不感冒的书现在却很能欣赏了，比如红楼梦，八岁的时候看了一遍，十八岁的时候看了一遍，不知道二十八岁还有没有机会看。我现在很能欣赏他的审美理想了，那种中国古典文学的审美范式，并且他一举跃升成我最喜欢的古典小说（虽然他的诗词单拿出来是二流作品，但是彼此有机融合了）。比如钢炼，现在越来越能体悟到那种集体主义的为了更崇高事业奉献的精神了（谁还不是个精苏呢）。从这个意义上来讲，文字的美感来源于陌生、祛魅、重构。</p>
-<p>我现在看的书，主要就是经典物理名著，偶尔看看数学书比如微分几何（梁灿彬还没看完woc）、李群李代数（之前看标准模型学了一些现在啥都忘了这玩意太博大精深了），数学书要是没有证明该多好我直接润去数学系。他们给了我足够的审美体验，不过更多的可能是理性上的，一种对于自然界描述的完备感，一种创造感、一种对于简洁对称美的追求。</p>
-<p>再就是我比较喜欢能给我带来审美体验的书，比如诗歌，散文，中国国家地理国家天文，比如沈从文的水乡，汪曾祺的北京这种富有生活气息人文风物的，比如李娟迟子建这种有生命力的，再举个例子余华的书我就喜欢在细雨中呼喊活着，不太喜欢许三观卖血记，不喜欢兄弟。还有就是人文社科的书籍，一些美学的论著，我才特么发现我桌子上现在摆着一本重大汉语言文学博士的毕业论文。</p>
-<p>其实我们读书读的是什么呢？为什么喜欢读书呢？对我而言，中国文化传统文学的作品，意味着文化源泉和从之获得的文化慰藉，是每次想到都会觉得心安的东西，是读到作品会觉得心领神会，一想到哪怕北欧再美也没有这些，一想到如果没有这种文脉传承就会很慌，就像符合胃口的饭菜，亲切不费力的语言。那些质朴的、华丽的、优美的文字，那些抽象的、对称的、简洁的公式，都能为我们传达一种很美好的审美感受。</p>
-<p>再可能就是作为思想的活水。当然周国平说过一句很过激的话，不要让自己的头脑成为他人思想的跑马场。也就是我们要对他人的思想观点进行批判接受，内化为自己的。</p>
-<p>还可能就是出于本身的意义，不必刻意于其中寻找什么抽象意义，只是单纯地喜欢，就像那句话。</p>
-<blockquote>
-<p>“热爱生活更甚于热爱它的意义吗？”</p>
-<p>“一定要这样，爱，应当先于逻辑，就像你说的那样，一定要先于逻辑，只有那时候我才会懂得人生的意义。”</p>
-</blockquote>
-<p>或者是“因为山就在那里”<br>
-曾经高考完的我给自己列了一个想看的书的书单：</p>
-<blockquote>
-<p>在路上 太阳照常升起 新唐书  罗马名人传 维多利亚史 明清山水小品 标准日本语 你好法语 毛泽东文集 毛泽东选集 史铁生  野草 指弹自学教程 俳句和歌 药物学 复分析可视化 颜料的化学成分（油墨彩色打印印染） 简单手语/去聋哑学院 周国平散文集 熊培云散文集 简祯散文 迟子建散文集 建筑学基本教程 有哪些健康问题症状容易被忽视 基地 韩松 火星三部曲 西方哲学史 西方美学史纲 冬夜繁星 人间时节 李娟 光明王 theoretical concepts in Physics by longmuir 物理学家的群论/微分几何 mma基础和应用 通往实在之路 简明天文学 现代宇宙学 可畏的对称 边缘奇迹 相变和临界现象 爱因斯坦文集 物理之美 克拉克《太空漫游》系列，阿西莫夫《机器人》短篇系列 《百年法》、《山》，王晋康《七重外壳》，韩松《地铁》，何夕《伤心者》。（问就是四大家）</p>
-</blockquote>
-<p>在《娱乐至死》中有提到过，text convey information meanwhile image and video conveying more efficencily, 后信息时代的人们越来越倾向于用图片和视频来接受信息，那看似庞大的，单张图以KB记载的信息量其实相比之下我们所提取出来的核心信息却少的可怜，但是人们却满足于充盈的虚假和逻辑链条知识结构的破碎。固然在做ppt和论文时候，流程图和概念图更能理清思维逻辑和脉络，把握整体结构。文字当然不是唯一的媒介，在书中一图便能胜千言，也能为读者带来更好的读书体验。只是这种技术进步带来的信息爆炸对于个体好坏参半，对于大段文字的阅读能力的丧失终究会带来理解能力的削弱和思想观念的偏激、辩证法的眼光。所以我一直坚守文字的意义，我始终相信读书的力量，并且会一直坚守下去。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzh-cycling.github.io/2022/05/02/%E5%96%9C%E6%AC%A2%E8%AF%BB%E7%9A%84%E4%B9%A6/" data-id="cm7rc8qoa0028dl822h8d8ar1" data-title="喜欢读的书" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" rel="tag">理想的生活</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-沙河那些平凡的人" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/05/01/%E6%B2%99%E6%B2%B3%E9%82%A3%E4%BA%9B%E5%B9%B3%E5%87%A1%E7%9A%84%E4%BA%BA/" class="article-date">
-  <time class="dt-published" datetime="2022-05-01T15:20:20.000Z" itemprop="datePublished">2022-05-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/05/01/%E6%B2%99%E6%B2%B3%E9%82%A3%E4%BA%9B%E5%B9%B3%E5%87%A1%E7%9A%84%E4%BA%BA/">沙河那些平凡的人</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>五月一号，想记录一下在沙河遇到的平凡但却是在认真生活、诚实劳动的普通人。</p>
-<h1>卖水果的大叔</h1>
-<p>因着优购水果的价格高昂，各个私人的水果群就有了发展空间，在水果群里要上一份水果，等到下课叔叔阿姨送来就可以开吃。于是我就认识了众多小贩中的一个老板。</p>
-<p>我倒是与他交流不多，零零散散了解到的信息大概就是老板是2010年沙河高教园修建起来六所大学开设分校区之后就开始在这边做生意了，学生需要水果，老板需要挣钱，于是大家皆大欢喜。我在有早市的时候一般不在水果群里买，或者可能去更远的郊区骑车路过采摘园顺便买点。在他这买水果呢，就得在东门等一位干瘦的中年男子骑着电动三轮拉来一箱水果，跟他说是哪群哪号买了啥，次数多了他也会记住你直接递给你。</p>
-<p>老板在这做了十年的生意了，和学生们有了感情，做生意也很诚信，一天要给六个大学送四次水果，水果这么容易坏都几乎没很少出质量问题，即使是很忙，别人不满意的水果也能给换。<br>
-<img src="/img/buaa-second-year/trivial_good.jpg" alt=""></p>
-<p>还有一次是我转发了一个患病的北航学长的水滴筹，学长刚本科毕业就患上了重病，叔叔看到了之后就问我，然后把水滴筹转发到了他经营的各个大学的水果群和同事的群里，这应该就是人间的对陌生人的善意，出于同感或是相似经历，都想着要帮一把。<br>
-<img src="/img/buaa-second-year/trivial_save.jpg" alt=""></p>
-<h1>玫瑰园的卖火烧的老板</h1>
-<p>在沙航的旁边的玫瑰园早市上，有卖各式各样的东西的人，水果啦，小吃啦，蔬菜啦总之就是农村集市上该有的都有，那时我大一，最喜欢的事就是周四周六没早八的早上起个大早骑着车去逛早市，买点嘎嘣脆的红富士，便宜到爆的柑橘，火龙果，买点胡辣汤和对夹，买点凉皮和卤煮，在早市上吃完回学校学习。</p>
-<p>在胡辣汤对过的驴肉火烧的摊上，摊主是一对兄弟俩。摊上通常是红艳的剁好的驴肉，焦黄的烤好的火烧，绿色的剁好的香菜和辣椒，旁边再煮上一大锅羊汤，都冒着热腾腾的香气和热气。我往往是要一碗羊汤两个火烧，吃一口火烧满满一大口肉，再喝一口热乎的羊汤，略带着荤腥却又很香是北方的感觉。</p>
-<p>我就是在那时候注意到了他。</p>
-<p>他穿着油乎乎的围裙，脸上刚烧完柴火熏黑了，费力地把烙火烧的大锅架好后，用胳膊肘擦了擦汗呼出了一口气。他是老板的弟弟。老板这时候在忙着插好电源，他在后面搓着手局促地看着，想帮忙，伸出了手又缩了回去。</p>
-<p>我愣住了。记忆里无数次相似的场景涌现了出来：在小学举行的元旦晚会上，帮别人搬好桌子却被骂了一顿，因为听错了他们的要求，然后被一脸嫌弃地说，“算了算了我来吧，这点事都干不好。”的我；在值日小组里我看到没干好的活想要帮忙却收回的手；后来无数次的这种场景我无助地局促地在旁边看着想要帮忙却生怕听错了别人的话反而帮倒忙的我……都在一瞬间和这一幕重合了。我意识到，他也应该和我一样，是个听障者。于是我特意上前，找他点餐，（是希望让他能帮上忙而不至于觉得不被需要），我指了指火烧，比出了二，又指了指羊汤，比出了一，他点点头，转过头指了一个后面的座位，我点点头，给他看了下我手机转账的记录。</p>
-<p>坐在座位上，他送上来火烧和羊汤后，认真地擦桌子去了。我边吃边观察着他，他约莫四十岁，黢黑的脸上有很多道皱纹，干活的时候异常专注——这是自然的。我边吃着边想了很多，关于我自己和关于他人，关于他这四十年是怎么过来的，他过得好不好，关于我这二十年是怎么过来的。我想了想，我遇到了很多善良的人，我也遇到了很多不理解的人，我有过痛苦与欢乐，我不希望别人也有这种痛苦，我决定为他做点什么，可是我悲哀地想到，我其实也做不了什么。</p>
-<p>我吃完后，趁他们不忙的时候找到了他的哥哥也就是老板聊了起来：</p>
-<blockquote>
-<p>“emmm，老板，我注意到他”，我指了一下他的弟弟，“他是听力不太好吗。”</p>
-<p>老板边剁香菜边看了我一眼，空气中弥漫着香菜味，说：“奥他是我弟弟，他的确听力不太好，也说不了话。”</p>
-<p>“咋整的啊。”</p>
-<p>“嗨应该就是小时候发高烧烧坏的，大概是五六岁时候吧。”</p>
-<p>我感到一种无力和绝望，想了解更多，却又不好太过直接戳中伤口，于是说：“你们老家是哪的啊，生意怎么样啊。”</p>
-<p>“我和我弟弟是从河北来的，生意还行，就是来北京挣钱来了嘛，一天挣得挺多的，我弟弟也挺能干帮了我挺多，他不耳朵和嘴不好使嘛，我就带着他出来干，我们哥俩这么多年干的挺好的。”</p>
-<p>我又聊了两句，最后说，“艾，那个其实我也是，听力不好，你看看我这，这么多年过得也挺不错的。”，他剁香菜的刀停了下来，抬头看了我一眼，我指了远处的北航校区，“我现在就在北航念书。”</p>
-<p>老板来了客人，我没再打搅，我看着哥俩忙碌着，觉得能做的真的不多，我和他们唠嗑说那番话的意图是什么呢？我也不知道。可能是想让他们知道听力不好也没啥也照样能过得很好吧，但我又觉得他们已经认识到了这点，能够很正常的谈论“耳朵和嘴不好使了”这些事并且在努力的活着。大约是不需要别人再多做什么了，除了社会保障残疾人证什么的，我能做的应该就是多多照顾生意多唠嗑，让他们去了解社会的政策，用我的心态多去影响别人。</p>
-<p>我在他们的摊上徘徊了一会，骑车拎着我的水果回学校了，然后就是忙碌的期末考试。等我下个学期再去早市的时候才知道因为疫情防控这个早市已经停了，那是我最后一次见到兄弟二人。我担心着他们在这么大个北京城，人潮汹涌许多人来来去去，能否适应，有没有赚到钱，有没有过得好……</p>
-</blockquote>
-<h1>瓦罐饭的叔叔</h1>
-<p>沙东食堂一楼的瓦罐饭打饭的大叔每次都满满给你盛上一大勺，我喜欢吃那里的瓦罐红烧肉，不过我不吃肥肉每次总是把肥肉挑出来。来的次数多了，叔叔也就能记住了你，一来二去就能打上招呼，“叔，今天照样。”，“好嘞。”。“今天下课咋晚了呢？”，“嗨，今天老师拖堂了/和老师讨论了点东西。”</p>
-<p>然后我了解到，大叔和上面那个卖水果的叔叔一样，也是沙河校区建起来就开始在这个窗口打饭了，这一打就是十年。十年来迎来了一批又一批，送走了一批又一批学生，瓦罐饭还是物美价廉的瓦罐饭，大叔却明显已经苍老了。<br>
-<img src="/img/buaa-second-year/trivial_14.jpg" alt=""></p>
-<h1>卖烤冷面手抓饼的叔叔</h1>
-<p>手抓饼群和水果群的性质一样，叔叔阿姨要早上起个大早准备好今天的材料，凉皮（只在4-10月有）、烤冷面、手抓饼，然后要为吃早饭的学生送去，午饭，晚饭都可以供应。凉皮是我在沙河吃到的唯一能入口的凉皮，我一般也会配上一份烤冷面，但我不太愿意吃他家的手抓饼。</p>
-<p>阿姨应该是负责做，叔叔是负责送，我们从来没见过阿姨，但是每次都能在东门看到叔叔骑着电动车从外交学院过来。摘下大头盔，微胖的脸上露出和蔼的笑容，然后珍重地把打包袋递给你，一日三次日日皆然风雨无阻，久而久之下雨刮风的日子里我们也不忍心让他们再送就会少要。</p>
-<p>日子照常的过着，忽然有一天，叔叔告诉我们一个噩耗，阿姨的妈妈去世了不得不回老家，暂时不能为我们做煎饼了。我们安慰叔叔阿姨，让他们节哀。这一去就是一个多月，然后叔叔告诉我们他们那边有了疫情，高速封路，回不了北京了，盼啊盼终于清零了，等他们疫情稳定就回北京，然而正好五一期间北京戒严了，，，我们很担心叔叔阿姨的平安，也担心几个月没有做生意，生活是否还好。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzh-cycling.github.io/2022/05/01/%E6%B2%99%E6%B2%B3%E9%82%A3%E4%BA%9B%E5%B9%B3%E5%87%A1%E7%9A%84%E4%BA%BA/" data-id="cm7rc8qod004bdl82h3xvbj0h" data-title="沙河那些平凡的人" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-四月总结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/04/30/%E5%9B%9B%E6%9C%88%E6%80%BB%E7%BB%93/" class="article-date">
-  <time class="dt-published" datetime="2022-04-30T08:49:18.000Z" itemprop="datePublished">2022-04-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">个人总结</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/04/30/%E5%9B%9B%E6%9C%88%E6%80%BB%E7%BB%93/">四月总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>以为三月多风，四月多雨，却没想到四月的雨水却出乎意料的不多，记忆里也就三四次，这个月本以为是闲下来的一个月，结果闲下来的显然不是我。五月份希望有好心情和好时光，能够闲下来（但显然不可能，大创、冯如杯又得来）。</p>
-<blockquote>
-<p>阴阴绿树黄鹂语，将与人间作夏凉。</p>
-</blockquote>
-<h1>四月份总结</h1>
-<p>四月份出乎意料的忙碌，先是冯如杯和大创的中期答辩，再是入党的答辩，还有给学弟学妹做的专业分流讲座虽然人家不感兴趣，不过尽力就行了。入党的材料好多上万上千字，然后我又开始写了量子计算的波形优化github project.净给自己找事…</p>
-<h2 id="读书">读书</h2>
-<p>这个月读的还是挺多的，把《我的阿勒泰》看完了，把《刘慈欣短篇小说合集看完了》，为了写《是谓风流》也翻了好多材料，发现人文社科的东西就是这样的，批判比较观点，给出论据，很多东西写的时候都需要自己思考，比如自然审美的自觉时期究竟是什么时候？汉代还是魏晋？还零零散散地开始读《朗道理论物理系列》的《力学》、《场论》、《统计力学》、《流体力学》、《统计力学》by黄克孙,physics from symmetry.</p>
-<p>《我的阿勒泰》是我很早就听闻了的，在我印象中那片广袤的西北大地上，悠远空旷的总是寂寞，一望无边的草地荒滩，挥着扬鞭的牧羊人，坐着火车或者自驾游偶尔一瞥而过的人家，大片大片的蓝天映着雪山，大朵大朵的白云。而事实上在李娟的笔下，阿勒泰也是寂寞的，但是总有着人的气息，和或妇女或儿童或青年的哈萨克人民，参加拖孩（聚会），唱歌，弹起冬不拉，又或者是做生意，做裁缝织衣服，至于文章末尾的采摘木耳导致的人心欲望涌动，不得不值得警惕，最近我也能深刻意识到人的刻板印象和偏见有多么可怕，前一日把你捧到天上去，下一刻将你踩进地里，人人都会说嗷原来他是这种人怪不得他之前xxx一瞬间所有不合理都能解释的通了于是心中聚集的怒气怨气都有了发泄口人人都来踩一脚，以至于对于一个陌生人竟能有着如此大的恶意。</p>
-<p>刘慈欣的短篇小说合集很不错，哪怕很多作品几乎都是二十年前的了，在现在来看也是很有着震人心魄的力量，虽然很多作品的idea经过信息轰炸的我们觉得过时了，但是人文性和对道德文明的反思却是如此深刻。那时候我以为中国的科幻文学很棒，于是找了很多别人的作品来看，包括韩松、王晋康、何夕，结果发现：</p>
-<blockquote>
-<p>撼人心魄者，唯大刘一人而已。</p>
-</blockquote>
-<p>大刘是个硬核科幻作家，有人评价大刘的作品笔调很冷血，其实只是因为以纯粹理性的描写手法显得不近人情，以近乎冷酷的客观视角来刻画人类的社会，文明，道德，历史，以唯物的技术的生产力的角度来审视人文。当然也有近人情的一面，那丰厚的乡土文学、苏联文学的传统，不能说没有感性的因素在里面，浸透文字的人民群众史观，具有很深的现实主义风格和硬汉特色，也有着共产主义的浪漫和乡土情结，无怪乎中南海某常委非常喜爱《三体》。我最喜欢他从小人物入手来看成长和故土眷恋、大的宏观叙事的关系。这个在《流浪地球》、《中国太阳》中表现得最为深刻，一百代人的接力，只是寻找另一个家乡，那种浓浓的对故土的难以割舍的感觉。《中国太阳》讲的小人物从落后的家乡一点点走出来成长最后立志向远方探索，不局限于一隅的故事，也有着很浓厚的故土文学气息。</p>
-<p>这里面我最喜欢的作品应该是《流浪地球》、《地火》、《山》、《微纪元、《乡村教师》，次一点的应该就是《中国太阳》和《太原之恋》了。</p>
-<blockquote>
-<p>在银色在大地上我遥望家乡<br>
-村边的妈妈仰望着中国太阳<br>
-这轮太阳就是儿子的眼睛<br>
-黄土地将在这目光中披上绿装</p>
-</blockquote>
-<p><img src="/blog/source/img/buaa-second-year/China_sun.jpg" alt=""></p>
-<p><img src="/blog/source/img/buaa-second-year/China_sun-2.jpg" alt=""></p>
-<p>(即使是大刘的想象力也想象不到北京房价的离谱程度)</p>
-<p>还有就是一些明显是以自己经历为背景的故事，对于故乡经济发展的忧虑，比如《地火》、《太原之恋》，大刘是山西人，父亲就是煤矿工人，所以他对煤矿的了解细致深入。山西的煤矿是重要的经济来源，然而在实体经济转型的现今，山西的经济显得有些落后，大刘也一直在为家乡的突破寻找出路。太原之恋和别的作品放在一起就显得有些可爱。</p>
-<p><img src="/blog/source/img/buaa-second-year/Love_to_taiyuan.jpg" alt=""></p>
-<p>朗道的《力学》、《场论》、《统计力学》、《流体力学》我都是翻阅开头第一章就没读多少，但是除了流体力学都是我打算接着看的（）。又重温了pfs，希望这一次能真正啃完。不包括相互作用的机制部分。</p>
-<p>还有就是没想到这模电还没学会，数电也落下了。五一正好被背刺的很惨，就出去玩一天老实蹲宿舍吧。</p>
-<h2 id="运动">运动</h2>
-<p>这个月本来能跑100km的跑量的，结果四月下旬臀中肌筋膜炎，强挺着跑量20km也不见效，上了泡沫轴慢慢恢复，最终只跑了75+km。<br>
-骑车也是因为疫情和事多没怎么出去，只骑了230+km，一边看老友记一边骑台子还是挺爽的。<br>
-健身房wok我竟然没去过一次。。。下个月多去。</p>
-<h2 id="人际交往">人际交往</h2>
-<p>这个月成功入党！好耶！当我真正看到我的政治面貌是预备党员的时候，我就知道我真正加入了中国共产党这么一个伟大的组织，和英雄的那些人们一道，我也意识到了自己肩上沉甸甸的责任，我应该接受群众和党员的监督，有则改之无则加勉，承担起自己身上党员的责任和义务，有事冲锋在前。</p>
-<p>然后这方面真正让我无语的是，我在平时的社交中比较坦率有啥说啥没有距离感，和谁谁谁做了啥也都会说，“和xjj出去玩了捏”、“和xgg出去玩了捏”，我这方面是不分男女都说的，不知道为啥说和女生出去的记录被人截屏，然后被人公开吊打。我承认我有炫耀的心态，这的确是一种物化女性的行为，但是并不是所有的物化都可以被放到批判的高度，在生活中我们和异性的交往有什么不值得说出来的，至于那些“炫耀小姐姐小妹妹青睐的动态”我真是服了，我炫耀小哥哥小弟弟的你们就视而不见是吧，很多时候的正是那些所谓的女权主义者才是真正的歧视女性的人。互联网放大了我们的缺点，让我们的形象变得扁平，然后信息茧房还会进一步地加大这种刻板印象，再加上新账旧账一起算，甚至还有不少捕风捉影的污蔑，最为过分的我觉得应该是对于事情完全不了解道听途说就对一个陌生人展开莫大的恶意。哎累了，挺好的朋友，现实中不好好交流上互联网上寻求解决方案本身就是不心存和平共处，以后离女性远一点就是了，交浅切莫言深，不要想着我是善意的就可以做一些超过距离的事，你把人家当朋友人家觉得你几把谁啊。</p>
-<p>还有一点心态的收获，所谓荣辱不惊，笑对世人冷眼莫外如是，在北航被骂成狗又怎么，对事情毫无了解通过别人的截图、道听途说甚至捕风捉影，来对人盖棺定论的人应该先想想自己是不是所谓“正义的恶”。我自己也要有错改之无则加勉，不要在意臧否，做好自己，我花了二十一年成为自己，走的每一步路都是告诉自己我之为我，我的底气，天下之大，何处去不得。</p>
-<h1>五月展望</h1>
-<p><img src="/blog/source/img/buaa-second-year/yiyan.jpg" alt=""></p>
-<h2 id="读书">读书</h2>
-<p>五月份课少了很多，但估计会有两个答辩，一个是大创开题，一个是冯如杯答辩，估计要占去四五天时间，组会也要听起来，但总的来说应该还是可以静心读书的，五一假期我就打算好好读书，补上模电。</p>
-<h2 id="运动">运动</h2>
-<p>还是跑步100k+，争取做到10k50min，骑车出去三四次，室内多骑骑，健身房也尽量去，如果能上山就蹲一蹲上山的车，越野还是得练起来，可以去打羽毛球。</p>
-<p>谨言慎行，少说多做。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzh-cycling.github.io/2022/04/30/%E5%9B%9B%E6%9C%88%E6%80%BB%E7%BB%93/" data-id="cm7rc8qoa0025dl82dn9s88t8" data-title="四月总结" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" rel="tag">个人总结</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-物理壬踩坑记录including_vscode_latex" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/04/14/%E7%89%A9%E7%90%86%E5%A3%AC%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95including_vscode_latex/" class="article-date">
-  <time class="dt-published" datetime="2022-04-13T17:28:27.000Z" itemprop="datePublished">2022-04-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/04/14/%E7%89%A9%E7%90%86%E5%A3%AC%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95including_vscode_latex/">物理壬踩坑记录including_vscode_latex</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <ol>
-<li></li>
-</ol>
-<h1>问题描述：</h1>
-<p>在vscode里切换了解释器后，该环境下的某个包无法被import, Run Code之后发现输出窗口显示<code>no module named xxx</code>. 但是切换到console后（此时会自动进入你当前的conda环境），cd进该路径，<code>python .\xxx.py</code>, 可以运行。</p>
-<h1>解决办法</h1>
-<p>把原来的<br>
-‘’’<br>
-“python.defaultInterpreterPath”: “D:\Anaconda3\envs\quantum\python.exe”<br>
-‘’’<br>
-一句注释掉，输入<code>code-runner.executorMap</code>: 这一句后会出现一大串提示点了后就会导入这个部分的语句。如下：<br>
-‘’’<br>
-“code-runner.executorMap”: {<br>
-“javascript”: “node”,<br>
-“java”: “cd $dir &amp;&amp; javac $fileName &amp;&amp; java $fileNameWithoutExt”,<br>
-“c”: “cd $dir &amp;&amp; gcc $fileName -o $fileNameWithoutExt &amp;&amp; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">dir</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>fileNameWithoutExt”,<br>
-“cpp”: “cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">dir</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>fileNameWithoutExt”,<br>
-“objective-c”: “cd $dir &amp;&amp; gcc -framework Cocoa $fileName -o $fileNameWithoutExt &amp;&amp; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">dir</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>fileNameWithoutExt”,<br>
-“php”: “php”,<br>
-“python”: “F:\Anaconda\envs\pytorch\python.exe”,<br>
-“perl”: “perl”,<br>
-“perl6”: “perl6”,<br>
-“ruby”: “ruby”,<br>
-“go”: “go run”,<br>
-“lua”: “lua”,<br>
-“groovy”: “groovy”,<br>
-“powershell”: “powershell -ExecutionPolicy ByPass -File”,<br>
-“bat”: “cmd /c”,<br>
-“shellscript”: “bash”,<br>
-“fsharp”: “fsi”,<br>
-“csharp”: “scriptcs”,<br>
-“vbscript”: “cscript //Nologo”,<br>
-“typescript”: “ts-node”,<br>
-“coffeescript”: “coffee”,<br>
-“scala”: “scala”,<br>
-“swift”: “swift”,<br>
-“julia”: “julia”,<br>
-“crystal”: “crystal”,<br>
-“ocaml”: “ocaml”,<br>
-“r”: “Rscript”,<br>
-“applescript”: “osascript”,<br>
-“clojure”: “lein exec”,<br>
-“haxe”: “haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt”,<br>
-“rust”: “cd $dir &amp;&amp; rustc $fileName &amp;&amp; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">dir</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>fileNameWithoutExt”,<br>
-“racket”: “racket”,<br>
-“scheme”: “csi -script”,<br>
-“ahk”: “autohotkey”,<br>
-“autoit”: “autoit3”,<br>
-“dart”: “dart”,<br>
-“pascal”: “cd $dir &amp;&amp; fpc $fileName &amp;&amp; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">dir</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>fileNameWithoutExt”,<br>
-“d”: “cd $dir &amp;&amp; dmd $fileName &amp;&amp; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">dir</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>fileNameWithoutExt”,<br>
-“haskell”: “runhaskell”,<br>
-“nim”: “nim compile --verbosity:0 --hints:off --run”,<br>
-“lisp”: “sbcl --script”,<br>
-“kit”: “kitc --run”,<br>
-“v”: “v run”,<br>
-“sass”: “sass --style expanded”,<br>
-“scss”: “scss --style expanded”<br>
-},<br>
-“code-runner.runInTerminal”: false<br>
-‘’’<br>
-再把其中的<br>
-‘’’<br>
-“python”: “python -u”<br>
-‘’’<br>
-改成自己的python.exe路径：<br>
-‘’’<br>
-“python.defaultInterpreterPath”: “D:\Anaconda3\envs\quantum\python.exe”<br>
-‘’’<br>
-如此我们直接run code就不会报错了，但是此时任然不会显示在输出窗口，会直接显示在终端。<br>
-我们最后还需加上一句，<br>
-‘’’<br>
-“code-runner.runInTerminal”: false<br>
-‘’’</p>
-<h2 id="总的代码如下">总的代码如下</h2>
-<p>“code-runner.executorMap”: {<br>
-“javascript”: “node”,<br>
-“java”: “cd $dir &amp;&amp; javac $fileName &amp;&amp; java $fileNameWithoutExt”,<br>
-“c”: “cd $dir &amp;&amp; gcc $fileName -o $fileNameWithoutExt &amp;&amp; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">dir</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>fileNameWithoutExt”,<br>
-“cpp”: “cd $dir &amp;&amp; g++ $fileName -o $fileNameWithoutExt &amp;&amp; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">dir</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>fileNameWithoutExt”,<br>
-“objective-c”: “cd $dir &amp;&amp; gcc -framework Cocoa $fileName -o $fileNameWithoutExt &amp;&amp; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">dir</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>fileNameWithoutExt”,<br>
-“php”: “php”,<br>
-“python”: “D:\Anaconda3\envs\quantum\python.exe”,<br>
-“perl”: “perl”,<br>
-“perl6”: “perl6”,<br>
-“ruby”: “ruby”,<br>
-“go”: “go run”,<br>
-“lua”: “lua”,<br>
-“groovy”: “groovy”,<br>
-“powershell”: “powershell -ExecutionPolicy ByPass -File”,<br>
-“bat”: “cmd /c”,<br>
-“shellscript”: “bash”,<br>
-“fsharp”: “fsi”,<br>
-“csharp”: “scriptcs”,<br>
-“vbscript”: “cscript //Nologo”,<br>
-“typescript”: “ts-node”,<br>
-“coffeescript”: “coffee”,<br>
-“scala”: “scala”,<br>
-“swift”: “swift”,<br>
-“julia”: “julia”,<br>
-“crystal”: “crystal”,<br>
-“ocaml”: “ocaml”,<br>
-“r”: “Rscript”,<br>
-“applescript”: “osascript”,<br>
-“clojure”: “lein exec”,<br>
-“haxe”: “haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt”,<br>
-“rust”: “cd $dir &amp;&amp; rustc $fileName &amp;&amp; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">dir</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>fileNameWithoutExt”,<br>
-“racket”: “racket”,<br>
-“scheme”: “csi -script”,<br>
-“ahk”: “autohotkey”,<br>
-“autoit”: “autoit3”,<br>
-“dart”: “dart”,<br>
-“pascal”: “cd $dir &amp;&amp; fpc $fileName &amp;&amp; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">dir</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>fileNameWithoutExt”,<br>
-“d”: “cd $dir &amp;&amp; dmd $fileName &amp;&amp; <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">dir</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span></span></span>fileNameWithoutExt”,<br>
-“haskell”: “runhaskell”,<br>
-“nim”: “nim compile --verbosity:0 --hints:off --run”,<br>
-“lisp”: “sbcl --script”,<br>
-“kit”: “kitc --run”,<br>
-“v”: “v run”,<br>
-“sass”: “sass --style expanded”,<br>
-“scss”: “scss --style expanded”<br>
-},<br>
-“code-runner.runInTerminal”: false</p>
-<ol start="2">
-<li></li>
-</ol>
-<h1>问题描述</h1>
-<p>写latex文档时，.bib文件加载不进去，导致的本应是[2]变成了[?],并且结尾处的bibliography(plain)加载不出来，同时文章中的<code>\ref</code>也无法<code>\cite</code>，尝试把编译器由</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">              &quot;name&quot;: &quot;xelatex-&gt;biber-&gt;xelatex*2&quot;,</span><br><span class="line">              &quot;tools&quot;: [</span><br><span class="line">              &quot;xelatex&quot;,</span><br><span class="line">              &quot;bibtex&quot;,</span><br><span class="line">              &quot;xelatex&quot;,</span><br><span class="line">              &quot;xelatex&quot;</span><br><span class="line">              ]</span><br><span class="line">              &#125;</span><br></pre></td></tr></table></figure>
-<p>换成</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&quot;latex-workshop.latex.recipes&quot;: [</span><br><span class="line">       </span><br><span class="line">          &#123;</span><br><span class="line">            &quot;name&quot;: &quot;xelatex-&gt;bibtex-&gt;xelatex-&gt;xelatex MikTex&quot;,</span><br><span class="line">            &quot;tools&quot;: [</span><br><span class="line">            &quot;xelatex&quot;,</span><br><span class="line">            &quot;bibtex&quot;,</span><br><span class="line">            &quot;xelatex&quot;,</span><br><span class="line">            &quot;xelatex MikTex&quot;</span><br><span class="line">            ]</span><br><span class="line">            &#125;]</span><br></pre></td></tr></table></figure>
-<p>后无果，虽然文章内引用方程式可显示\cite了，但参考文献的[1]还是[?]，想到应该用<code>bibtex</code>，但是不应该用<code>xelatexmk</code>，于是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#编译链设置   </span><br><span class="line">     &quot;latex-workshop.latex.recipes&quot;: [</span><br><span class="line"></span><br><span class="line">            &#123;</span><br><span class="line">                &quot;name&quot;: &quot;xelatex-&gt;bibtex-&gt;xelatex*2&quot;,</span><br><span class="line">                &quot;tools&quot;: [</span><br><span class="line">                &quot;xelatex&quot;,</span><br><span class="line">                &quot;bibtex&quot;,</span><br><span class="line">                &quot;xelatex&quot;,</span><br><span class="line">                &quot;xelatex&quot;</span><br><span class="line">                ]</span><br><span class="line">                &#125;]</span><br><span class="line">#Done!</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li></li>
-</ol>
-<h1>问题描述</h1>
-<p>当我尝试在两个环境之间插入空行时，如</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;block&#125;&#123;角动量守恒&#125;</span><br><span class="line">    空间旋转不变 \quad $q_i \rightarrow q_i+\epsilon_&#123;ijk&#125; q_j a_k \quad G=0$</span><br><span class="line">\end&#123;block&#125;</span><br><span class="line"></span><br><span class="line">\begin&#123;equation*&#125;</span><br><span class="line">    J=\frac&#123;\partial L&#125;&#123;\partial \dot&#123;q&#125;&#125;\epsilon_&#123;ijk&#125;q_j a_k</span><br><span class="line">\end&#123;equation*&#125;  </span><br></pre></td></tr></table></figure>
-<p>or</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$$J=\frac&#123;\partial L&#125;&#123;\partial \dot&#123;q&#125;&#125;\epsilon_&#123;ijk&#125;q_j a_k$$ \vspace&#123;2em&#125; $$J=\frac&#123;\partial L&#125;&#123;\partial \dot&#123;q&#125;&#125;\epsilon_&#123;ijk&#125;q_j a_k$$ #parameter needed by is vspace(2em)</span><br><span class="line">or</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\[Some stuff\]</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line"></span><br><span class="line">\[Some more stuff\]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>报错：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">You can&#x27;t use `\unskip&#x27; in vertical mode.</span><br><span class="line">\beamer@smuggle ...@zeropt \else \ifvmode \unskip </span><br><span class="line"></span><br><span class="line">Font “Fangdolsong-Regular” doesn‘t contain requested (fontspec) script “CJK“ #此报错本可以忽略，然而若与上述错误相遇则什么也生成不了</span><br></pre></td></tr></table></figure>
-<h1>解决方案</h1>
-<p class='katex-block katex-error' title='ParseError: KaTeX parse error: Can&#039;t use function &#039;$&#039; in math mode at position 7:  math $̲$ is obsolete f…'> math $$ is obsolete for a long long time, use \[ math \] instead. You also might be interested in the environments provided by amsmath, for example gather and gather*
-using consecutive math displays, which is wrong for other reasons: you should use gather*. Note that $$...$$ should never be used in LaTeX.
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;gather*&#125;</span><br><span class="line">eq1 \\</span><br><span class="line">eq2 \\[3ex]% some vertical space</span><br><span class="line">eq3</span><br><span class="line">\end&#123;gather*&#125;</span><br><span class="line"></span><br><span class="line">text above</span><br><span class="line"></span><br><span class="line">\bigskip</span><br><span class="line"></span><br><span class="line">text below</span><br></pre></td></tr></table></figure>
-
-4. 
-# 问题描述
-当我用hexo框架搭建博客的时候，遇到了相对路径的图片总是显示不出来的问题，在`vscode MPE`上看是可以看得到的，但是在`hexo serve` or `hexo g d`后显示不出来。
-
-# 解决办法
-`hexo`的[资源文件夹](https://hexo.io/zh-cn/docs/asset-folders.html)一切资源都是存储在source里的，当你generate后source中文件除了_[文件名]被生成成HTML资源外，其余的被拷贝到\public文件夹中，被生成的资源也会在\public文件夹中，然后被deploy展示出来
-
-
-资源（Asset）代表 source 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 source/images 文件夹中。然后通过类似于 ![](/images/image.jpg) 的方法访问它们。
-
-对于那些想要更有规律地提供图片和其他资源以及想要将他们的资源分布在各个文章上的人来说，Hexo也提供了更组织化的方式来管理资源。这个稍微有些复杂但是管理资源非常方便的功能可以通过将 config.yml 文件中的 post_asset_folder 选项设为 true 来打开。
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_config.yml</span><br><span class="line">post_asset_folder: true</span><br></pre></td></tr></table></figure>
-当资源文件管理功能打开后，Hexo将会在你每一次通过 hexo new [layout] &lt;title&gt; 命令创建新文章时自动创建一个文件夹。这个资源文件夹将会有与这个文章文件一样的名字。将所有与你的文章有关的资源放在这个关联文件夹中之后，你可以通过相对路径来引用它们，这样你就得到了一个更简单而且方便得多的工作流。
-</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzh-cycling.github.io/2022/04/14/%E7%89%A9%E7%90%86%E5%A3%AC%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95including_vscode_latex/" data-id="cm7rc8qoe004sdl82b7xs41ev" data-title="物理壬踩坑记录including_vscode_latex" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/latex/" rel="tag">latex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/">个人总结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/">春天来了</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%8B%E5%A4%A9%E6%9D%A5%E4%BA%86/">秋天来了</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%84%E6%B5%8B/">评测</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B6%A6/" rel="tag"> 润</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fundamentals-of-computer-and-programming/" rel="tag">Fundamentals of computer and programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux-and-macOS/" rel="tag">Linux and macOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medical-Imaging/" rel="tag">Medical Imaging</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PekingUni-Summer-School/" rel="tag">PekingUni Summer School</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Physics/" rel="tag">Physics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/" rel="tag">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/latex/" rel="tag">latex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/non-equilibrium/" rel="tag">non-equilibrium</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/physics/" rel="tag">physics</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qutip/" rel="tag">qutip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%9C%E5%8C%97/" rel="tag">东北</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" rel="tag">个人总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%84%E8%AF%AD/" rel="tag">俄语</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E4%BA%AC%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90/" rel="tag">北京吃喝玩乐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E4%BA%AC%E6%B8%B8%E7%8E%A9/" rel="tag">北京游玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%97%E8%88%AA/" rel="tag">北航</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E7%89%A9/" rel="tag">博物</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E5%AD%97%E5%A7%93%E6%B0%8F/" rel="tag">名字姓氏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%8A%E5%88%AB/" rel="tag">告别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%A7%E4%BA%8C%E7%9A%84%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">大二的生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E9%99%A2%E8%B7%AF%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">学院路生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%A1%E7%BE%8E%E7%90%86%E6%83%B3/" rel="tag">审美理想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%B6%E4%B9%A1/" rel="tag">家乡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%88%B1%E5%A5%BD/" rel="tag">小爱好</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%80%E6%97%A7/" rel="tag">怀旧</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%97%E7%BE%8E%E6%8F%B4%E6%9C%9D/" rel="tag">抗美援朝</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%85%E4%B9%A1/" rel="tag">故乡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%8F%B2%E5%93%B2/" rel="tag">文史哲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%87%E5%AD%A6/" rel="tag">文学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E5%B9%B4%E5%A5%BD/" rel="tag">新年好</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%85%E8%A1%8C/" rel="tag">旅行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E4%BB%A3/" rel="tag">时代</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/" rel="tag">春天来了</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" rel="tag">模型部署</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%99%E6%B2%B3%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" rel="tag">沙河生存指南</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E7%8E%A9/" rel="tag">游玩</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/" rel="tag">热爱生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%88%B1%E6%83%85/" rel="tag">爱情</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89/" rel="tag">物理直觉</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E4%B8%BB%E4%B9%89/" rel="tag">理想主义</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" rel="tag">理想的生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%BD%B1%E4%B8%8E%E6%AD%8C%E6%9B%B2/" rel="tag">电影与歌曲</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%8B%E5%AE%9E%E5%AD%A6%E5%9B%AD/" rel="tag">秋实学园</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/" rel="tag">红楼梦</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E7%84%B6/" rel="tag">自然</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%B4%E6%95%AC%E8%8B%B1%E9%9B%84/" rel="tag">致敬英雄</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%88%AA%E5%A4%A9/" rel="tag">航天</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%84%E6%B5%8B/" rel="tag">评测</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%94%AE%E7%9B%98/" rel="tag">键盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AA%91%E8%BD%A6/" rel="tag">骑车</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AD%8F%E6%99%8B/" rel="tag">魏晋</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/%E6%B6%A6/" style="font-size: 10px;"> 润</a> <a href="/tags/Fundamentals-of-computer-and-programming/" style="font-size: 11.67px;">Fundamentals of computer and programming</a> <a href="/tags/Linux-and-macOS/" style="font-size: 10px;">Linux and macOS</a> <a href="/tags/Medical-Imaging/" style="font-size: 10px;">Medical Imaging</a> <a href="/tags/PekingUni-Summer-School/" style="font-size: 10px;">PekingUni Summer School</a> <a href="/tags/Physics/" style="font-size: 10px;">Physics</a> <a href="/tags/coding/" style="font-size: 11.67px;">coding</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/non-equilibrium/" style="font-size: 11.67px;">non-equilibrium</a> <a href="/tags/physics/" style="font-size: 15px;">physics</a> <a href="/tags/qutip/" style="font-size: 10px;">qutip</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E4%B8%9C%E5%8C%97/" style="font-size: 10px;">东北</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%80%BB%E7%BB%93/" style="font-size: 18.33px;">个人总结</a> <a href="/tags/%E4%BF%84%E8%AF%AD/" style="font-size: 10px;">俄语</a> <a href="/tags/%E5%8C%97%E4%BA%AC%E5%90%83%E5%96%9D%E7%8E%A9%E4%B9%90/" style="font-size: 13.33px;">北京吃喝玩乐</a> <a href="/tags/%E5%8C%97%E4%BA%AC%E6%B8%B8%E7%8E%A9/" style="font-size: 16.67px;">北京游玩</a> <a href="/tags/%E5%8C%97%E8%88%AA/" style="font-size: 10px;">北航</a> <a href="/tags/%E5%8D%9A%E7%89%A9/" style="font-size: 10px;">博物</a> <a href="/tags/%E5%90%8D%E5%AD%97%E5%A7%93%E6%B0%8F/" style="font-size: 10px;">名字姓氏</a> <a href="/tags/%E5%91%8A%E5%88%AB/" style="font-size: 10px;">告别</a> <a href="/tags/%E5%A4%A7%E4%BA%8C%E7%9A%84%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 10px;">大二的生存指南</a> <a href="/tags/%E5%AD%A6%E9%99%A2%E8%B7%AF%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 11.67px;">学院路生存指南</a> <a href="/tags/%E5%AE%A1%E7%BE%8E%E7%90%86%E6%83%B3/" style="font-size: 10px;">审美理想</a> <a href="/tags/%E5%AE%B6%E4%B9%A1/" style="font-size: 10px;">家乡</a> <a href="/tags/%E5%B0%8F%E7%88%B1%E5%A5%BD/" style="font-size: 10px;">小爱好</a> <a href="/tags/%E6%80%80%E6%97%A7/" style="font-size: 11.67px;">怀旧</a> <a href="/tags/%E6%8A%97%E7%BE%8E%E6%8F%B4%E6%9C%9D/" style="font-size: 10px;">抗美援朝</a> <a href="/tags/%E6%95%85%E4%B9%A1/" style="font-size: 10px;">故乡</a> <a href="/tags/%E6%96%87%E5%8F%B2%E5%93%B2/" style="font-size: 11.67px;">文史哲</a> <a href="/tags/%E6%96%87%E5%AD%A6/" style="font-size: 10px;">文学</a> <a href="/tags/%E6%96%B0%E5%B9%B4%E5%A5%BD/" style="font-size: 10px;">新年好</a> <a href="/tags/%E6%97%85%E8%A1%8C/" style="font-size: 10px;">旅行</a> <a href="/tags/%E6%97%B6%E4%BB%A3/" style="font-size: 13.33px;">时代</a> <a href="/tags/%E6%98%A5%E5%A4%A9%E6%9D%A5%E4%BA%86/" style="font-size: 16.67px;">春天来了</a> <a href="/tags/%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">模型部署</a> <a href="/tags/%E6%B2%99%E6%B2%B3%E7%94%9F%E5%AD%98%E6%8C%87%E5%8D%97/" style="font-size: 11.67px;">沙河生存指南</a> <a href="/tags/%E6%B8%B8%E7%8E%A9/" style="font-size: 10px;">游玩</a> <a href="/tags/%E7%83%AD%E7%88%B1%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">热爱生活</a> <a href="/tags/%E7%88%B1%E6%83%85/" style="font-size: 10px;">爱情</a> <a href="/tags/%E7%89%A9%E7%90%86%E7%9B%B4%E8%A7%89/" style="font-size: 10px;">物理直觉</a> <a href="/tags/%E7%90%86%E6%83%B3%E4%B8%BB%E4%B9%89/" style="font-size: 10px;">理想主义</a> <a href="/tags/%E7%90%86%E6%83%B3%E7%9A%84%E7%94%9F%E6%B4%BB/" style="font-size: 20px;">理想的生活</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 10px;">生活</a> <a href="/tags/%E7%94%B5%E5%BD%B1%E4%B8%8E%E6%AD%8C%E6%9B%B2/" style="font-size: 10px;">电影与歌曲</a> <a href="/tags/%E7%A7%8B%E5%AE%9E%E5%AD%A6%E5%9B%AD/" style="font-size: 10px;">秋实学园</a> <a href="/tags/%E7%BA%A2%E6%A5%BC%E6%A2%A6/" style="font-size: 10px;">红楼梦</a> <a href="/tags/%E8%87%AA%E7%84%B6/" style="font-size: 10px;">自然</a> <a href="/tags/%E8%87%B4%E6%95%AC%E8%8B%B1%E9%9B%84/" style="font-size: 10px;">致敬英雄</a> <a href="/tags/%E8%88%AA%E5%A4%A9/" style="font-size: 10px;">航天</a> <a href="/tags/%E8%AF%84%E6%B5%8B/" style="font-size: 10px;">评测</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E9%94%AE%E7%9B%98/" style="font-size: 10px;">键盘</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a> <a href="/tags/%E9%AA%91%E8%BD%A6/" style="font-size: 11.67px;">骑车</a> <a href="/tags/%E9%AD%8F%E6%99%8B/" style="font-size: 10px;">魏晋</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">November 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/02/11/Download-without-sudo/">Download without sudo</a>
-          </li>
-        
-          <li>
-            <a href="/2025/02/09/2024%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/">2024年度总结</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/27/%E5%BD%92/">归</a>
-          </li>
-        
-          <li>
-            <a href="/2023/11/12/%E5%BE%B7%E5%9B%BD%E8%A7%81%E9%97%BB%E4%B8%80%E4%BA%8C%E8%AE%B0/">德国见闻一二记</a>
-          </li>
-        
-          <li>
-            <a href="/2023/05/15/Diagonalization-and-Several-Linalg-Packages/">Diagonalization and Several Linalg Packages</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
